@@ -7,7 +7,7 @@ body {
 
 /* Base Glass-Effect Navbar */
 .navbar.glass-effect {
-  background-color: #ffffff;
+  
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
   z-index: 1000;
   }

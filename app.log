@@ -18432,3 +18432,27 @@ app.donate.routes.PaymentVerificationError: Could not verify payment
 2025-05-08 14:21:26,170 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:26] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
 2025-05-08 14:21:26,178 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:26] "[36mGET /static/images/yr.jpg HTTP/1.1[0m" 304 -
 2025-05-08 14:21:26,285 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:26] "GET /categories HTTP/1.1" 200 -
+2025-05-08 14:24:47,805 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-08 14:24:47,805 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-08 14:24:47,807 [INFO] -  * Restarting with stat
+2025-05-08 14:24:48,770 [WARNING] -  * Debugger is active!
+2025-05-08 14:24:49,157 [INFO] -  * Debugger PIN: 593-030-366
+2025-05-08 14:24:49,390 [INFO] - 127.0.0.1 - - [08/May/2025 14:24:49] "GET / HTTP/1.1" 200 -
+2025-05-08 14:24:49,577 [INFO] - 127.0.0.1 - - [08/May/2025 14:24:49] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-08 14:24:49,583 [INFO] - 127.0.0.1 - - [08/May/2025 14:24:49] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-08 14:24:49,585 [INFO] - 127.0.0.1 - - [08/May/2025 14:24:49] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-08 14:24:49,585 [INFO] - 127.0.0.1 - - [08/May/2025 14:24:49] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-08 14:24:49,588 [INFO] - 127.0.0.1 - - [08/May/2025 14:24:49] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-08 14:24:49,632 [INFO] - 127.0.0.1 - - [08/May/2025 14:24:49] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-08 14:24:49,635 [INFO] - 127.0.0.1 - - [08/May/2025 14:24:49] "[36mGET /static/images/yr.jpg HTTP/1.1[0m" 304 -
+2025-05-08 14:24:49,749 [INFO] - 127.0.0.1 - - [08/May/2025 14:24:49] "GET /categories HTTP/1.1" 200 -
+2025-05-08 14:26:00,922 [INFO] - 127.0.0.1 - - [08/May/2025 14:26:00] "GET / HTTP/1.1" 200 -
+2025-05-08 14:26:01,176 [INFO] - 127.0.0.1 - - [08/May/2025 14:26:01] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-08 14:26:01,177 [INFO] - 127.0.0.1 - - [08/May/2025 14:26:01] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-08 14:26:01,179 [INFO] - 127.0.0.1 - - [08/May/2025 14:26:01] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-08 14:26:01,181 [INFO] - 127.0.0.1 - - [08/May/2025 14:26:01] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-08 14:26:01,186 [INFO] - 127.0.0.1 - - [08/May/2025 14:26:01] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-08 14:26:01,268 [INFO] - 127.0.0.1 - - [08/May/2025 14:26:01] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-08 14:26:01,276 [INFO] - 127.0.0.1 - - [08/May/2025 14:26:01] "[36mGET /static/images/yr.jpg HTTP/1.1[0m" 304 -
+2025-05-08 14:26:01,469 [INFO] - 127.0.0.1 - - [08/May/2025 14:26:01] "GET /categories HTTP/1.1" 200 -
