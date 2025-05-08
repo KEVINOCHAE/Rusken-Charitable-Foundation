@@ -18398,3 +18398,37 @@ app.donate.routes.PaymentVerificationError: Could not verify payment
 2025-05-08 13:45:09,516 [INFO] - 127.0.0.1 - - [08/May/2025 13:45:09] "[36mGET /static/images/yr.jpg HTTP/1.1[0m" 304 -
 2025-05-08 13:45:10,717 [INFO] - 127.0.0.1 - - [08/May/2025 13:45:10] "GET /categories HTTP/1.1" 200 -
 2025-05-08 13:45:10,799 [INFO] - 127.0.0.1 - - [08/May/2025 13:45:10] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-08 14:17:11,708 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-08 14:17:11,709 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-08 14:17:11,711 [INFO] -  * Restarting with stat
+2025-05-08 14:17:12,906 [WARNING] -  * Debugger is active!
+2025-05-08 14:17:12,906 [INFO] -  * Debugger PIN: 593-030-366
+2025-05-08 14:20:14,942 [INFO] - 127.0.0.1 - - [08/May/2025 14:20:14] "GET / HTTP/1.1" 200 -
+2025-05-08 14:20:16,126 [INFO] - 127.0.0.1 - - [08/May/2025 14:20:16] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-08 14:20:16,127 [INFO] - 127.0.0.1 - - [08/May/2025 14:20:16] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-08 14:20:16,209 [INFO] - 127.0.0.1 - - [08/May/2025 14:20:16] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-08 14:20:16,375 [INFO] - 127.0.0.1 - - [08/May/2025 14:20:16] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-08 14:20:16,408 [INFO] - 127.0.0.1 - - [08/May/2025 14:20:16] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-08 14:20:17,263 [INFO] - 127.0.0.1 - - [08/May/2025 14:20:17] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-08 14:20:17,275 [INFO] - 127.0.0.1 - - [08/May/2025 14:20:17] "[36mGET /static/images/yr.jpg HTTP/1.1[0m" 304 -
+2025-05-08 14:20:17,777 [INFO] - 127.0.0.1 - - [08/May/2025 14:20:17] "GET /categories HTTP/1.1" 200 -
+2025-05-08 14:20:18,753 [INFO] - 127.0.0.1 - - [08/May/2025 14:20:18] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-08 14:21:00,428 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:00] "GET / HTTP/1.1" 200 -
+2025-05-08 14:21:00,630 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:00] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-08 14:21:00,634 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:00] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-08 14:21:00,636 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:00] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-08 14:21:00,647 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:00] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-08 14:21:00,649 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:00] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-08 14:21:00,736 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:00] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-08 14:21:00,745 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:00] "[36mGET /static/images/yr.jpg HTTP/1.1[0m" 304 -
+2025-05-08 14:21:00,862 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:00] "GET /categories HTTP/1.1" 200 -
+2025-05-08 14:21:25,856 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:25] "GET / HTTP/1.1" 200 -
+2025-05-08 14:21:26,058 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:26] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-08 14:21:26,063 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:26] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-08 14:21:26,068 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:26] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-08 14:21:26,073 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:26] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-08 14:21:26,075 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:26] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-08 14:21:26,170 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:26] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-08 14:21:26,178 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:26] "[36mGET /static/images/yr.jpg HTTP/1.1[0m" 304 -
+2025-05-08 14:21:26,285 [INFO] - 127.0.0.1 - - [08/May/2025 14:21:26] "GET /categories HTTP/1.1" 200 -
