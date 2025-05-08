@@ -53,19 +53,12 @@
 .text-shadow {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-.animated-gradient {
-  background: linear-gradient(90deg, #eebaee, #ffa3a3, #7467e0);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientText 3s linear infinite;
-}
+
 
 /* 6. Ensure content sits above everything */
 .hero-content {
   position: relative;
-  z-index: 100; /* above overlay */
+  z-index: 10000; 
   color: #fff;
 }
 
