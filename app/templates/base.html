@@ -56,13 +56,13 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" defer></script>  
+   
    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 
-  <nav class="navbar navbar-expand-lg  glass-effect custom-blur-navbar">
+  <nav class="navbar navbar-expand-lg  fixed-top glass-effect custom-blur-navbar">
    
     <!-- Brand -->
     <a class="navbar-brand d-flex align-items-center animate-logo me-2" href="{{ url_for('main.home') }}">
@@ -297,7 +297,7 @@
   </script>
 
   <!-- Cookie Consent -->
-  
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" defer></script>  
   <script defer>
     window.addEventListener('load', () => {
       window.cookieconsent.initialise({
