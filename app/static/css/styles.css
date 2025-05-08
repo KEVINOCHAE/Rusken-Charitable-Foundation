@@ -12,6 +12,7 @@ body {
   z-index: 1000;
   }
 
+
 /* When scrolled */
 .navbar.glass-effect.scrolled {
   background-color: rgba(255, 255, 255, 0.9); 
@@ -30,10 +31,10 @@ body {
 }
 
 /* Nav Link Styling */
-.navbar .nav-link, .logos, .small {
+.navbar .nav-link {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #2b1515 !important; 
+  color: #15078d !important; 
   transition: color 0.2s ease;
  
 }
