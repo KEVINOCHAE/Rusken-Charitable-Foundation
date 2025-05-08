@@ -20225,3 +20225,19 @@ app.donate.routes.PaymentVerificationError: Could not verify payment
 2025-05-08 23:15:06,920 [INFO] - 127.0.0.1 - - [08/May/2025 23:15:06] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
 2025-05-08 23:15:06,924 [INFO] - 127.0.0.1 - - [08/May/2025 23:15:06] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
 2025-05-08 23:15:07,137 [INFO] - 127.0.0.1 - - [08/May/2025 23:15:07] "GET /categories HTTP/1.1" 200 -
+2025-05-08 23:33:01,688 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-08 23:33:01,711 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-08 23:33:01,715 [INFO] -  * Restarting with stat
+2025-05-08 23:33:07,842 [WARNING] -  * Debugger is active!
+2025-05-08 23:33:07,966 [INFO] -  * Debugger PIN: 593-030-366
+2025-05-08 23:33:25,232 [INFO] - 127.0.0.1 - - [08/May/2025 23:33:25] "GET / HTTP/1.1" 200 -
+2025-05-08 23:33:29,305 [INFO] - 127.0.0.1 - - [08/May/2025 23:33:29] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-08 23:33:29,394 [INFO] - 127.0.0.1 - - [08/May/2025 23:33:29] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-08 23:33:29,440 [INFO] - 127.0.0.1 - - [08/May/2025 23:33:29] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-08 23:33:30,151 [INFO] - 127.0.0.1 - - [08/May/2025 23:33:30] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-08 23:33:30,201 [INFO] - 127.0.0.1 - - [08/May/2025 23:33:30] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-08 23:33:30,427 [INFO] - 127.0.0.1 - - [08/May/2025 23:33:30] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-08 23:33:30,537 [INFO] - 127.0.0.1 - - [08/May/2025 23:33:30] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-08 23:33:31,886 [INFO] - 127.0.0.1 - - [08/May/2025 23:33:31] "GET /categories HTTP/1.1" 200 -
+2025-05-08 23:33:32,537 [INFO] - 127.0.0.1 - - [08/May/2025 23:33:32] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
