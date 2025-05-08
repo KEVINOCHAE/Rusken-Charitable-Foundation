@@ -54,7 +54,7 @@
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 .animated-gradient {
-  background: linear-gradient(90deg, #eebaee, #ffa3a3, #7467e0);
+  background: linear-gradient(90deg, #ff1e00, #b5ff54, #8577ff);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
