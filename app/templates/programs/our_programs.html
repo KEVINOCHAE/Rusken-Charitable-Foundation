@@ -1,0 +1,395 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/programs.css') }}">
+
+<div class="container py-2" style="margin-top: 80px;" >
+    <h2 class="mb-4 display-5 font-weight-bold">
+        {% if category %}
+        <i class="fas fa-folder-open mr-2"></i>{{ category.name }}
+        {% else %}
+        <i class="fas fa-boxes mr-2"></i>All Programs
+        {% endif %}
+    </h2>
+
+    <div class="row">
+        {% for program in programs.items %}
+        {% set annual_budget = program.annual_budget|float %}
+        {% set total_donated = program.total_donated|float %}
+        {% set donated_percent = (total_donated / annual_budget * 100) if annual_budget > 0 else 0 %}
+        {% set remaining_percent = 100 - donated_percent %}
+        
+        <div class="col-lg-6 col-12 mb-4">
+            <div class="card program-card h-100 position-relative">
+                <div class="category-badge">
+                    {{ program.category.name }}
+                </div>
+
+               <div class="card-img-wrapper overflow-hidden">
+                  {% set img = program.images.first() %}
+                  <img src="{{ img|program_image_url }}" class="card-img-top">
+                </div>
+
+
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ program.title }}</h5>
+                    
+                    <div class="budget-progress my-3">
+                        <div class="progress-bar progress-bar-donated" style="width: {{ donated_percent }}%"></div>
+                        <div class="progress-bar progress-bar-remaining" style="width: {{ remaining_percent }}%"></div>
+                    </div>
+
+                    <div class="budget-stats">
+                        <div class="stat-item">
+                            <span>Goal:</span>
+                            <span>${{ "{:,.0f}".format(annual_budget) }}</span>
+                        </div>
+                        <div class="stat-item text-success">
+                            <span>Raised:</span>
+                            <span>${{ "{:,.0f}".format(total_donated) }}</span>
+                        </div>
+                        <div class="stat-item text-info">
+                            <span>Remaining:</span>
+                            <span>${{ "{:,.0f}".format(annual_budget - total_donated) }}</span>
+                        </div>
+                    </div>
+
+                    <p class="card-text">{{ program.description|truncate(200) }}</p>
+                </div>
+
+                <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                    <div class="started-by">
+                        <div>Started on {{ program.created_at.strftime('%b %d, %Y') }}</div>
+                        <div class="text-muted">by {{ program.author.username }}</div>
+                    </div>
+                    <a href="{{ url_for('main.program_detail', slug=program.slug) }}" 
+                       class="view-details">
+                        View Details <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+
+                <a href="{{ url_for('donate.donate', program_id=program.id) }}" 
+                   class="donate-btn btn btn-success shadow-sm">
+                    <i class="fas fa-donate mr-2"></i>Donate Now
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation" class="mt-5">
+        <ul class="pagination justify-content-center">
+            {% if programs.has_prev %}
+            <li class="page-item">
+                <a class="page-link" 
+                   href="{% if category %}{{ url_for('main.programs_by_category', category_slug=category.slug, page=programs.prev_num) }}{% else %}{{ url_for('main.all_programs', page=programs.prev_num) }}{% endif %}">
+                    &laquo; Previous
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&laquo; Previous</span>
+            </li>
+            {% endif %}
+
+            {% for page_num in programs.iter_pages() %}
+            <li class="page-item {% if page_num == programs.page %}active{% endif %}">
+                <a class="page-link" 
+                   href="{% if category %}{{ url_for('main.programs_by_category', category_slug=category.slug, page=page_num) }}{% else %}{{ url_for('main.all_programs', page=page_num) }}{% endif %}">
+                    {{ page_num }}
+                </a>
+            </li>
+            {% endfor %}
+
+            {% if programs.has_next %}
+            <li class="page-item">
+                <a class="page-link" 
+                   href="{% if category %}{{ url_for('main.programs_by_category', category_slug=category.slug, page=programs.next_num) }}{% else %}{{ url_for('main.all_programs', page=programs.next_num) }}{% endif %}">
+                    Next &raquo;
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Next &raquo;</span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+<style>
+/* static/css/programs.css */
+/* Modern Light Theme with Depth */
+body.programs-page {
+    min-height: 100vh;
+    background: linear-gradient(45deg, #f8f9fa, #f1f3f5, #e9ecef);
+    background-attachment: fixed;
+    color: #2d3436;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Glassmorphic Card Design */
+.program-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.05),
+        0 0 20px rgba(255, 255, 255, 0.2) inset;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.program-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.1),
+        0 0 30px rgba(255, 255, 255, 0.3) inset;
+}
+
+/* Dynamic Image Container */
+.card-img-wrapper {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px 20px 0 0;
+}
+
+.card-img-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(transparent, rgba(255, 255, 255, 0.9));
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.program-card:hover .card-img-top {
+    transform: scale(1.08);
+}
+
+/* Modern Category Badge */
+.category-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 3;
+    background: rgba(255, 255, 255, 0.9);
+    color: #2d3436;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.category-badge:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+}
+
+/* Vibrant Progress Bars */
+.budget-progress {
+    height: 12px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+    margin: 1.5rem 0;
+}
+
+.progress-bar-donated {
+    height: 100%;
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    width: var(--donated-percent);
+    position: relative;
+}
+
+.progress-bar-donated::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2));
+}
+
+.progress-bar-remaining {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    width: var(--remaining-percent);
+    height: 100%;
+}
+
+/* Sophisticated Typography */
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.card-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #2ecc71, #3498db);
+}
+
+.card-text {
+    color: #636e72;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Modern Stats Grid */
+.budget-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.stat-item {
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-3px);
+}
+
+.stat-item span {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.stat-item span:first-child {
+    color: #636e72;
+    margin-bottom: 0.5rem;
+}
+
+.stat-item span:last-child {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #2d3436;
+}
+
+/* Elegant Footer */
+.card-footer {
+    background: rgba(255, 255, 255, 0.7);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.started-by {
+    color: #636e72;
+    font-size: 0.85rem;
+}
+
+.started-by strong {
+    color: #2d3436;
+    font-weight: 600;
+}
+
+/* Modern Donate Button */
+.donate-btn {
+    background: linear-gradient(45deg, #6c5ce7, #0984e3);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 8px 25px rgba(108, 92, 231, 0.2);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.donate-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.donate-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(108, 92, 231, 0.3);
+}
+
+.donate-btn:hover::before {
+    left: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .program-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .budget-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-img-wrapper {
+        height: 200px;
+    }
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.program-card {
+    animation: float 6s ease-in-out infinite;
+}
+
+.program-card:nth-child(odd) {
+    animation-delay: 0.5s;
+}   
+</style>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+<h2>Upload Image for "{{ program.title }}"</h2>
+<form method="POST" enctype="multipart/form-data">
+  {{ form.hidden_tag() }}
+  <div class="form-group">
+    {{ form.image.label }}<br>
+    {{ form.image(class="form-control-file") }}
+    {% for err in form.image.errors %}<div class="text-danger">{{ err }}</div>{% endfor %}
+  </div>
+  <div class="form-check">
+    {{ form.is_cover(class="form-check-input") }}
+    {{ form.is_cover.label(class="form-check-label") }}
+  </div>
+  <button type="submit" class="btn btn-primary mt-3">{{ form.submit.label }}</button>
+</form>
+{% endblock %}

@@ -1,0 +1,82 @@
+from flask import Flask, send_from_directory, url_for
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+from flask_migrate import Migrate
+from flask_wtf.csrf import CSRFProtect
+from flask_mail import Mail
+import logging
+
+
+# Initialize extensions
+db = SQLAlchemy()
+migrate = Migrate()
+login_manager = LoginManager()
+csrf = CSRFProtect()
+mail = Mail()
+
+def create_app(config_class=None):
+    app = Flask(__name__)
+    app.config.from_object(config_class or 'config.Config')
+
+    # Initialize extensions
+    db.init_app(app)
+    migrate.init_app(app, db)
+    login_manager.init_app(app)
+    csrf.init_app(app)
+    mail.init_app(app)
+
+
+
+    logging.basicConfig(
+        level=logging.INFO, 
+        format="%(asctime)s [%(levelname)s] - %(message)s",
+        handlers=[
+            logging.StreamHandler(),  # Logs to the console
+            logging.FileHandler("app.log")  # Logs to a file named app.log
+        ]
+    )
+
+
+    # Setup login view and messages
+    login_manager.login_view = 'auth.login'  # Redirect to login route
+    login_manager.login_message = 'Please log in to access this page.'
+    login_manager.login_message_category = 'warning'
+
+    # Blueprints
+    from app.auth.routes import auth_bp 
+    from app.main.routes import main_bp
+    from app.admin.routes import admin_bp
+    from app.programs.routes import program_bp
+    from app.donate.routes import donate_bp
+    from app.paystack.routes import paystack_bp
+
+    app.register_blueprint(main_bp)
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(program_bp, url_prefix='/program')
+    app.register_blueprint(donate_bp, url_prefix='/donate')
+    app.register_blueprint(paystack_bp, url_prefix='/paystack')
+
+    # User loader for login management
+    from app.admin.models import User
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
+
+    @app.route('/media/programs/<filename>')
+    def serve_program_image(filename):
+        return send_from_directory('/data/programs', filename)
+
+    def program_image_url(img):
+        if img:
+            filename = img.filename.split('/')[-1]
+            return url_for('serve_program_image', filename=filename)
+        else:
+            return url_for('static', filename='programs/placeholder.jpg')
+
+    app.jinja_env.filters['program_image_url'] = program_image_url
+    
+     
+    return app

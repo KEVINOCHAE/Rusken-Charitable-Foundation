@@ -1,0 +1,352 @@
+{% extends "base.html" %}
+{% block title %}{{ program.title }} – Program Details{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/program_detail.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+{% endblock %}
+
+{% block content %}
+<div class="program-detail-page">
+
+  <!-- Hero Section -->
+<section class="pd-hero d-flex align-items-center text-center text-white mt-4">
+  {% set img = program.images.first() %}
+  <div class="pd-hero-bg" style="background-image: url('{{ img|program_image_url }}');"></div>
+  <div class="pd-hero-overlay"></div>
+  <div class="container position-relative z-2">
+    <span class="pd-category">{{ program.category.name }}</span>
+    <h1 class="pd-title mt-3">{{ program.title }}</h1>
+    <p class="pd-meta mt-2">
+      Started on {{ program.created_at.strftime('%B %d, %Y') }} | by {{ program.author.username }}
+    </p>
+    <a href="{{ url_for('donate.donate', program_id=program.id) }}" class="btn btn-donate d-md-none" style="max-width: 200px;">
+      <i class="fas fa-hand-holding-heart me-2"></i> Support Now
+    </a>
+  </div>
+</section>
+
+
+  <!-- Content -->
+  <div class="container py-5">
+    <div class="row g-5">
+      <!-- Description & Story -->
+      <div class="col-lg-8">
+        <div class="pd-box" data-aos="fade-right">
+          <h4 class="pd-section-title">Description</h4>
+          <p class="pd-text">{{ program.description }}</p>
+        </div>
+    
+        <div class="pd-box mt-4" data-aos="fade-right" data-aos-delay="100">
+          <h4 class="pd-section-title">Full Story</h4>
+          <div class="pd-story">
+            {{ program.story | safe }}
+          </div>
+        </div>
+    
+        <!-- Mobile Financial Overview (Only for small/medium screens) -->
+        <div class="pd-box pd-financial-box d-block d-lg-none mt-4" data-aos="fade-up">
+          <h4 class="pd-section-title">Funding Progress</h4>
+          {% set goal = program.annual_budget or 0 %}
+          {% set raised = total_donated or 0 %}
+          {% set donated_pct = (raised / goal * 100) if goal else 0 %}
+    
+          <div class="pd-progress-container">
+            <div class="pd-progress" style="width: {{ donated_pct }}%;">
+              <span class="pd-progress-label">{{ donated_pct|round(1) }}%</span>
+            </div>
+          </div>
+    
+          <div class="pd-stats">
+            <div class="pd-stat">
+              <div class="pd-stat-value">${{ "{:,.0f}".format(raised) }}</div>
+              <div class="pd-stat-label">Raised</div>
+            </div>
+            <div class="pd-stat">
+              <div class="pd-stat-value">${{ "{:,.0f}".format(goal) }}</div>
+              <div class="pd-stat-label">Goal</div>
+            </div>
+          </div>
+    
+          <a href="{{ url_for('donate.donate', program_id=program.id) }}" class="btn btn-donate">
+            <i class="fas fa-hand-holding-heart me-2"></i> Support Now
+          </a>
+        </div>
+      </div>
+    
+      <!-- Financial Overview (Only for large screens) -->
+      <div class="col-lg-4 d-none d-lg-block">
+        <div class="pd-box pd-financial-box" data-aos="fade-left">
+          <h4 class="pd-section-title">Funding Progress</h4>
+          {% set goal = program.annual_budget or 0 %}
+          {% set raised = total_donated or 0 %}
+          {% set donated_pct = (raised / goal * 100) if goal else 0 %}
+    
+          <div class="pd-progress-container">
+            <div class="pd-progress" style="width: {{ donated_pct }}%;">
+              <span class="pd-progress-label">{{ donated_pct|round(1) }}%</span>
+            </div>
+          </div>
+    
+          <div class="pd-stats">
+            <div class="pd-stat">
+              <div class="pd-stat-value">${{ "{:,.0f}".format(raised) }}</div>
+              <div class="pd-stat-label">Raised</div>
+            </div>
+            <div class="pd-stat">
+              <div class="pd-stat-value">${{ "{:,.0f}".format(goal) }}</div>
+              <div class="pd-stat-label">Goal</div>
+            </div>
+          </div>
+    
+          <a href="{{ url_for('donate.donate', program_id=program.id) }}" class="btn btn-donate">
+            <i class="fas fa-hand-holding-heart me-2"></i> Support Now
+          </a>
+        </div>
+      </div>
+    
+      <!-- CTA Section -->
+      <div class="col-12 text-center" data-aos="zoom-in">
+        <a href="{{ url_for('main.all_programs') }}" class="btn btn-outline-secondary">
+          <i class="fas fa-arrow-left me-2"></i> Explore Other Programs
+        </a>
+      </div>
+    </div>
+    
+</div>
+
+<style>
+:root {
+  --primary-color: #2A5C82;
+  --secondary-color: #5FB49C;
+  --accent-color: #FF6B6B;
+  --light-bg: #F9FBFD;
+  --text-color: #2D3748;
+}
+
+.program-detail-page {
+  background: var(--light-bg);
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.pd-hero {
+  height: 50vh;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pd-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 10s linear;
+  transform: scale(1);
+}
+
+.carousel-item.active .pd-hero-bg {
+  transform: scale(1.05);
+}
+
+.pd-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, rgba(42, 92, 130, 0.6), rgba(95, 180, 156, 0.4));
+}
+
+.pd-category {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary-color);
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pd-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Content Boxes */
+.pd-box {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pd-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pd-section-title {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+/* Progress Bar */
+.pd-progress-container {
+  background: #EDF2F7;
+  border-radius: 10px;
+  height: 20px;
+  overflow: hidden;
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+.pd-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  border-radius: 10px;
+  position: relative;
+  transition: width 1s ease-in-out;
+}
+
+.pd-progress-label {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Stats */
+.pd-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.pd-stat {
+  text-align: center;
+  padding: 1rem;
+  background: var(--light-bg);
+  border-radius: 8px;
+}
+
+.pd-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.pd-stat-label {
+  color: #718096;
+  font-size: 0.9rem;
+}
+
+/* Buttons */
+.btn-donate {
+  background: var(--secondary-color);
+  color: white;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-donate:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(95, 180, 156, 0.3);
+}
+
+
+/* Full Story Section */
+.pd-story {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 15px;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+.pd-story::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pd-story::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.pd-story::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.pd-story img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pd-story iframe {
+  max-width: 100%;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+}
+
+/* Add some spacing between paragraphs */
+.pd-story p {
+  margin-bottom: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .pd-story {
+    max-height: 400px;
+  }
+  
+  .pd-story img {
+    margin: 1rem 0;
+  }
+}
+
+
+
+
+
+@media (max-width: 768px) {
+  .pd-title {
+    font-size: 2rem;
+  }
+  
+  .pd-hero {
+    height: 50vh;
+  }
+  
+  .pd-box {
+    padding: 1.5rem;
+  }
+}
+</style>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true,
+    easing: 'ease-in-out'
+  });
+</script>
+{% endblock %}
