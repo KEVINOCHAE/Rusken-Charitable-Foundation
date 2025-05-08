@@ -20345,3 +20345,72 @@ app.donate.routes.PaymentVerificationError: Could not verify payment
 2025-05-09 00:16:54,031 [INFO] - 127.0.0.1 - - [09/May/2025 00:16:54] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
 2025-05-09 00:16:54,032 [INFO] - 127.0.0.1 - - [09/May/2025 00:16:54] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
 2025-05-09 00:16:54,125 [INFO] - 127.0.0.1 - - [09/May/2025 00:16:54] "GET /categories HTTP/1.1" 200 -
+2025-05-09 00:19:46,864 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-09 00:19:46,864 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-09 00:19:46,865 [INFO] -  * Restarting with stat
+2025-05-09 00:19:47,643 [WARNING] -  * Debugger is active!
+2025-05-09 00:19:47,644 [INFO] -  * Debugger PIN: 593-030-366
+2025-05-09 00:19:49,726 [INFO] - 127.0.0.1 - - [09/May/2025 00:19:49] "GET / HTTP/1.1" 200 -
+2025-05-09 00:19:49,872 [INFO] - 127.0.0.1 - - [09/May/2025 00:19:49] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 00:19:49,874 [INFO] - 127.0.0.1 - - [09/May/2025 00:19:49] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 00:19:49,875 [INFO] - 127.0.0.1 - - [09/May/2025 00:19:49] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-09 00:19:49,881 [INFO] - 127.0.0.1 - - [09/May/2025 00:19:49] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 00:19:49,884 [INFO] - 127.0.0.1 - - [09/May/2025 00:19:49] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 00:19:49,933 [INFO] - 127.0.0.1 - - [09/May/2025 00:19:49] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 00:19:49,939 [INFO] - 127.0.0.1 - - [09/May/2025 00:19:49] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 00:19:50,262 [INFO] - 127.0.0.1 - - [09/May/2025 00:19:50] "GET /categories HTTP/1.1" 200 -
+2025-05-09 00:20:40,018 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:40] "GET / HTTP/1.1" 200 -
+2025-05-09 00:20:40,256 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:40] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-09 00:20:40,257 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:40] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 00:20:40,264 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:40] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 00:20:40,272 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:40] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 00:20:40,275 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:40] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 00:20:40,373 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:40] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 00:20:40,374 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:40] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 00:20:40,509 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:40] "GET /categories HTTP/1.1" 200 -
+2025-05-09 00:20:55,547 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:55] "GET / HTTP/1.1" 200 -
+2025-05-09 00:20:55,745 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:55] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 00:20:55,752 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:55] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 00:20:55,757 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:55] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-09 00:20:55,764 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:55] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 00:20:55,765 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:55] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 00:20:55,858 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:55] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 00:20:55,864 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:55] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 00:20:56,040 [INFO] - 127.0.0.1 - - [09/May/2025 00:20:56] "GET /categories HTTP/1.1" 200 -
+2025-05-09 00:21:25,018 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:25] "GET / HTTP/1.1" 200 -
+2025-05-09 00:21:25,266 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:25] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 00:21:25,271 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:25] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 00:21:25,273 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:25] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-09 00:21:25,278 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:25] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 00:21:25,280 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:25] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 00:21:25,377 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:25] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 00:21:25,382 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:25] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 00:21:25,553 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:25] "GET /categories HTTP/1.1" 200 -
+2025-05-09 00:21:37,693 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:37] "GET / HTTP/1.1" 200 -
+2025-05-09 00:21:37,918 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:37] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 00:21:37,925 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:37] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 00:21:37,930 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:37] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-09 00:21:37,934 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:37] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 00:21:37,941 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:37] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 00:21:38,035 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:38] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 00:21:38,039 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:38] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 00:21:38,197 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:38] "GET /categories HTTP/1.1" 200 -
+2025-05-09 00:21:59,096 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:59] "GET / HTTP/1.1" 200 -
+2025-05-09 00:21:59,308 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:59] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 00:21:59,312 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:59] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 00:21:59,316 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:59] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-09 00:21:59,322 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:59] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 00:21:59,328 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:59] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 00:21:59,433 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:59] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 00:21:59,441 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:59] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 00:21:59,574 [INFO] - 127.0.0.1 - - [09/May/2025 00:21:59] "GET /categories HTTP/1.1" 200 -
+2025-05-09 00:22:35,337 [INFO] - 127.0.0.1 - - [09/May/2025 00:22:35] "GET / HTTP/1.1" 200 -
+2025-05-09 00:22:35,627 [INFO] - 127.0.0.1 - - [09/May/2025 00:22:35] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 00:22:35,632 [INFO] - 127.0.0.1 - - [09/May/2025 00:22:35] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 00:22:35,634 [INFO] - 127.0.0.1 - - [09/May/2025 00:22:35] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-09 00:22:35,640 [INFO] - 127.0.0.1 - - [09/May/2025 00:22:35] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 00:22:35,642 [INFO] - 127.0.0.1 - - [09/May/2025 00:22:35] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 00:22:35,879 [INFO] - 127.0.0.1 - - [09/May/2025 00:22:35] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 00:22:35,882 [INFO] - 127.0.0.1 - - [09/May/2025 00:22:35] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 00:22:36,122 [INFO] - 127.0.0.1 - - [09/May/2025 00:22:36] "GET /categories HTTP/1.1" 200 -
