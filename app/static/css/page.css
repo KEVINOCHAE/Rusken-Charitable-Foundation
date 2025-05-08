@@ -37,12 +37,7 @@
   will-change: transform;
 }
 
-/* 3. Gradient Overlay (soft, not overpowering) */
-.gradient-overlay {
-  position: absolute;
-  inset: 0; /* shorthand for top/left/right/bottom: 0 */
-  
-}
+
 
 /* 4. Glass-morphism Content Panel */
 .bg-soft-glass {
@@ -200,7 +195,7 @@
   .wheel {
     width: 4px;
     height: 8px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(19, 18, 18, 0.8);
     border-radius: 2px;
     position: absolute;
     top: 8px;
