@@ -3,7 +3,7 @@
 {% block title %}Rusken-Charitable-Foundation  | Home{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/page.css') }}">
 
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -13,7 +13,7 @@
   <!-- Background with Parallax Effect -->
   <div class="hero-background">
     <div class="parallax-wrapper">
-      <img src="{{url_for('static', filename='images/yr.jpg')}}" 
+      <img src="{{url_for('static', filename='images/er.jpg')}}" 
            alt="Community empowerment" 
            class="img-cover parallax-layer" 
            data-depth="0.4">
@@ -31,19 +31,23 @@
             <span class="highlighted-text animated-gradient">Hope & Opportunity</span>
           </h1>
           
-          <p class="lead text-white opacity-90 mb-5">
+          <p class="lead  text-white mb-5">
             Creating sustainable solutions through innovation, compassion, and global partnerships
           </p>
           
-          <div class="d-flex gap-3 justify-content-center flex-wrap">
-            <a href="#donate" class="btn btn-lg btn-primary px-5 py-3 btn-hover-scale">
-              <i class="fas fa-hand-holding-heart me-2"></i>Make an Impact Today
-            </a>
-            <a href="{{url_for('main.all_programs')}}" 
-               class="btn btn-lg btn-outline-light px-5 py-3 btn-hover-grow">
-              Explore Our Programs <i class="fas fa-arrow-right ms-2"></i>
-            </a>
+          <div class="row">
+            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+              <a href="#donate" class="btn btn-lg btn-primary px-5 py-3 btn-hover-scale">
+                <i class="fas fa-hand-holding-heart me-2"></i>Make an Impact Today
+              </a>
+              <a href="{{ url_for('main.all_programs') }}" 
+                 class="btn btn-lg btn-outline-light px-5 py-3 btn-hover-grow" 
+                 style="background-color: #49235a;">
+                Explore Our Programs <i class="fas fa-arrow-right ms-2"></i>
+              </a>
+            </div>
           </div>
+          
         </div>
       </div>
     </div>
@@ -68,6 +72,24 @@
 </section>
 
 
+
+
+<style>
+  .animated-gradient {
+  background: linear-gradient(90deg, #ff6b6b, #ffa3a3, #ff6b6b);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: gradientText 3s linear infinite;
+}
+
+@keyframes gradientText {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+</style>
 <section class="donation-module py-8 position-relative overflow-hidden" id="donate">
 
   <div class="position-absolute top-0 start-0 w-100 h-90">
