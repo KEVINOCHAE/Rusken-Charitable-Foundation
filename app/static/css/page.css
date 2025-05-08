@@ -24,7 +24,7 @@
   height: 100%;
   perspective: 1px;
   overflow: hidden;
-  z-index: 1;
+
 }
 .parallax-layer {
   position: absolute;
@@ -137,16 +137,16 @@
     height: 0;
     border-left: 75px solid transparent;
     border-right: 75px solid transparent;
-    border-bottom: 130px solid #f8a5c2;
+    border-bottom: 130px solid #0e0d0d;
     top: 60%;
     right: 15%;
-    opacity: 0.1;
+    opacity: 0.51;
   }
   
   .wave {
     width: 200px;
     height: 100px;
-    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg"><path d="M0,15 C30,30 70,0 120,15 L120,30 L0,30 Z" fill="%23ff6b6b"/></svg>') no-repeat;
+    background: linear-gradient(45deg, #140f0f, #080505);
     bottom: 10%;
     left: 20%;
   }
