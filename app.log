@@ -20552,3 +20552,28 @@ app.donate.routes.PaymentVerificationError: Could not verify payment
 2025-05-09 00:56:38,022 [INFO] - 127.0.0.1 - - [09/May/2025 00:56:38] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
 2025-05-09 00:56:38,135 [INFO] - 127.0.0.1 - - [09/May/2025 00:56:38] "GET /categories HTTP/1.1" 200 -
 2025-05-09 00:56:38,161 [INFO] - 127.0.0.1 - - [09/May/2025 00:56:38] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-09 01:12:38,092 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-09 01:12:38,092 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-09 01:12:38,093 [INFO] -  * Restarting with stat
+2025-05-09 01:12:38,876 [WARNING] -  * Debugger is active!
+2025-05-09 01:12:38,877 [INFO] -  * Debugger PIN: 593-030-366
+2025-05-09 01:13:51,139 [INFO] - 127.0.0.1 - - [09/May/2025 01:13:51] "GET / HTTP/1.1" 200 -
+2025-05-09 01:13:51,274 [INFO] - 127.0.0.1 - - [09/May/2025 01:13:51] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-09 01:13:51,274 [INFO] - 127.0.0.1 - - [09/May/2025 01:13:51] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-09 01:13:51,275 [INFO] - 127.0.0.1 - - [09/May/2025 01:13:51] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 01:13:51,360 [INFO] - 127.0.0.1 - - [09/May/2025 01:13:51] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 01:13:51,369 [INFO] - 127.0.0.1 - - [09/May/2025 01:13:51] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 01:13:51,411 [INFO] - 127.0.0.1 - - [09/May/2025 01:13:51] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 01:13:51,412 [INFO] - 127.0.0.1 - - [09/May/2025 01:13:51] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 01:13:51,636 [INFO] - 127.0.0.1 - - [09/May/2025 01:13:51] "GET /categories HTTP/1.1" 200 -
+2025-05-09 01:13:51,770 [INFO] - 127.0.0.1 - - [09/May/2025 01:13:51] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-09 01:14:36,402 [INFO] - 127.0.0.1 - - [09/May/2025 01:14:36] "GET / HTTP/1.1" 200 -
+2025-05-09 01:14:36,523 [INFO] - 127.0.0.1 - - [09/May/2025 01:14:36] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 01:14:36,530 [INFO] - 127.0.0.1 - - [09/May/2025 01:14:36] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 01:14:36,531 [INFO] - 127.0.0.1 - - [09/May/2025 01:14:36] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 01:14:36,540 [INFO] - 127.0.0.1 - - [09/May/2025 01:14:36] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 01:14:36,541 [INFO] - 127.0.0.1 - - [09/May/2025 01:14:36] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-09 01:14:36,599 [INFO] - 127.0.0.1 - - [09/May/2025 01:14:36] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 01:14:36,599 [INFO] - 127.0.0.1 - - [09/May/2025 01:14:36] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 01:14:36,769 [INFO] - 127.0.0.1 - - [09/May/2025 01:14:36] "GET /categories HTTP/1.1" 200 -
