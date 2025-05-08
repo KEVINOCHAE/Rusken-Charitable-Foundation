@@ -20484,3 +20484,18 @@ app.donate.routes.PaymentVerificationError: Could not verify payment
 2025-05-09 00:33:55,083 [INFO] - 127.0.0.1 - - [09/May/2025 00:33:55] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
 2025-05-09 00:33:55,088 [INFO] - 127.0.0.1 - - [09/May/2025 00:33:55] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
 2025-05-09 00:33:55,198 [INFO] - 127.0.0.1 - - [09/May/2025 00:33:55] "GET /categories HTTP/1.1" 200 -
+2025-05-09 00:34:42,413 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-09 00:34:42,413 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-09 00:34:42,414 [INFO] -  * Restarting with stat
+2025-05-09 00:34:43,229 [WARNING] -  * Debugger is active!
+2025-05-09 00:34:43,230 [INFO] -  * Debugger PIN: 593-030-366
+2025-05-09 00:35:20,558 [INFO] - 127.0.0.1 - - [09/May/2025 00:35:20] "GET / HTTP/1.1" 200 -
+2025-05-09 00:35:20,726 [INFO] - 127.0.0.1 - - [09/May/2025 00:35:20] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 00:35:20,727 [INFO] - 127.0.0.1 - - [09/May/2025 00:35:20] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 00:35:20,735 [INFO] - 127.0.0.1 - - [09/May/2025 00:35:20] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 00:35:20,738 [INFO] - 127.0.0.1 - - [09/May/2025 00:35:20] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-09 00:35:20,739 [INFO] - 127.0.0.1 - - [09/May/2025 00:35:20] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 00:35:20,787 [INFO] - 127.0.0.1 - - [09/May/2025 00:35:20] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 00:35:20,788 [INFO] - 127.0.0.1 - - [09/May/2025 00:35:20] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 00:35:20,941 [INFO] - 127.0.0.1 - - [09/May/2025 00:35:20] "GET /categories HTTP/1.1" 200 -
