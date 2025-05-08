@@ -68,6 +68,13 @@ def create_app(config_class=None):
     @app.route('/media/programs/<filename>')
     def serve_program_image(filename):
         return send_from_directory('/data/programs', filename)
+    
+
+    # Sitemap route
+    @app.route('/sitemap.xml')
+    def sitemap():
+        return send_from_directory(app.static_folder, 'sitemap.xml')
+
 
     def program_image_url(img):
         if img:
