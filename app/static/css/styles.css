@@ -23,21 +23,18 @@ body {
   color: #444444 !important;
 }
 
-.navbar.glass-effect.scrolled .logos  {
-  color: #444444 !important;
-}
-.navbar.glass-effect.scrolled .small  {
-  color: #444444 !important;
-}
 
 /* Nav Link Styling */
-.navbar .nav-link {
+.navbar .nav-link   {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #15078d !important; 
+  color: #000000 !important; 
   transition: color 0.2s ease;
  
 }
+
+
+
 
 .navbar .nav-link:hover,
 .navbar .nav-link:focus {
