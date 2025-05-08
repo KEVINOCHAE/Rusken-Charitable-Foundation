@@ -47,7 +47,7 @@ def initialize_payment():
         # Create donation record
         donation = Donation(
             program_id=program_id,
-            user_id=current_user.id if current_user.is_authenticated else None,
+            user_id=current_user.id if current_user.is_authenticated else "",
             donor_name=donor_name,
             donor_email=email,
             amount=amount_decimal,

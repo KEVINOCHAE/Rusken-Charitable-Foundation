@@ -20672,3 +20672,138 @@ app.donate.routes.PaymentVerificationError: Could not verify payment
 2025-05-09 01:52:16,242 [INFO] -  * Debugger PIN: 593-030-366
 2025-05-09 01:52:23,195 [INFO] - 127.0.0.1 - - [09/May/2025 01:52:23] "GET /sitemap.xml HTTP/1.1" 200 -
 2025-05-09 01:52:23,944 [INFO] - 127.0.0.1 - - [09/May/2025 01:52:23] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-09 02:03:28,705 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-09 02:03:28,745 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-09 02:03:28,746 [INFO] -  * Restarting with stat
+2025-05-09 02:03:30,145 [WARNING] -  * Debugger is active!
+2025-05-09 02:03:30,146 [INFO] -  * Debugger PIN: 593-030-366
+2025-05-09 02:08:21,861 [INFO] - 127.0.0.1 - - [09/May/2025 02:08:21] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-09 02:08:21,886 [INFO] - 127.0.0.1 - - [09/May/2025 02:08:21] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-09 02:08:24,784 [INFO] - 127.0.0.1 - - [09/May/2025 02:08:24] "GET /programs HTTP/1.1" 200 -
+2025-05-09 02:08:25,003 [INFO] - 127.0.0.1 - - [09/May/2025 02:08:25] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-09 02:08:25,020 [INFO] - 127.0.0.1 - - [09/May/2025 02:08:25] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 02:08:25,065 [INFO] - 127.0.0.1 - - [09/May/2025 02:08:25] "GET /static/css/programs.css HTTP/1.1" 200 -
+2025-05-09 02:08:25,145 [INFO] - 127.0.0.1 - - [09/May/2025 02:08:25] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 02:08:25,189 [INFO] - 127.0.0.1 - - [09/May/2025 02:08:25] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 02:08:25,255 [INFO] - 127.0.0.1 - - [09/May/2025 02:08:25] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 02:08:25,533 [INFO] - 127.0.0.1 - - [09/May/2025 02:08:25] "GET /categories HTTP/1.1" 200 -
+2025-05-09 02:08:25,542 [INFO] - 127.0.0.1 - - [09/May/2025 02:08:25] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-09 02:11:39,454 [INFO] -  * Detected change in '/home/bha/Desktop/rusken/app/donate/routes.py', reloading
+2025-05-09 02:11:39,915 [INFO] -  * Restarting with stat
+2025-05-09 02:11:42,991 [WARNING] -  * Debugger is active!
+2025-05-09 02:11:42,992 [INFO] -  * Debugger PIN: 100-231-178
+2025-05-09 02:11:56,333 [INFO] - 127.0.0.1 - - [09/May/2025 02:11:56] "[35m[1mGET /auth/login HTTP/1.1[0m" 500 -
+2025-05-09 02:11:56,833 [INFO] - 127.0.0.1 - - [09/May/2025 02:11:56] "GET /auth/login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-05-09 02:11:56,836 [INFO] - 127.0.0.1 - - [09/May/2025 02:11:56] "[36mGET /auth/login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-09 02:11:56,883 [INFO] - 127.0.0.1 - - [09/May/2025 02:11:56] "GET /auth/login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-05-09 02:11:56,908 [INFO] - 127.0.0.1 - - [09/May/2025 02:11:56] "GET /auth/login?__debugger__=yes&cmd=resource&f=console.png&s=rOUElQ5NrxE9qx51YFlz HTTP/1.1" 200 -
+2025-05-09 02:12:19,714 [INFO] -  * Detected change in '/home/bha/Desktop/rusken/app/donate/routes.py', reloading
+2025-05-09 02:12:19,978 [INFO] -  * Restarting with stat
+2025-05-09 02:12:22,043 [WARNING] -  * Debugger is active!
+2025-05-09 02:12:22,060 [INFO] -  * Debugger PIN: 593-030-366
+2025-05-09 02:12:31,195 [INFO] -  * Detected change in '/home/bha/Desktop/rusken/app/donate/routes.py', reloading
+2025-05-09 02:12:31,421 [INFO] -  * Restarting with stat
+2025-05-09 02:12:32,382 [WARNING] -  * Debugger is active!
+2025-05-09 02:12:32,383 [INFO] -  * Debugger PIN: 593-030-366
+2025-05-09 02:12:33,786 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:33] "GET /auth/login HTTP/1.1" 200 -
+2025-05-09 02:12:34,053 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:34] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-09 02:12:34,097 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:34] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 02:12:34,234 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:34] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 02:12:34,235 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:34] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 02:12:34,293 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:34] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 02:12:35,051 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:35] "[36mGET /static/images/eq1.jpg HTTP/1.1[0m" 304 -
+2025-05-09 02:12:35,279 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:35] "GET /categories HTTP/1.1" 200 -
+2025-05-09 02:12:41,650 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:41] "[32mPOST /auth/login HTTP/1.1[0m" 302 -
+2025-05-09 02:12:41,722 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:41] "GET / HTTP/1.1" 200 -
+2025-05-09 02:12:42,035 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:42] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 02:12:42,050 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:42] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 02:12:42,059 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:42] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-09 02:12:42,062 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:42] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 02:12:42,073 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:42] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-09 02:12:42,163 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:42] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 02:12:42,206 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:42] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 02:12:42,397 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:42] "GET /categories HTTP/1.1" 200 -
+2025-05-09 02:12:48,104 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:48] "GET /admin/admin/dashboard HTTP/1.1" 200 -
+2025-05-09 02:12:50,740 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:50] "GET /program/admin/programs HTTP/1.1" 200 -
+2025-05-09 02:12:53,808 [INFO] - 127.0.0.1 - - [09/May/2025 02:12:53] "GET /program/admin/program/add HTTP/1.1" 200 -
+2025-05-09 02:13:50,511 [INFO] - 127.0.0.1 - - [09/May/2025 02:13:50] "GET /program/categories HTTP/1.1" 200 -
+2025-05-09 02:13:52,573 [INFO] - 127.0.0.1 - - [09/May/2025 02:13:52] "GET /program/categories/create HTTP/1.1" 200 -
+2025-05-09 02:13:52,736 [INFO] - 127.0.0.1 - - [09/May/2025 02:13:52] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-09 02:13:59,326 [INFO] - 127.0.0.1 - - [09/May/2025 02:13:59] "[32mPOST /program/categories/create HTTP/1.1[0m" 302 -
+2025-05-09 02:13:59,346 [INFO] - 127.0.0.1 - - [09/May/2025 02:13:59] "GET /program/categories HTTP/1.1" 200 -
+2025-05-09 02:14:02,099 [INFO] - 127.0.0.1 - - [09/May/2025 02:14:02] "GET /program/categories/create HTTP/1.1" 200 -
+2025-05-09 02:14:06,175 [INFO] - 127.0.0.1 - - [09/May/2025 02:14:06] "GET /program/admin/programs HTTP/1.1" 200 -
+2025-05-09 02:14:08,057 [INFO] - 127.0.0.1 - - [09/May/2025 02:14:08] "GET /program/admin/program/add HTTP/1.1" 200 -
+2025-05-09 02:14:45,725 [INFO] - 127.0.0.1 - - [09/May/2025 02:14:45] "[32mPOST /program/admin/program/add HTTP/1.1[0m" 302 -
+2025-05-09 02:14:45,745 [INFO] - 127.0.0.1 - - [09/May/2025 02:14:45] "GET /program/admin/programs HTTP/1.1" 200 -
+2025-05-09 02:14:45,953 [INFO] - 127.0.0.1 - - [09/May/2025 02:14:45] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-09 02:14:54,326 [INFO] - 127.0.0.1 - - [09/May/2025 02:14:54] "GET /admin/admin/programs/1/images HTTP/1.1" 200 -
+2025-05-09 02:15:10,699 [INFO] - 127.0.0.1 - - [09/May/2025 02:15:10] "[35m[1mPOST /admin/admin/programs/1/images HTTP/1.1[0m" 500 -
+2025-05-09 02:15:10,838 [INFO] - 127.0.0.1 - - [09/May/2025 02:15:10] "GET /admin/admin/programs/1/images?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-05-09 02:15:10,850 [INFO] - 127.0.0.1 - - [09/May/2025 02:15:10] "GET /admin/admin/programs/1/images?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-05-09 02:15:10,898 [INFO] - 127.0.0.1 - - [09/May/2025 02:15:10] "GET /admin/admin/programs/1/images?__debugger__=yes&cmd=resource&f=console.png&s=LhtXPfvGFBAhiLUf5evK HTTP/1.1" 200 -
+2025-05-09 02:15:10,910 [INFO] - 127.0.0.1 - - [09/May/2025 02:15:10] "GET /admin/admin/programs/1/images?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-05-09 02:15:15,417 [INFO] - 127.0.0.1 - - [09/May/2025 02:15:15] "GET /admin/admin/programs/1/images HTTP/1.1" 200 -
+2025-05-09 02:16:33,013 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:33] "GET / HTTP/1.1" 200 -
+2025-05-09 02:16:33,136 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:33] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-09 02:16:33,136 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:33] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 02:16:33,193 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:33] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-09 02:16:33,361 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:33] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 02:16:33,362 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:33] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 02:16:33,548 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:33] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 02:16:33,554 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:33] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 02:16:33,684 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:33] "GET /categories HTTP/1.1" 200 -
+2025-05-09 02:16:33,951 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:33] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-09 02:16:35,844 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:35] "GET /programs HTTP/1.1" 200 -
+2025-05-09 02:16:36,075 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:36] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 02:16:36,082 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:36] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 02:16:36,083 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:36] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 02:16:36,088 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:36] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 02:16:36,098 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:36] "GET /static/css/programs.css HTTP/1.1" 200 -
+2025-05-09 02:16:36,101 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:36] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-05-09 02:16:36,156 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:36] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 02:16:36,157 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:36] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-05-09 02:16:36,216 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:36] "GET /categories HTTP/1.1" 200 -
+2025-05-09 02:16:40,731 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:40] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-09 02:16:41,044 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:41] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 02:16:41,048 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:41] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 02:16:41,051 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:41] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 02:16:41,053 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:41] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 02:16:41,146 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:41] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 02:16:41,284 [INFO] - 127.0.0.1 - - [09/May/2025 02:16:41] "GET /categories HTTP/1.1" 200 -
+2025-05-09 02:17:03,419 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:03] "[32mGET /auth/logout HTTP/1.1[0m" 302 -
+2025-05-09 02:17:03,572 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:03] "GET / HTTP/1.1" 200 -
+2025-05-09 02:17:03,816 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:03] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-09 02:17:03,824 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:03] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 02:17:03,829 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:03] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 02:17:03,830 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:03] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 02:17:03,884 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:03] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-09 02:17:04,049 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:04] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 02:17:04,110 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:04] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 02:17:04,169 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:04] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-09 02:17:04,216 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:04] "GET /categories HTTP/1.1" 200 -
+2025-05-09 02:17:08,148 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:08] "GET /programs HTTP/1.1" 200 -
+2025-05-09 02:17:08,383 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:08] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 02:17:08,385 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:08] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 02:17:08,391 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:08] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 02:17:08,393 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:08] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 02:17:08,396 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:08] "GET /static/css/programs.css HTTP/1.1" 200 -
+2025-05-09 02:17:08,453 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:08] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-05-09 02:17:08,498 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:08] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 02:17:08,608 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:08] "GET /categories HTTP/1.1" 200 -
+2025-05-09 02:17:08,832 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:08] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-09 02:17:11,126 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:11] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-09 02:17:11,451 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:11] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 02:17:11,461 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:11] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 02:17:11,461 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:11] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 02:17:11,466 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:11] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 02:17:11,569 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:11] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 02:17:11,698 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:11] "GET /categories HTTP/1.1" 200 -
+2025-05-09 02:17:35,783 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:35] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-09 02:17:36,002 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:36] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 02:17:36,004 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:36] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 02:17:36,008 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:36] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 02:17:36,013 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:36] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 02:17:36,076 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:36] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 02:17:36,138 [INFO] - 127.0.0.1 - - [09/May/2025 02:17:36] "GET /categories HTTP/1.1" 200 -
