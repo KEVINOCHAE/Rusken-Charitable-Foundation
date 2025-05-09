@@ -22,7 +22,7 @@
                         <th>Title</th>
                         <th>Category</th>
                         <th>Author</th>
-                        <th class="text-end">Budget ($)</th>
+                        <th class="text-end">Budget (KES)</th>
                         <th class="text-end">Donated</th>
                         <th class="text-end">Remaining</th>
                         <th>Created</th>
@@ -38,9 +38,9 @@
                         </td>
                         <td>{{ program.category.name if program.category else "Uncategorized" }}</td>
                         <td>{{ program.author.name if program.author else "N/A" }}</td>
-                        <td class="text-end">$ {{ "{:,.2f}".format(program.annual_budget) }}</td>
-                        <td class="text-end">$ {{ "{:,.2f}".format(program.total_donated) }}</td>
-                        <td class="text-end text-success fw-bold">$ {{ "{:,.2f}".format(program.budget_remaining) }}</td>
+                        <td class="text-end">KES {{ "{:,.2f}".format(program.annual_budget) }}</td>
+                        <td class="text-end">KES {{ "{:,.2f}".format(program.total_donated) }}</td>
+                        <td class="text-end text-success fw-bold">KES {{ "{:,.2f}".format(program.budget_remaining) }}</td>
                         <td>{{ program.created_at.strftime('%Y-%m-%d') }}</td>
                         <td class="text-center">
                             <a href="{{ url_for('program.edit_program', program_id=program.id) }}" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Edit">
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.addEventListener('click', function () {
             const programId = this.dataset.id;
             const programTitle = this.dataset.title;
-            deleteForm.action = `/admin/programs/delete/${programId}`;
+            deleteForm.action = `/admin/programs/delete/KES{programId}`;
             deleteMessage.textContent = `Are you sure you want to delete the program "${programTitle}"?`;
             deleteModal.show();
         });

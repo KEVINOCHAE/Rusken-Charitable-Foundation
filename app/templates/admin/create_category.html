@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const updateCounter = () => {
             const remaining = 200 - descriptionField.value.length;
-            counter.textContent = `${descriptionField.value.length}/200 characters`;
+            counter.textContent = `KES{descriptionField.value.length}/200 characters`;
             counter.style.color = remaining < 0 ? '#dc3545' : '#6c757d';
         };
 

@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function showMessage(text, type) {
     const msg = document.getElementById('paymentMessages');
     msg.textContent = text;
-    msg.className = `text-center text-sm ${type==='error'?'text-red-500':'text-green-500'}`;
+    msg.className = `text-center text-sm KES{type==='error'?'text-red-500':'text-green-500'}`;
     setTimeout(()=>{ msg.textContent=''; msg.className=''; }, 5000);
   }
 

@@ -149,13 +149,13 @@
               <div class="donation-tiers mb-4">
                 <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
                   <button type="button" class="tier-card btn btn-outline-primary rounded-pill px-4 py-2" data-amount="25">
-                    $25
+                    KSH 25
                   </button>
                   <button type="button" class="tier-card btn btn-outline-primary rounded-pill px-4 py-2" data-amount="50">
-                    $50
+                    KSH 50
                   </button>
                   <button type="button" class="tier-card btn btn-outline-primary rounded-pill px-4 py-2 active" data-amount="100">
-                    $100
+                    KSH 100
                   </button>
                   
                 </div>
@@ -165,7 +165,7 @@
               <div class="custom-amount mb-4">
                 <div class="input-group input-group-lg hover-scale">
                   <span class="input-group-text bg-white border-end-0">
-                    <i class="fas fa-dollar-sign"></i>
+                    <i class="small"> KSH</i>
                   </span>
                   <input type="number" 
                          class="form-control border-start-0" 
@@ -251,7 +251,7 @@
           <!-- Donation Amount Preview -->
           <div class="donation-preview mb-4 p-3 rounded-3 text-center" style="background-color: #f8f9fa;">
             <div class="text-muted  mb-1">You're donating</div>
-            <div class="display-5 fw-bold text-primary" id="donationAmountPreview">$100.00</div>
+            <div class="display-5 fw-bold text-primary" id="donationAmountPreview">KSH 100.00</div>
           </div>
 
           <!-- Form Fields -->
@@ -302,7 +302,7 @@
         </button>
         <button type="submit" form="generalDonationForm" class="btn btn-primary btn-donate-now">
           <span class="donate-text">Donate Now</span>
-          <span class="donate-amount ms-1" id="footerDonationAmount">$100.00</span>
+          <span class="donate-amount ms-1" id="footerDonationAmount">KSH 100.00</span>
           <i class="fas fa-arrow-right ms-2"></i>
         </button>
       </div>
@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="progress-info d-flex justify-content-between mb-1">
     <span class="progress-label">Raised</span>
     <span class="progress-value">
-      ${{ program.total_donated | round(2) }} of ${{ program.annual_budget | round(2) }}
+      KSH {{ program.total_donated | round(2) }} of KSH {{ program.annual_budget | round(2) }}
     </span>
   </div>
   {% set donated_percent = (program.total_donated / program.annual_budget | float * 100) if program.annual_budget else 0 %}
