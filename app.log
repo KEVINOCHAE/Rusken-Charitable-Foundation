@@ -22771,3 +22771,31 @@ app.donate.routes.PaymentVerificationError: Could not verify payment
 2025-05-09 11:50:38,662 [INFO] - 127.0.0.1 - - [09/May/2025 11:50:38] "[36mGET /static/images/national.svg HTTP/1.1[0m" 304 -
 2025-05-09 11:50:38,665 [INFO] - 127.0.0.1 - - [09/May/2025 11:50:38] "[36mGET /static/images/kcb.svg HTTP/1.1[0m" 304 -
 2025-05-09 11:50:38,746 [INFO] - 127.0.0.1 - - [09/May/2025 11:50:38] "GET /categories HTTP/1.1" 200 -
+2025-05-09 12:20:33,366 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-09 12:20:33,366 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-09 12:20:33,367 [INFO] -  * Restarting with stat
+2025-05-09 12:20:34,332 [WARNING] -  * Debugger is active!
+2025-05-09 12:20:34,332 [INFO] -  * Debugger PIN: 124-225-853
+2025-05-09 12:20:35,364 [INFO] - 127.0.0.1 - - [09/May/2025 12:20:35] "GET /donate-details HTTP/1.1" 200 -
+2025-05-09 12:20:35,776 [INFO] - 127.0.0.1 - - [09/May/2025 12:20:35] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 12:20:35,777 [INFO] - 127.0.0.1 - - [09/May/2025 12:20:35] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-09 12:20:35,777 [INFO] - 127.0.0.1 - - [09/May/2025 12:20:35] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 12:20:35,778 [INFO] - 127.0.0.1 - - [09/May/2025 12:20:35] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 12:20:35,828 [INFO] - 127.0.0.1 - - [09/May/2025 12:20:35] "GET /static/images/mpesah.png HTTP/1.1" 200 -
+2025-05-09 12:20:35,831 [INFO] - 127.0.0.1 - - [09/May/2025 12:20:35] "GET /static/images/lipa.webp HTTP/1.1" 200 -
+2025-05-09 12:20:35,833 [INFO] - 127.0.0.1 - - [09/May/2025 12:20:35] "GET /static/images/national.svg HTTP/1.1" 200 -
+2025-05-09 12:20:35,837 [INFO] - 127.0.0.1 - - [09/May/2025 12:20:35] "GET /static/images/kcb.svg HTTP/1.1" 200 -
+2025-05-09 12:20:36,053 [INFO] - 127.0.0.1 - - [09/May/2025 12:20:36] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 12:20:36,532 [INFO] - 127.0.0.1 - - [09/May/2025 12:20:36] "GET /categories HTTP/1.1" 200 -
+2025-05-09 12:23:19,910 [INFO] - 127.0.0.1 - - [09/May/2025 12:23:19] "GET /donate-details HTTP/1.1" 200 -
+2025-05-09 12:23:20,026 [INFO] - 127.0.0.1 - - [09/May/2025 12:23:20] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 12:23:20,031 [INFO] - 127.0.0.1 - - [09/May/2025 12:23:20] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 12:23:20,035 [INFO] - 127.0.0.1 - - [09/May/2025 12:23:20] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 12:23:20,038 [INFO] - 127.0.0.1 - - [09/May/2025 12:23:20] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 12:23:20,170 [INFO] - 127.0.0.1 - - [09/May/2025 12:23:20] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 12:23:20,177 [INFO] - 127.0.0.1 - - [09/May/2025 12:23:20] "[36mGET /static/images/mpesah.png HTTP/1.1[0m" 304 -
+2025-05-09 12:23:20,179 [INFO] - 127.0.0.1 - - [09/May/2025 12:23:20] "[36mGET /static/images/lipa.webp HTTP/1.1[0m" 304 -
+2025-05-09 12:23:20,189 [INFO] - 127.0.0.1 - - [09/May/2025 12:23:20] "[36mGET /static/images/kcb.svg HTTP/1.1[0m" 304 -
+2025-05-09 12:23:20,196 [INFO] - 127.0.0.1 - - [09/May/2025 12:23:20] "[36mGET /static/images/national.svg HTTP/1.1[0m" 304 -
+2025-05-09 12:23:20,224 [INFO] - 127.0.0.1 - - [09/May/2025 12:23:20] "GET /categories HTTP/1.1" 200 -
