@@ -22811,3 +22811,124 @@ app.donate.routes.PaymentVerificationError: Could not verify payment
 2025-05-09 12:56:49,017 [INFO] -  * Restarting with stat
 2025-05-09 12:56:50,067 [WARNING] -  * Debugger is active!
 2025-05-09 12:56:50,068 [INFO] -  * Debugger PIN: 124-225-853
+2025-05-09 14:23:10,470 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-09 14:23:10,470 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-09 14:23:10,471 [INFO] -  * Restarting with stat
+2025-05-09 14:23:11,264 [WARNING] -  * Debugger is active!
+2025-05-09 14:23:11,265 [INFO] -  * Debugger PIN: 124-225-853
+2025-05-09 14:23:17,142 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:17] "GET /donate-details HTTP/1.1" 200 -
+2025-05-09 14:23:17,290 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:17] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 14:23:17,294 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:17] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 14:23:17,292 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:17] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-09 14:23:17,295 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:17] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 14:23:17,382 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:17] "GET /static/images/mpesah.png HTTP/1.1" 200 -
+2025-05-09 14:23:17,384 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:17] "GET /static/images/lipa.webp HTTP/1.1" 200 -
+2025-05-09 14:23:17,389 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:17] "GET /static/images/national.svg HTTP/1.1" 200 -
+2025-05-09 14:23:17,392 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:17] "[36mGET /static/images/kcb.svg HTTP/1.1[0m" 304 -
+2025-05-09 14:23:17,394 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:17] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 14:23:17,493 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:17] "GET /categories HTTP/1.1" 200 -
+2025-05-09 14:23:20,037 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "GET / HTTP/1.1" 200 -
+2025-05-09 14:23:20,293 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 14:23:20,299 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 14:23:20,301 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-09 14:23:20,322 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "GET /static/images/mr.png HTTP/1.1" 200 -
+2025-05-09 14:23:20,399 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 14:23:20,402 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 14:23:20,405 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 14:23:20,411 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 14:23:20,524 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
+2025-05-09 14:23:20,609 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "GET /categories HTTP/1.1" 200 -
+2025-05-09 14:23:20,711 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:20] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-09 14:23:22,447 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:22] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-05-09 14:23:38,777 [INFO] - 127.0.0.1 - - [09/May/2025 14:23:38] "POST /paystack/initialize-general HTTP/1.1" 200 -
+2025-05-09 14:24:44,075 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:44] "GET /programs/category/education HTTP/1.1" 200 -
+2025-05-09 14:24:44,349 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:44] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-09 14:24:44,350 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:44] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 14:24:44,367 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:44] "GET /static/css/programs.css HTTP/1.1" 200 -
+2025-05-09 14:24:44,372 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:44] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-05-09 14:24:44,393 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:44] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 14:24:44,398 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:44] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 14:24:44,478 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:44] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-05-09 14:24:44,493 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:44] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 14:24:44,501 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:44] "GET /categories HTTP/1.1" 200 -
+2025-05-09 14:24:49,879 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:49] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-09 14:24:50,197 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:50] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 14:24:50,202 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:50] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 14:24:50,207 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:50] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 14:24:50,213 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:50] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 14:24:50,405 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:50] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 14:24:50,486 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:50] "GET /categories HTTP/1.1" 200 -
+2025-05-09 14:24:50,544 [INFO] - 127.0.0.1 - - [09/May/2025 14:24:50] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-09 14:25:05,552 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:05] "POST /paystack/initialize HTTP/1.1" 200 -
+2025-05-09 14:25:39,802 [ERROR] - Paystack verification error: Payment not successful
+2025-05-09 14:25:39,802 [ERROR] - Payment verification failed: Could not verify payment
+Traceback (most recent call last):
+  File "/home/bha/Desktop/rusken/app/donate/routes.py", line 172, in verify_paystack_transaction
+    raise PaymentVerificationError("Payment not successful")
+app.donate.routes.PaymentVerificationError: Payment not successful
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/bha/Desktop/rusken/app/donate/routes.py", line 116, in payment_callback
+    transaction = verify_paystack_transaction(reference)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/rusken/app/donate/routes.py", line 185, in verify_paystack_transaction
+    raise PaymentVerificationError("Could not verify payment")
+app.donate.routes.PaymentVerificationError: Could not verify payment
+2025-05-09 14:25:39,833 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:39] "[32mGET /donate/payment-callback?trxref=0y8q2m53bc&reference=0y8q2m53bc HTTP/1.1[0m" 302 -
+2025-05-09 14:25:39,870 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:39] "GET / HTTP/1.1" 200 -
+2025-05-09 14:25:40,211 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:40] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 14:25:40,214 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:40] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 14:25:40,217 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:40] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-09 14:25:40,222 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:40] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-09 14:25:40,223 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:40] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-09 14:25:40,321 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:40] "GET /static/images/mr.png HTTP/1.1" 200 -
+2025-05-09 14:25:40,345 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:40] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 14:25:40,347 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:40] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 14:25:40,351 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:40] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
+2025-05-09 14:25:40,759 [INFO] - 127.0.0.1 - - [09/May/2025 14:25:40] "GET /categories HTTP/1.1" 200 -
+2025-05-09 14:33:11,918 [INFO] -  * Detected change in '/home/bha/Desktop/rusken/config.py', reloading
+2025-05-09 14:33:12,187 [INFO] -  * Restarting with stat
+2025-05-09 14:33:13,657 [WARNING] -  * Debugger is active!
+2025-05-09 14:33:13,657 [INFO] -  * Debugger PIN: 124-225-853
+2025-05-09 14:35:01,222 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "GET / HTTP/1.1" 200 -
+2025-05-09 14:35:01,548 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 14:35:01,550 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-09 14:35:01,552 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 14:35:01,552 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 14:35:01,556 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 14:35:01,610 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 14:35:01,612 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 14:35:01,707 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
+2025-05-09 14:35:01,717 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "[36mGET /static/images/mr.png HTTP/1.1[0m" 304 -
+2025-05-09 14:35:01,741 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "GET /categories HTTP/1.1" 200 -
+2025-05-09 14:35:01,870 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:01] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-09 14:35:04,315 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:04] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-05-09 14:35:25,895 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:25] "[31m[1mPOST /paystack/initialize-general HTTP/1.1[0m" 400 -
+2025-05-09 14:35:40,830 [INFO] -  * Detected change in '/home/bha/Desktop/rusken/config.py', reloading
+2025-05-09 14:35:41,197 [INFO] -  * Restarting with stat
+2025-05-09 14:35:43,192 [WARNING] -  * Debugger is active!
+2025-05-09 14:35:43,194 [INFO] -  * Debugger PIN: 124-225-853
+2025-05-09 14:35:44,610 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:44] "GET / HTTP/1.1" 200 -
+2025-05-09 14:35:44,922 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:44] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-09 14:35:44,923 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:44] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-09 14:35:44,925 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:44] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-09 14:35:44,927 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:44] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-09 14:35:44,929 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:44] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-05-09 14:35:44,980 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:44] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-09 14:35:44,981 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:44] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-09 14:35:45,062 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:45] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-05-09 14:35:45,120 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:45] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
+2025-05-09 14:35:45,121 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:45] "[36mGET /static/images/mr.png HTTP/1.1[0m" 304 -
+2025-05-09 14:35:45,180 [INFO] - 127.0.0.1 - - [09/May/2025 14:35:45] "GET /categories HTTP/1.1" 200 -
+2025-05-09 14:36:00,824 [INFO] - 127.0.0.1 - - [09/May/2025 14:36:00] "POST /paystack/initialize-general HTTP/1.1" 200 -
+2025-05-09 14:41:22,096 [INFO] -  * Detected change in '/home/bha/Desktop/rusken/config.py', reloading
+2025-05-09 14:41:22,452 [INFO] -  * Restarting with stat
+2025-05-09 14:41:24,197 [WARNING] -  * Debugger is active!
+2025-05-09 14:41:24,198 [INFO] -  * Debugger PIN: 124-225-853
+2025-05-09 14:48:58,565 [INFO] -  * Detected change in '/home/bha/Desktop/rusken/config.py', reloading
+2025-05-09 14:48:58,781 [INFO] -  * Restarting with stat
+2025-05-09 14:48:59,878 [WARNING] -  * Debugger is active!
+2025-05-09 14:48:59,879 [INFO] -  * Debugger PIN: 124-225-853
