@@ -41,7 +41,7 @@ body {
 /* Nav Link Styling */
 .navbar .nav-link   {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 500;
   transition: color 0.2s ease;
   
 }
@@ -560,3 +560,58 @@ body {
       color: #64748b;
       margin-top: 0.5rem;
     }
+
+
+/* Our Valued Donors Section */
+#our-donors {
+  background-color: #f8f9fa;
+  padding: 4rem 0;
+}
+
+/* Donor Card */
+#our-donors .card {
+  background-color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#our-donors .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Donor Logo */
+#our-donors .donor-logo {
+  max-height: 80px;
+  object-fit: contain;
+}
+
+/* Donor Name */
+#our-donors .card-title {
+  font-family: 'Poppins', sans-serif;
+  color: #49235A;
+}
+
+/* Donor Message */
+#our-donors .card-text {
+  font-family: 'Inter', sans-serif;
+  color: #666;
+}
+
+/* Contact Info */
+#our-donors .donor-contact {
+  font-style: normal;
+  font-size: 0.9rem;
+  color: #444;
+}
+#our-donors .donor-email {
+  font-size: 0.9rem;
+  color: #007bff;
+  text-decoration: none;
+}
+#our-donors .donor-email:hover {
+  text-decoration: underline;
+}
+
+
+    

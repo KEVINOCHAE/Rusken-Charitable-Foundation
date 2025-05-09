@@ -90,6 +90,7 @@
             <li class="dropdown-item text-center text-muted">Loading…</li>
           </ul>
         </li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.donate_details') }}">Donate</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('main.about') }}">About</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Contact</a></li>
 
@@ -146,7 +147,7 @@
           </ul>
         </li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('main.about') }}">About</a></li>
-     
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.donate_details') }}">Donate</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Contact</a></li>
   
         {% if current_user.is_authenticated %}
@@ -217,7 +218,7 @@
           <li><a href="{{ url_for('main.home') }}">Home</a></li>
           <li><a href="#">Programmes</a></li>
           <li><a href="{{ url_for('main.about') }}">About</a></li>
-        
+          <li><a href="{{ url_for('main.donate_details') }}">Donate</a></li>
           <li><a href="{{ url_for('main.contact') }}">Contact</a></li>
         </ul>
       </div>
@@ -255,9 +256,10 @@
       <div class="col text-center small">
         &copy; {{ current_year }} Rusken. All rights reserved.
  
-        <a href="{{ url_for('main.privacy_policy') }}">Privacy Policy</a> | 
-        <a href="#">Terms of Service</a>
+        <a href="{{url_for('main.privacy_policy')}}">Privacy Policy</a> | 
+        <a href="{{url_for('main.terms_of_service')}}">Terms of Service</a>
       </div>
+
       <div class="powered-by bg-light py-3 text-center mt-5">
         <p class="mb-0 small">
           <span class="text-muted">Powered by</span>

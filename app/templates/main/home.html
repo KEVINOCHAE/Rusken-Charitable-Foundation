@@ -525,6 +525,57 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<section id="our-donors" class="py-6 bg-white">
+  <div class="container text-center">
+    <h2 class="h3 fw-bold mb-5">Our Valued Donors</h2>
+    <div class="row justify-content-center g-4">
+      
+      <!-- Donor 1 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column align-items-center">
+            <img src="{{ url_for('static', filename='images/rg.png') }}"
+                 alt="Donor One Logo"
+                 class="mb-4 donor-logo">
+            <h5 class="card-title mb-2">Rhein Global Estate</h5>
+            <p class="card-text text-muted mb-3">
+              “Thanks to Rhein Global Estate’s generous support, we’ve been able to launch our community education program, reaching more children with vital resources.”
+            </p>
+            <address class="donor-contact text-center mb-1">
+              Möltke Strasse 58-60, D-53179 Bonn, Germany
+            </address>
+            <a href="mailto:post@rhein-immobilien24.de" class="donor-email mb-0">
+              post@rhein-immobilien24.de
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Donor 2 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column align-items-center">
+            <img src="{{ url_for('static', filename='images/mr.png') }}"
+                 alt="Donor Two Logo"
+                 class="mb-4 donor-logo">
+            <h5 class="card-title mb-2">MR Global UG</h5>
+            <p class="card-text text-muted mb-3">
+              “With MR Global UG’s partnership, we have expanded our healthcare outreach, providing life-saving services to remote villages.”
+            </p>
+            <address class="donor-contact text-center mb-1">
+              Möltke Strasse 58-60, D-53179 Bonn, Germany
+            </address>
+            <a href="mailto:post@rhein-immobilien24.de" class="donor-email mb-0">
+              post@rhein-immobilien24.de
+            </a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
 
 
 <section class="updates-section py-7 bg-dark text-white mb-3">

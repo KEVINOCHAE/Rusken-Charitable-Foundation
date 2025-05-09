@@ -60,6 +60,13 @@ def dashboard():
 def about():
     return render_template('main/about.html', current_year=datetime.now().year)
 
+@main_bp.route('/donate-details', methods=['GET', 'POST'])
+def donate_details():
+    return render_template('main/donate_details.html', current_year=datetime.now().year)
+
+@main_bp.route('/terms-of-service', methods=['GET', 'POST'])
+def terms_of_service():
+    return render_template('main/terms.html', current_year=datetime.now().year)
 
 @main_bp.route('/contact', methods=['GET', 'POST'])
 def contact():
