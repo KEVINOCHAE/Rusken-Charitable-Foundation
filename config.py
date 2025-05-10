@@ -30,5 +30,5 @@ class Config:
     ALLOWED_EXTENSIONS          = {'png', 'jpg', 'jpeg', 'gif'}
     MAX_CONTENT_LENGTH          = 4 * 1024 * 1024  # 4 MB
 
-    PAYSTACK_PUBLIC_KEY = "pk_test_1d7ec05c6c8f1659bbea26be1d2f177cd9a5216a"
-    PAYSTACK_SECRET_KEY = "sk_test_b80d6c0763e75374a0c199d82e8e87ddc9f3fb9b"
+    PAYSTACK_PUBLIC_KEY = os.getenv('PAYSTACK_PUBLIC_KEY')
+    PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY')
