@@ -84,7 +84,7 @@
         
 <div class="mt-4 text-center mb-2">
             {% if current_user.is_authenticated %}
-              <a href="{{ url_for('user.dashboard') }}" class="btn btn-outline-secondary me-2">
+              <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-secondary me-2">
                 <i class="bi bi-arrow-left me-1"></i> Back to Dashboard
               </a>
             {% else %}
