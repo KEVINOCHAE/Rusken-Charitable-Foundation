@@ -28950,3 +28950,29 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'donate
 2025-05-10 15:45:54,583 [INFO] - 127.0.0.1 - - [10/May/2025 15:45:54] "[32mGET /donate/find-donations?token=ImFmdXlhLmJAZ21haWwuY29tIg.aB8ncw.UNLV25grsOPdRUSUsrdvWZkDqMY HTTP/1.1[0m" 302 -
 2025-05-10 15:45:54,633 [INFO] - 127.0.0.1 - - [10/May/2025 15:45:54] "GET /donate/find-donations HTTP/1.1" 200 -
 2025-05-10 15:45:56,203 [INFO] - 127.0.0.1 - - [10/May/2025 15:45:56] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-10 16:44:29,351 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-10 16:44:29,373 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-10 16:44:29,376 [INFO] -  * Restarting with stat
+2025-05-10 16:44:31,192 [WARNING] -  * Debugger is active!
+2025-05-10 16:44:31,528 [INFO] -  * Debugger PIN: 176-689-434
+2025-05-10 16:44:38,134 [INFO] - 127.0.0.1 - - [10/May/2025 16:44:38] "GET /donate/find-donations HTTP/1.1" 200 -
+2025-05-10 16:44:38,597 [INFO] - 127.0.0.1 - - [10/May/2025 16:44:38] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-10 16:44:38,657 [INFO] - 127.0.0.1 - - [10/May/2025 16:44:38] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-10 16:44:38,838 [INFO] - 127.0.0.1 - - [10/May/2025 16:44:38] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-10 16:44:38,851 [INFO] - 127.0.0.1 - - [10/May/2025 16:44:38] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-10 16:44:38,919 [INFO] - 127.0.0.1 - - [10/May/2025 16:44:38] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-10 16:44:39,452 [INFO] - 127.0.0.1 - - [10/May/2025 16:44:39] "GET /categories HTTP/1.1" 200 -
+2025-05-10 16:44:39,988 [INFO] - 127.0.0.1 - - [10/May/2025 16:44:39] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-10 16:45:13,483 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:13] "GET / HTTP/1.1" 200 -
+2025-05-10 16:45:14,176 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:14] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-10 16:45:14,177 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:14] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-10 16:45:14,328 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:14] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-10 16:45:14,604 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:14] "GET /static/images/mr.png HTTP/1.1" 200 -
+2025-05-10 16:45:14,892 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:14] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-10 16:45:14,939 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:14] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
+2025-05-10 16:45:15,175 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:15] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-10 16:45:15,178 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:15] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-10 16:45:15,179 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:15] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-10 16:45:15,915 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:15] "GET /categories HTTP/1.1" 200 -
+2025-05-10 16:45:15,927 [INFO] - 127.0.0.1 - - [10/May/2025 16:45:15] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
