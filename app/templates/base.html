@@ -58,6 +58,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@500&display=swap" rel="stylesheet">
    
    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+   {% block head %}{% endblock %}
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -81,29 +83,58 @@
     <!-- Desktop Nav (centered) -->
     <div class="collapse navbar-collapse d-none d-lg-flex justify-content-center" id="desktopNav">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.home') }}">Home</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Programmes
-          </a>
-          <ul class="dropdown-menu shadow-lg rounded-2" id="category-menu" aria-labelledby="categoryDropdown">
-            <li class="dropdown-item text-center text-muted">Loading…</li>
-          </ul>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.donate_details') }}">Donate</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{url_for('main.home')}}#our-donors">Sponsors</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.about') }}">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Contact</a></li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
+  </li>
 
-        {% if current_user.is_authenticated %}
-          {% if current_user.has_role('Admin') %}
-            <li class="nav-item"><a class="nav-link text-warning" href="{{ url_for('admin.dashboard') }}">Admin</a></li>
-          {% endif %}
-          <li class="nav-item"><a class="nav-link btn btn-danger ms-2" href="{{ url_for('auth.logout') }}">Logout</a></li>
-        {% else %}
-          <li class="nav-item"><a class="nav-link btn btn-outline-primary ms-2" href="{{ url_for('auth.login') }}">Login</a></li>
-        {% endif %}
-      </ul>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Programmes
+    </a>
+    <ul class="dropdown-menu shadow-lg rounded-2" id="category-menu" aria-labelledby="categoryDropdown">
+      <li class="dropdown-item text-center text-muted">Loading…</li>
+    </ul>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('main.donate_details') }}">Donate</a>
+  </li>
+
+ 
+
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('main.contact') }}">Contact</a>
+  </li>
+
+  {% if current_user.is_authenticated %}
+    {% if current_user.has_role('Admin') %}
+      <li class="nav-item">
+        <a class="nav-link text-warning" href="{{ url_for('admin.dashboard') }}">Admin</a>
+      </li>
+    {% endif %}
+
+    <li class="nav-item">
+      <a class="nav-link btn btn-outline-secondary ms-2" href="{{ url_for('main.dashboard') }}">Account</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link btn btn-danger ms-2" href="{{ url_for('auth.logout') }}">Logout</a>
+    </li>
+  {% else %}
+    <li class="nav-item">
+      <a class="nav-link btn btn-outline-primary ms-2" href="{{ url_for('donate.find_donations') }}">My Donations</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link btn btn-outline-primary ms-2" href="{{ url_for('auth.login') }}">Login</a>
+    </li>
+  {% endif %}
+</ul>
+
     </div>
 
     <!-- Contact details (right, desktop only) -->
@@ -151,6 +182,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ url_for('main.donate_details') }}">Donate</a></li>
         
         <li class="nav-item"><a class="nav-link" href="{{url_for('main.home')}}#our-donors">Sponsors</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{url_for('donate.find_donations')}}#our-donors">My Donations</a></li>
         
         <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Contact</a></li>
   
@@ -162,6 +194,9 @@
           {% endif %}
           <li class="nav-item">
             <a class="nav-link btn btn-danger mt-2" href="{{ url_for('auth.logout') }}">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-danger mt-2" href="{{ url_for('main.dashboard') }}">Account</a>
           </li>
         {% else %}
           <li class="nav-item">

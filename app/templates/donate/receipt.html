@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Donation Receipt</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 40px;
+      color: #2c3e50;
+      background: #fff;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .logo {
+      max-height: 70px;
+      margin-bottom: 10px;
+    }
+    .receipt-title {
+      font-size: 28px;
+      font-weight: bold;
+      color: #1e3d59;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .section h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #34495e;
+      border-bottom: 1px solid #dfe6e9;
+      padding-bottom: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px;
+      vertical-align: top;
+    }
+    .info-table th {
+      width: 35%;
+      color: #555;
+      background-color: #f8f9fa;
+    }
+    .info-table td {
+      background-color: #fafafa;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #2ecc71;
+    }
+    .thank-you {
+      background: #ecf9f1;
+      border-left: 5px solid #2ecc71;
+      padding: 20px;
+      font-style: italic;
+      margin-top: 20px;
+    }
+    .signature {
+      margin-top: 50px;
+      text-align: right;
+    }
+    .signature p {
+      margin: 3px 0;
+    }
+    .footer {
+      margin-top: 60px;
+      font-size: 11px;
+      text-align: center;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo" alt="Logo">
+    <div class="receipt-title">Official Donation Receipt</div>
+  </header>
+
+  <div class="section">
+    <h2>Receipt Information</h2>
+    <table class="info-table">
+      <tr><th>Receipt Number:</th><td>{{ donation.receipt_number or "N/A" }}</td></tr>
+      <tr><th>Date Issued:</th><td>{{ donation.created_at.strftime('%B %d, %Y') }}</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Donor Details</h2>
+    <table class="info-table">
+      <tr><th>Full Name:</th><td>{{ donation.donor_name or "Anonymous" }}</td></tr>
+      <tr><th>Email Address:</th><td>{{ donation.donor_email or "N/A" }}</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Donation Summary</h2>
+    <table class="info-table">
+      <tr><th>Amount Donated:</th><td class="highlight">{{ "{:,.2f}".format(donation.amount) }} {{ donation.currency }}</td></tr>
+      <tr><th>Payment Method:</th><td>{{ donation.payment_gateway|capitalize }}</td></tr>
+      <tr><th>Transaction ID:</th><td>{{ donation.gateway_reference }}</td></tr>
+      <tr><th>Program/Project:</th><td>{{ donation.program.name if donation.program else "General Fund" }}</td></tr>
+    </table>
+  </div>
+
+  <div class="thank-you">
+    Thank you for your generous support to {{ org_name }}. Your contribution helps us make a tangible difference and reach more people in need.
+  </div>
+
+  <div class="signature">
+    <p>Sincerely,</p>
+    <p><strong>{{ org_representative_name }}</strong></p>
+    <p>{{ org_name }}</p>
+  </div>
+
+  <div class="footer">
+    {{ org_name }} &middot; {{ org_address }} &middot; {{ org_email }} &middot; {{ org_website }}<br>
+    Registered Charity No. {{ org_charity_number }}
+  </div>
+
+</body>
+</html>

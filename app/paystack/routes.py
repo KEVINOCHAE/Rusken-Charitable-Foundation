@@ -8,7 +8,7 @@ from datetime import datetime
 from app import csrf
 from paystackapi.paystack import Paystack
 from decimal import Decimal
-from app.admin.models import Donation
+from app.admin.models import Donation, Program
 
 paystack_bp = Blueprint('paystack', __name__)
 
@@ -16,10 +16,10 @@ paystack_bp = Blueprint('paystack', __name__)
 @paystack_bp.route('/initialize', methods=['POST'])
 def initialize_payment():
     data = request.get_json() or {}
-    email       = data.get('email')
-    raw_amount  = data.get('amount')
-    program_id  = data.get('program_id')
-    donor_name  = data.get('donor_name') or (
+    email      = data.get('email')
+    raw_amount = data.get('amount')
+    program_id = data.get('program_id')
+    donor_name = data.get('donor_name') or (
                      current_user.username if current_user.is_authenticated else 'Anonymous'
                  )
 
@@ -38,19 +38,19 @@ def initialize_payment():
     try:
         # 3. Create pending Donation record
         donation = Donation(
-            program_id   = program_id,
-            user_id      = current_user.id if current_user.is_authenticated else None,
-            donor_name   = donor_name,
-            donor_email  = email,
-            amount       = amount,
-            currency     = 'KES',
-            status       = 'pending',
-            created_at   = datetime.utcnow()
+            program_id  = program_id,
+            user_id     = current_user.id if current_user.is_authenticated else None,
+            donor_name  = donor_name,
+            donor_email = email,
+            amount      = amount,
+            currency    = 'KES',
+            status      = 'pending',
+            created_at  = datetime.utcnow()
         )
         db.session.add(donation)
         db.session.flush()  # so donation.id is available
 
-        # 4. Build Paystack metadata & callback
+        # 4. Build metadata & callback
         metadata = {
             'donation_id': donation.id,
             'donor_email': email,
@@ -61,30 +61,26 @@ def initialize_payment():
         }
         callback_url = url_for('donate.payment_callback', _external=True)
 
-        # 5. Initialize Paystack payload (KES → cents)
+        # 5. Initialize Paystack transaction
         payload = {
-            'email'        : email,
-            'amount'       : int(amount * 100),  # KES×100 → cents
-            'currency'     : 'KES',
-            'metadata'     : metadata,
-            'callback_url' : callback_url
+            'email'       : email,
+            'amount'      : int(amount * 100),  # KES→cents :contentReference[oaicite:10]{index=10}
+            'currency'    : 'KES',
+            'metadata'    : metadata,
+            'callback_url': callback_url          # Must match dashboard whitelist :contentReference[oaicite:11]{index=11}
         }
         headers = {
             'Authorization': f'Bearer {current_app.config["PAYSTACK_SECRET_KEY"]}',
             'Content-Type' : 'application/json'
         }
-
-        # 6. Call Paystack to initialize
         resp   = requests.post(
             'https://api.paystack.co/transaction/initialize',
-            headers=headers,
-            json=payload,
-            timeout=10
+            headers=headers, json=payload, timeout=10
         )
         resp.raise_for_status()
         result = resp.json()
 
-        # 7. Handle initialization failure
+        # 6. Handle initialization failure
         if not result.get('status'):
             db.session.rollback()
             current_app.logger.error(f"Paystack init error: {result}")
@@ -93,15 +89,15 @@ def initialize_payment():
                 'message': result.get('message', 'Payment initialization failed')
             }), 400
 
-        # 8. Save the reference and commit
+        # 7. Save reference & commit
         donation.gateway_reference = result['data']['reference']
         donation.payment_gateway  = 'paystack'
         db.session.commit()
 
-        # 9. Return authorization URL for frontend redirect
+        # 8. Return authorization URL for redirect
         return jsonify({
             'status'           : True,
-            'authorization_url': result['data']['authorization_url'],
+            'authorization_url': result['data']['authorization_url'],  # Redirect here :contentReference[oaicite:12]{index=12}
             'reference'        : result['data']['reference']
         }), 200
 
@@ -112,7 +108,6 @@ def initialize_payment():
             'status' : False,
             'message': 'An unexpected error occurred while processing your payment'
         }), 500
-
 
 
 """

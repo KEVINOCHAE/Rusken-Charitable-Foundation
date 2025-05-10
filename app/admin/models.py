@@ -1,5 +1,5 @@
 from app import db
-from flask import current_app as app
+from flask import current_app as app, request, url_for
 import string, secrets
 from sqlalchemy.orm import backref
 from datetime import datetime
@@ -13,6 +13,7 @@ from enum import Enum
 import re
 from sqlalchemy import event
 from sqlalchemy.orm import backref, validates
+from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
 
 # ---------------------------------------
 # contact model
@@ -285,3 +286,9 @@ def validate_donation(mapper, connection, target):
         raise ValueError("Donation amount must be positive")
     if not target.user_id and (not target.donor_name or not target.donor_email):
         raise ValueError("Guest donations require name and email")
+
+
+ # Add this to your Donation model
+@hybrid_property
+def is_authenticated_donation(self):
+    return self.user_id is not None       

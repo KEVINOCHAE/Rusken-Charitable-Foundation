@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, session
+from flask import Blueprint, render_template, redirect, url_for, flash, request, session, request
 from flask import jsonify
-from app.admin.models import  ContactMessage,Program,Category
+from app.admin.models import  ContactMessage,Program,Category, User, Donation
+from sqlalchemy import func
 from app.main.forms import  ContactForm
 from werkzeug.exceptions import abort
 from sqlalchemy.exc import SQLAlchemyError
@@ -49,11 +50,28 @@ def dashboard():
     # Fetch user details
     user = User.query.filter_by(id=current_user.id).first()
 
-    # Fetch referral stats
+    # Generate referral link for the user
+    referral_link = user.get_referral_link()
+
+    # Fetch referral stats (count of people they invited)
     referral_count = User.query.filter_by(invited_by_id=user.id).count()
 
-    
-    return render_template('dashboard.html', user=user, referral_count=referral_count , current_year=datetime.now().year)
+    # Fetch donations for the logged-in user
+    donations = Donation.query.filter_by(user_id=current_user.id).all()
+
+    # Calculate total donations
+    total_donated = db.session.query(func.sum(Donation.amount)).filter_by(user_id=current_user.id).scalar() or 0.00
+
+    return render_template(
+        'main/dashboard.html', 
+        user=user, 
+        referral_count=referral_count, 
+        referral_link=referral_link, 
+        donations=donations,
+        total_donated=total_donated,
+        current_year=datetime.now().year
+    )
+
 
 
 @main_bp.route('/about', methods=['GET', 'POST'])

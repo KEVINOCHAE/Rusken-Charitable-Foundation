@@ -76,6 +76,18 @@ def create_app(config_class=None):
         return send_from_directory(app.static_folder, 'sitemap.xml')
 
 
+     # In your template filters file
+    @app.template_filter('currency')
+    def currency_format(value):
+        return "KES{:,.2f}".format(float(value))
+
+    @app.template_filter('datetime_format')
+    def datetime_format(value, format='medium'):
+        if format == 'short':
+            return value.strftime('%b %d, %Y')
+        return value.strftime('%B %d, %Y at %I:%M %p')   
+
+
     def program_image_url(img):
         if img:
             filename = img.filename.split('/')[-1]

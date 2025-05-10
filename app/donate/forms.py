@@ -32,3 +32,19 @@ class DonationForm(FlaskForm):
 
 
     submit = SubmitField('Donate Now')
+
+
+
+
+class FindDonationsForm(FlaskForm):
+    email = StringField('Email Address', 
+                      validators=[
+                          DataRequired(message="Please enter your email address"),
+                          Email(message="Please enter a valid email address")
+                      ],
+                      render_kw={
+                          "placeholder": "your@email.com",
+                          "class": "form-control"
+                      })
+    submit = SubmitField('Find Donations',
+                       render_kw={"class": "btn btn-primary w-100"})
