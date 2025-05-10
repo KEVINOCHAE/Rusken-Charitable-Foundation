@@ -4,7 +4,7 @@
 from flask import (
     Blueprint, render_template, request, flash, redirect, url_for, current_app, abort, jsonify, make_response, send_file 
 )
-from weasyprint import HTML
+
 from io import BytesIO
 from app.utils.receipts import generate_receipt_pdf
 from decimal import Decimal, ROUND_HALF_UP
