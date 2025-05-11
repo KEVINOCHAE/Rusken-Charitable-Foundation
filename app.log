@@ -29502,3 +29502,31 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'donate
 2025-05-11 10:41:45,285 [INFO] - 127.0.0.1 - - [11/May/2025 10:41:45] "GET /static/css/home.css HTTP/1.1" 200 -
 2025-05-11 10:41:45,366 [INFO] - 127.0.0.1 - - [11/May/2025 10:41:45] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
 2025-05-11 10:41:45,496 [INFO] - 127.0.0.1 - - [11/May/2025 10:41:45] "GET /categories HTTP/1.1" 200 -
+2025-05-11 10:47:35,030 [INFO] -  * Detected change in '/home/bha/Desktop/rusken/app/donate/routes.py', reloading
+2025-05-11 10:47:35,348 [INFO] -  * Restarting with stat
+2025-05-11 10:47:36,767 [WARNING] -  * Debugger is active!
+2025-05-11 10:47:36,768 [INFO] -  * Debugger PIN: 176-689-434
+2025-05-11 10:47:37,645 [INFO] - 127.0.0.1 - - [11/May/2025 10:47:37] "GET /donate/find-donations HTTP/1.1" 200 -
+2025-05-11 10:47:37,859 [INFO] - 127.0.0.1 - - [11/May/2025 10:47:37] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-11 10:47:37,861 [INFO] - 127.0.0.1 - - [11/May/2025 10:47:37] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-11 10:47:37,868 [INFO] - 127.0.0.1 - - [11/May/2025 10:47:37] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-11 10:47:37,875 [INFO] - 127.0.0.1 - - [11/May/2025 10:47:37] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-11 10:47:37,936 [INFO] - 127.0.0.1 - - [11/May/2025 10:47:37] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-11 10:47:38,159 [INFO] - 127.0.0.1 - - [11/May/2025 10:47:38] "GET /categories HTTP/1.1" 200 -
+2025-05-11 10:48:35,947 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:35] "[32mPOST /donate/find-donations HTTP/1.1[0m" 302 -
+2025-05-11 10:48:35,972 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:35] "GET /donate/find-donations HTTP/1.1" 200 -
+2025-05-11 10:48:36,174 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:36] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-11 10:48:36,185 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:36] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-11 10:48:36,190 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:36] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-11 10:48:36,194 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:36] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-11 10:48:36,553 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:36] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-11 10:48:36,592 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:36] "GET /categories HTTP/1.1" 200 -
+2025-05-11 10:48:46,875 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:46] "GET /donate/find-donations?token=ImFmdXlhLmJAZ21haWwuY29tIg.aCBWTg.nOTBFvU6hCEUJCQmuKq_lFEyL9I HTTP/1.1" 200 -
+2025-05-11 10:48:47,015 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:47] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-11 10:48:47,017 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:47] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-11 10:48:47,069 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:47] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-11 10:48:47,075 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:47] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-11 10:48:47,167 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:47] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-11 10:48:47,231 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:47] "GET /categories HTTP/1.1" 200 -
+2025-05-11 10:48:47,242 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:47] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-11 10:48:51,151 [INFO] - 127.0.0.1 - - [11/May/2025 10:48:51] "GET /donate/receipt/55?token=ImFmdXlhLmJAZ21haWwuY29tIg.aCBWTg.nOTBFvU6hCEUJCQmuKq_lFEyL9I HTTP/1.1" 200 -
