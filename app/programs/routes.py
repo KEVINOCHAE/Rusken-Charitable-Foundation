@@ -6,13 +6,14 @@ from flask_login import login_required
 from app.auth.routes import roles_required
 from sqlalchemy.exc import IntegrityError
 from flask_login import current_user
-
+from app.auth.routes import roles_required
 
 program_bp= Blueprint('program', __name__ )
 
 
 @program_bp.route('/categories/create', methods=['GET', 'POST'])
 @program_bp.route('/categories/<int:id>/edit', methods=['GET', 'POST'])
+@roles_required('Admin')
 @login_required
 def add_category(id=None):
     category = Category.query.get_or_404(id) if id else Category()
@@ -46,6 +47,7 @@ def list_categories():
 
 
 @program_bp.route('/admin/program/add', methods=['GET', 'POST'])
+@roles_required('Admin')
 @login_required
 def add_program():
     form = ProgramForm()
@@ -67,6 +69,7 @@ def add_program():
 
 
 @program_bp.route('/admin/programs')
+@roles_required('Admin')
 @login_required
 def list_programs():
     page = request.args.get('page', 1, type=int)
@@ -78,6 +81,7 @@ def list_programs():
 
 
 @program_bp.route('/admin/programs/edit/<int:program_id>', methods=['GET', 'POST'])
+@roles_required('Admin')
 @login_required
 def edit_program(program_id):
     program = Program.query.get_or_404(program_id)

@@ -250,37 +250,33 @@ def confirmation(donation_id):
 def download_receipt(donation_id):
     try:
         donation = Donation.query.get_or_404(donation_id)
-        
+
+        # ✅ Block if not completed
+        if donation.status != 'completed':
+            flash('Receipts are only available for completed donations.', 'warning')
+            return redirect(url_for('donate.find_donations'))
+
         # For authenticated users
         if current_user.is_authenticated:
             if donation.user_id != current_user.id:
-                abort(403)  # Forbidden
+                abort(403)
             return _generate_receipt_response(donation)
-        
+
         # For unauthenticated users - check token
         token = request.args.get('token')
         if token:
             email = verify_email_token(token)
             if email and email.lower() == donation.donor_email.lower():
                 return _generate_receipt_response(donation)
-        
-        # If neither authenticated nor valid token
-        flash('Please verify your email to download receipts', 'warning')
+
+        # Not authenticated or token invalid
+        flash('Please verify your email to download receipts.', 'warning')
         return redirect(url_for('donate.find_donations'))
-        
+
     except Exception as e:
         current_app.logger.error(f"Receipt download error: {str(e)}")
         flash('Error generating receipt', 'danger')
         return redirect(url_for('main.home'))
-
-def _generate_receipt_response(donation):
-    pdf = generate_receipt_pdf(donation)
-    return send_file(
-        pdf,
-        mimetype='application/pdf',
-        download_name=f"rusken_receipt_{donation.gateway_reference}.pdf",
-        as_attachment=True
-    )
 
 
 @donate_bp.route('/find-donations', methods=['GET', 'POST'])
@@ -293,11 +289,12 @@ def find_donations():
             flash('Invalid or expired verification link', 'danger')
             return redirect(url_for('donate.find_donations'))
         
-        # Get donations for verified email
+        # Get only completed donations for verified email
         donations = Donation.query.filter(
-            func.lower(Donation.donor_email) == email
+            func.lower(Donation.donor_email) == email,
+            Donation.status.ilike('completed')  # Case-insensitive filter
         ).order_by(Donation.created_at.desc()).all()
-        
+
         return render_template('donate/donation_history.html',
                             donations=donations,
                             email=email)
@@ -307,20 +304,18 @@ def find_donations():
     if form.validate_on_submit():
         email = form.email.data.strip().lower()
         
-        # Check if donations exist
+        # Check if completed donations exist
         donations_exist = Donation.query.filter(
-            func.lower(Donation.donor_email) == email
+            func.lower(Donation.donor_email) == email,
+            Donation.status.ilike('completed')  # Add status filter here
         ).count() > 0
         
         if donations_exist:
             send_donation_access_email(email)
             flash('We\'ve sent a verification link to your email', 'success')
         else:
-            flash('No donations found with that email', 'warning')
+            flash('No completed donations found with that email', 'warning')
         
         return redirect(url_for('donate.find_donations'))
     
     return render_template('donate/find_donations.html', form=form)
-
-
-

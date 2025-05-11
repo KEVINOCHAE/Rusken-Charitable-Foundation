@@ -15,6 +15,7 @@ admin_bp = Blueprint('admin', __name__)
 
 
 @admin_bp.route('/admin/dashboard', methods=['GET'])
+@roles_required('Admin')
 def dashboard():
     
     return render_template('admin/dashboard.html')
@@ -22,31 +23,12 @@ def dashboard():
 
 
 @admin_bp.route('/admin/users')
+@roles_required('Admin')
 @login_required
 def list_users():
     form= EmptyForm()
     users = User.query.all()
     return render_template('admin/list_users.html', users=users, form=form)
-
-@admin_bp.route('/admin/users/ban/<int:user_id>', methods=['POST'])
-@login_required
-def ban_user(user_id):
-    user = User.query.get_or_404(user_id)
-    user.is_banned = True
-    db.session.commit()
-    flash(f'User {user.username} has been banned.', 'warning')
-    return redirect(url_for('admin.list_users'))
-
-@admin_bp.route('/admin/users/unban/<int:user_id>', methods=['POST'])
-@login_required
-def unban_user(user_id):
-    user = User.query.get_or_404(user_id)
-    user.is_banned = False
-    db.session.commit()
-    flash(f'User {user.username} has been unbanned.', 'success')
-    return redirect(url_for('admin.list_users'))
-
-
 
 @admin_bp.route('/admin/programs/<int:program_id>/images', methods=['GET', 'POST'])
 @login_required

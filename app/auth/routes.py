@@ -17,10 +17,10 @@ def roles_required(*roles):
         def decorated_view(*args, **kwargs):
             if not current_user.is_authenticated:
                 return redirect(url_for('main.login'))
-            if not current_user.role.name in roles:
+            if current_user.role.name not in roles:
                 flash('You do not have the required permissions to access this page.', 'danger')
                 return redirect(url_for('main.home'))
-            return func(*args **kwargs)
+            return func(*args, **kwargs)
         return decorated_view
     return wrapper
 
