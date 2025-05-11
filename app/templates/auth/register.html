@@ -162,12 +162,13 @@ document.addEventListener('DOMContentLoaded', () => {
       <i class="fas fa-lock input-icon"></i>
     </div>
 
-    <div class="form-group">
-      {{ form.referral_code(class="form-control", placeholder=" ") }}
-      <label for="{{ form.referral_code.id }}">Referral Code (Optional)</label>
-      
-      {% for e in form.referral_code.errors %}<small class="form-error">{{ e }}</small>{% endfor %}
-    </div>
+    <div class="floating-label">
+  {{ form.referral_code(class="form-control", placeholder=" ") }}
+  <label for="{{ form.referral_code.id }}">Referral Code (Optional)</label>
+  <i class="fas fa-link input-icon"></i>
+  {% for e in form.referral_code.errors %}<small class="form-error">{{ e }}</small>{% endfor %}
+</div>
+
 
     <div class="terms-check">
       <input type="checkbox" id="terms" required>

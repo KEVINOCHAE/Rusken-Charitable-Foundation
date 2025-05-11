@@ -1,6 +1,3 @@
-
-
-
 from flask import (
     Blueprint, render_template, request, flash, redirect, url_for, current_app, abort, jsonify, make_response, send_file 
 )
@@ -251,15 +248,15 @@ def download_receipt(donation_id):
     try:
         donation = Donation.query.get_or_404(donation_id)
 
-        # ✅ Block if not completed
-        if donation.status != 'completed':
+        # ✅ Only allow completed donations
+        if donation.status != 'complete':
             flash('Receipts are only available for completed donations.', 'warning')
             return redirect(url_for('donate.find_donations'))
 
         # For authenticated users
         if current_user.is_authenticated:
             if donation.user_id != current_user.id:
-                abort(403)
+                abort(403)  # Forbidden
             return _generate_receipt_response(donation)
 
         # For unauthenticated users - check token
@@ -269,14 +266,15 @@ def download_receipt(donation_id):
             if email and email.lower() == donation.donor_email.lower():
                 return _generate_receipt_response(donation)
 
-        # Not authenticated or token invalid
-        flash('Please verify your email to download receipts.', 'warning')
+        # If neither authenticated nor valid token
+        flash('Please verify your email to download receipts', 'warning')
         return redirect(url_for('donate.find_donations'))
 
     except Exception as e:
         current_app.logger.error(f"Receipt download error: {str(e)}")
         flash('Error generating receipt', 'danger')
         return redirect(url_for('main.home'))
+
 
 
 @donate_bp.route('/find-donations', methods=['GET', 'POST'])

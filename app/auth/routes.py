@@ -33,6 +33,12 @@ def home():
 def register():
     form = RegisterForm()
 
+    # Pre-fill referral code from URL on GET request
+    if request.method == 'GET':
+        ref = request.args.get('ref')
+        if ref:
+            form.referral_code.data = ref.upper()
+
     if form.validate_on_submit():
         # Get default role
         default_role = Role.query.filter_by(name='User').first()
@@ -49,7 +55,7 @@ def register():
                 flash('Invalid referral code.', 'danger')
                 return render_template('auth/register.html', form=form)
 
-        # Create the user with the referral code assigned
+        # Create user
         user = User.create_with_referral(
             username=form.username.data,
             email=form.email.data,
@@ -58,7 +64,6 @@ def register():
             invited_by_id=invited_by.id if invited_by else None
         )
 
-        # Add the user to the session and commit
         db.session.add(user)
         db.session.commit()
 
@@ -79,6 +84,7 @@ def register():
         return redirect(url_for('auth.login'))
 
     return render_template('auth/register.html', form=form)
+
 
 
 # Login route

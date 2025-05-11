@@ -11,6 +11,7 @@ from flask import current_app
 from sqlalchemy.orm import joinedload
 from flask_login import login_required, login_user, logout_user, current_user
 from datetime import datetime
+from app.utils.receipts import generate_receipt_pdf
 import re
 
 # Create a blueprint for main routes
@@ -47,32 +48,27 @@ def home():
 @main_bp.route('/dashboard')
 @login_required
 def dashboard():
-    # Fetch user details
-    user = User.query.filter_by(id=current_user.id).first()
+    user = current_user
 
-    # Generate referral link for the user
+    # Referral link and stats
     referral_link = user.get_referral_link()
-
-    # Fetch referral stats (count of people they invited)
     referral_count = User.query.filter_by(invited_by_id=user.id).count()
 
-    # Fetch donations for the logged-in user
-    donations = Donation.query.filter_by(user_id=current_user.id).all()
+    # Fetch and sort donations
+    donations = Donation.query.filter_by(user_id=user.id).order_by(Donation.created_at.desc()).all()
 
-    # Calculate total donations
-    total_donated = db.session.query(func.sum(Donation.amount)).filter_by(user_id=current_user.id).scalar() or 0.00
+    # Calculate total donated
+    total_donated = db.session.query(func.sum(Donation.amount)).filter_by(user_id=user.id).scalar() or 0.00
 
     return render_template(
-        'main/dashboard.html', 
-        user=user, 
-        referral_count=referral_count, 
-        referral_link=referral_link, 
+        'main/dashboard.html',
+        user=user,
+        referral_count=referral_count,
+        referral_link=referral_link,
         donations=donations,
         total_donated=total_donated,
         current_year=datetime.now().year
     )
-
-
 
 @main_bp.route('/about', methods=['GET', 'POST'])
 def about():
