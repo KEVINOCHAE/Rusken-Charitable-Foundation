@@ -175,7 +175,6 @@ def verify_paystack_transaction(reference):
 
 
 
-
 @donate_bp.route('/donate', methods=['GET'])
 def donate():
     program_id = request.args.get('program_id', type=int)
@@ -185,15 +184,24 @@ def donate():
 
     program = Program.query.get_or_404(program_id)
     form = DonationForm()
-    
+
+    # Pre-fill for logged-in users
     if current_user.is_authenticated:
-        form.donor_name.data = current_user.username
+        form.donor_name.data  = current_user.username
         form.donor_email.data = current_user.email
 
-    return render_template('donate/donate.html',
-        program=program,
-        form=form,
-        paystack_public_key=current_app.config['PAYSTACK_PUBLIC_KEY'])
+    # Calculate how much remains on the program’s budget
+    remaining = f"KSH {program.budget_remaining:,.2f}"
+
+    return render_template(
+        'donate/donate.html',
+        program           = program,
+        form              = form,
+        remaining         = remaining,
+        currency_symbol   = "KSH",
+        paypal_client_id  = current_app.config['PAYPAL_CLIENT_ID']
+    )
+
 
 
 @donate_bp.route('/confirmation/<int:donation_id>')

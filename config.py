@@ -35,10 +35,9 @@ class Config:
 
 
         # For development/testing
-    PAYPAL_CLIENT_ID="AfXbJQIC4J5SDGzACSiJNIP6NZUKtts74UeEh_JDuBPQyajNrpreEQXRF1grPnT31UYb9t_IovHCD35y"
-    PAYPAL_SECRET="EL1kh9BtIjUcn03MIDLAAgYp8s3-EfKom50gZE4DpLVoyOcnSW3-789est4a5VLqQN-H8d4C4zY9YdTX"
+    PAYPAL_CLIENT_ID=os.getenv('PAYPAL_CLIENT_ID')
+    PAYPAL_SECRET=os.getenv('PAYPAL_SECRET')
+
     ENV = os.getenv('ENV', 'sandbox')
 
-    # When you go live, swap these for your live App’s credentials
-    # PAYPAL_CLIENT_ID="Adolh4w218TBosFO0Fc9vxPWpMTErBBnXkBVIIG2gZ-BvtFj7BQFddygJdQmVoZ76dL4XgD7fwgK_2lu"
-    # PAYPAL_SECRET="EPY2KbnTkCj_bYNsxp8r1qDFD2QXPdkzVJO_8aD_DMAuhysB9yiZvmchi5A9XNJ-z_wSyscbUjW0Bn90"
+    
