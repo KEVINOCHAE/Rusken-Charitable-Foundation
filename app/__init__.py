@@ -49,7 +49,9 @@ def create_app(config_class=None):
     from app.programs.routes import program_bp
     from app.donate.routes import donate_bp
     from app.paystack.routes import paystack_bp
+    from app.paypal.routes import paypal_bp
 
+    app.register_blueprint(paypal_bp, url_prefix='/paypal')
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(admin_bp, url_prefix='/admin')
@@ -96,6 +98,12 @@ def create_app(config_class=None):
             return url_for('static', filename='programs/placeholder.jpg')
 
     app.jinja_env.filters['program_image_url'] = program_image_url
-    
+
+        # in your app factory or main module
+    @app.context_processor
+    def inject_paypal_id():
+        return dict(paypal_client_id=app.config['PAYPAL_CLIENT_ID'])
+
+        
      
     return app

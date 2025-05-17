@@ -43,15 +43,15 @@
                     <div class="budget-stats">
                         <div class="stat-item">
                             <span>Goal:</span>
-                            <span>KES{{ "{:,.0f}".format(annual_budget) }}</span>
+                            <span>${{ "{:,.0f}".format(annual_budget) }}</span>
                         </div>
                         <div class="stat-item text-success">
                             <span>Raised:</span>
-                            <span>KES{{ "{:,.0f}".format(total_donated) }}</span>
+                            <span>${{ "{:,.0f}".format(total_donated) }}</span>
                         </div>
                         <div class="stat-item text-info">
                             <span>Remaining:</span>
-                            <span>KES{{ "{:,.0f}".format(annual_budget - total_donated) }}</span>
+                            <span>${{ "{:,.0f}".format(annual_budget - total_donated) }}</span>
                         </div>
                     </div>
 

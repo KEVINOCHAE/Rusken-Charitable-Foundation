@@ -32,3 +32,13 @@ class Config:
 
     PAYSTACK_PUBLIC_KEY = os.getenv('PAYSTACK_PUBLIC_KEY')
     PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY')
+
+
+        # For development/testing
+    PAYPAL_CLIENT_ID="AfXbJQIC4J5SDGzACSiJNIP6NZUKtts74UeEh_JDuBPQyajNrpreEQXRF1grPnT31UYb9t_IovHCD35y"
+    PAYPAL_SECRET="EL1kh9BtIjUcn03MIDLAAgYp8s3-EfKom50gZE4DpLVoyOcnSW3-789est4a5VLqQN-H8d4C4zY9YdTX"
+    ENV = os.getenv('ENV', 'sandbox')
+
+    # When you go live, swap these for your live App’s credentials
+    # PAYPAL_CLIENT_ID=YourLiveClientID
+    # PAYPAL_SECRET=YourLiveSecret

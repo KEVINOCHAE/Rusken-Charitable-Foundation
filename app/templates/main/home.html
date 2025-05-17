@@ -149,13 +149,13 @@
               <div class="donation-tiers mb-4">
                 <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
                   <button type="button" class="tier-card btn btn-outline-primary rounded-pill px-4 py-2" data-amount="25">
-                    KSH 25
+                   $ 25
                   </button>
                   <button type="button" class="tier-card btn btn-outline-primary rounded-pill px-4 py-2" data-amount="50">
-                    KSH 50
+                    $ 50
                   </button>
                   <button type="button" class="tier-card btn btn-outline-primary rounded-pill px-4 py-2 active" data-amount="100">
-                    KSH 100
+                    $ 100
                   </button>
                   
                 </div>
@@ -165,7 +165,7 @@
               <div class="custom-amount mb-4">
                 <div class="input-group input-group-lg hover-scale">
                   <span class="input-group-text bg-white border-end-0">
-                    <i class="small"> KSH</i>
+                    <i class="small"> $</i>
                   </span>
                   <input type="number" 
                          class="form-control border-start-0" 
@@ -251,7 +251,7 @@
           <!-- Donation Amount Preview -->
           <div class="donation-preview mb-4 p-3 rounded-3 text-center" style="background-color: #f8f9fa;">
             <div class="text-muted  mb-1">You're donating</div>
-            <div class="display-5 fw-bold text-primary" id="donationAmountPreview">KSH 100.00</div>
+            <div class="display-5 fw-bold text-primary" id="donationAmountPreview">$ 100.00</div>
           </div>
 
           <!-- Form Fields -->
@@ -282,34 +282,47 @@
 
          
 
-          <!-- Security Badge -->
-          <div class="security-badge text-center mt-4">
-            <div class="d-inline-flex align-items-center bg-light rounded-pill px-3 py-1">
-              <i class="fas fa-lock-shield text-success me-2"></i>
-              <small class="text-muted">256-bit SSL Secure Donation</small>
-            </div>
-          </div>
-
+        
           <!-- Error Message -->
           <div id="modal_message" class="alert alert-danger mt-3 mb-0 d-none"></div>
         </form>
       </div>
 
       <!-- Modal Footer -->
-      <div class="modal-footer border-0 pt-0 pb-4 px-4">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-          <i class="fas fa-arrow-left me-2"></i> Back
-        </button>
-        <button type="submit" form="generalDonationForm" class="btn btn-primary btn-donate-now">
-          <span class="donate-text">Donate Now</span>
-          <span class="donate-amount ms-1" id="footerDonationAmount">KSH 100.00</span>
-          <i class="fas fa-arrow-right ms-2"></i>
-        </button>
-      </div>
+    <div class="modal-footer border-0 pt-0 pb-4 px-4 flex-column align-items-stretch gap-3">
+  
+  <!-- Traditional Donate Button -->
+  <div class="d-flex justify-content-between align-items-center">
+    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+      <i class="fas fa-arrow-left me-2"></i> Back
+    </button>
+    <button type="submit" form="generalDonationForm" class="btn btn-primary btn-donate-now">
+      <span class="donate-text">Donate Now </span>
+      <span class="donate-amount ms-1" id="footerDonationAmount">$ 100.00</span>
+      <i class="fas fa-arrow-right ms-2"></i>
+    </button>
+  </div>
+
+  
+  <!-- PayPal Smart Button Section -->
+  <div class="text-center">
+    <div class="mb-2">
+      <span class="badge bg-light text-dark py-2 px-3 rounded-pill d-inline-flex align-items-center">
+        <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" width="20" height="20" class="me-2">
+        Pay securely with PayPal
+      </span>
+    </div>
+  <div id="paypal-button-container" class="mt-3"></div>
+
+  </div>
+
+</div>
+
     </div>
   </div>
 </div>
 
+<script src="https://www.paypal.com/sdk/js?client-id={{ config.PAYPAL_CLIENT_ID }}&currency=USD&components=buttons&enable-funding=card&buyer-country=KE"></script>
 
 
 
@@ -334,6 +347,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+
+
+
 </script> 
 
 
@@ -399,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="progress-info d-flex justify-content-between mb-1">
     <span class="progress-label">Raised</span>
     <span class="progress-value">
-      KSH {{ program.total_donated | round(2) }} of KSH {{ program.annual_budget | round(2) }}
+      $ {{ program.total_donated | round(2) }} of $ {{ program.annual_budget | round(2) }}
     </span>
   </div>
   {% set donated_percent = (program.total_donated / program.annual_budget | float * 100) if program.annual_budget else 0 %}
