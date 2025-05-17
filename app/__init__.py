@@ -48,7 +48,7 @@ def create_app(config_class=None):
     from app.admin.routes import admin_bp
     from app.programs.routes import program_bp
     from app.donate.routes import donate_bp
-    from app.paystack.routes import paystack_bp
+   
     from app.paypal.routes import paypal_bp
 
     app.register_blueprint(paypal_bp, url_prefix='/paypal')
@@ -57,7 +57,7 @@ def create_app(config_class=None):
     app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(program_bp, url_prefix='/program')
     app.register_blueprint(donate_bp, url_prefix='/donate')
-    app.register_blueprint(paystack_bp, url_prefix='/paystack')
+   
 
     # User loader for login management
     from app.admin.models import User
