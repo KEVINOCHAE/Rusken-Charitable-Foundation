@@ -2,7 +2,7 @@ import base64, json
 from decimal import Decimal, ROUND_HALF_UP, InvalidOperation
 from datetime import datetime
 import requests
-import paypalrestsdk
+
 from flask import (
     Blueprint, request, jsonify,
     current_app, flash, redirect,
