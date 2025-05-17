@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     // Animate elements using Intersection Observer
     const animateOnScroll = (elements) => {

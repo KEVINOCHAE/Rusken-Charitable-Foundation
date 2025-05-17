@@ -1,5 +1,7 @@
 
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const donationModal = new bootstrap.Modal(document.getElementById('donationModal'));
 
