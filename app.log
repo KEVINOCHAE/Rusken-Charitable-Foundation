@@ -31301,3 +31301,19 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'donate
 2025-05-17 20:49:58,128 [INFO] - 127.0.0.1 - - [17/May/2025 20:49:58] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
 2025-05-17 20:49:58,130 [INFO] - 127.0.0.1 - - [17/May/2025 20:49:58] "[36mGET /static/images/mr.png HTTP/1.1[0m" 304 -
 2025-05-17 20:49:58,307 [INFO] - 127.0.0.1 - - [17/May/2025 20:49:58] "GET /categories HTTP/1.1" 200 -
+2025-05-17 20:54:02,014 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "GET / HTTP/1.1" 200 -
+2025-05-17 20:54:02,241 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-17 20:54:02,246 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-17 20:54:02,250 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-17 20:54:02,268 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-17 20:54:02,270 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-05-17 20:54:02,373 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-17 20:54:02,376 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-17 20:54:02,489 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-05-17 20:54:02,511 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
+2025-05-17 20:54:02,520 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "[36mGET /static/images/mr.png HTTP/1.1[0m" 304 -
+2025-05-17 20:54:02,779 [INFO] - 127.0.0.1 - - [17/May/2025 20:54:02] "GET /categories HTTP/1.1" 200 -
+2025-05-17 21:06:58,956 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/config.py', reloading
+2025-05-17 21:06:59,288 [INFO] -  * Restarting with stat
+2025-05-17 21:07:02,456 [WARNING] -  * Debugger is active!
+2025-05-17 21:07:02,474 [INFO] -  * Debugger PIN: 696-329-131
