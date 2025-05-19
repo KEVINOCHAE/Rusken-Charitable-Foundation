@@ -30,14 +30,10 @@ class Config:
     ALLOWED_EXTENSIONS          = {'png', 'jpg', 'jpeg', 'gif'}
     MAX_CONTENT_LENGTH          = 4 * 1024 * 1024  # 4 MB
 
-    PAYSTACK_PUBLIC_KEY = os.getenv('PAYSTACK_PUBLIC_KEY')
-    PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY')
 
+    PAYPAL_CLIENT_ID="AfXbJQIC4J5SDGzACSiJNIP6NZUKtts74UeEh_JDuBPQyajNrpreEQXRF1grPnT31UYb9t_IovHCD35y"
+    PAYPAL_SECRET="EL1kh9BtIjUcn03MIDLAAgYp8s3-EfKom50gZE4DpLVoyOcnSW3-789est4a5VLqQN-H8d4C4zY9YdTX"
+    ENV = "production"
+    PAYPAL_API_BASE="https://api-m.paypal.com"
 
-        # For development/testing
-    PAYPAL_CLIENT_ID=os.getenv('PAYPAL_CLIENT_ID')
-    PAYPAL_SECRET=os.getenv('PAYPAL_SECRET')
-
-    ENV = os.getenv('ENV', 'sandbox')
-
-    
+ 

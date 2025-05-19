@@ -11,6 +11,8 @@ from flask import (
 from flask_login import current_user
 from app import db
 from app.admin.models import Donation
+from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment
+from paypalcheckoutsdk.orders import OrdersCreateRequest
 
 paypal_bp = Blueprint('paypal', __name__, url_prefix='/paypal')
 
@@ -18,17 +20,18 @@ class PaymentError(Exception): pass
 
 
 def _paypal_api_base():
-    if current_app.config['ENV'] == 'production':
-        return 'api.paypal.com'
-    return 'api.sandbox.paypal.com'
-
+   
+    return "api-m.paypal.com"
 
 def _get_access_token():
     cid    = current_app.config['PAYPAL_CLIENT_ID']
     secret = current_app.config['PAYPAL_SECRET']
     creds  = base64.b64encode(f"{cid}:{secret}".encode()).decode()
+
+    # Build the correct URL: https://api-m.paypal.com/v1/oauth2/token
+    url = f"https://{_paypal_api_base()}/v1/oauth2/token"
     resp = requests.post(
-        f"https://{_paypal_api_base()}/v1/oauth2/token",
+        url,
         headers={
             'Authorization': f'Basic {creds}',
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -36,8 +39,10 @@ def _get_access_token():
         data={'grant_type':'client_credentials'},
         timeout=10
     )
+
     if resp.status_code != 200:
-        raise PaymentError("PayPal auth failed")
+        raise PaymentError(f"PayPal auth failed: {resp.status_code} {resp.text}")
+
     return resp.json()['access_token']
 
 
