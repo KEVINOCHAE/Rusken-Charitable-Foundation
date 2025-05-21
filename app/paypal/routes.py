@@ -256,6 +256,9 @@ def _redirect_after(donation):
     return render_template('donate/guest_confirmation.html', donation=donation)
 
 
+
+
+
 @paypal_bp.route('/webhook', methods=['POST'])
 def webhook():
     # 1. Gather PayPal headers

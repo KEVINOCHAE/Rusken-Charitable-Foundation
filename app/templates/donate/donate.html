@@ -1,58 +1,139 @@
 {% extends "base.html" %}
-{% block title %}Donate to {{ program.title }}{% endblock %}
+{% block title %}Support {{ program.title }} | {{ super() }}{% endblock %}
 
 {% block content %}
-<div class="container py-5 mt-5">
-  <div class="donation-header">
-    <h3>
-      <i class="fas fa-hands-helping me-2"></i>
+<div class="container-lg py-5 mt-5">
+
+  
+  
+  <div class="text-center mb-5">
+    <div class="progress-wrapper mx-auto mb-4">
+     
+    <h1 class="display-5 fw-bold mb-3">
+      <i class="fas fa-hands-holding-heart text-primary me-2"></i>
       Support {{ program.title }}
-    </h3>
-    <div class="remaining">
-      Goal Progress: {{ remaining }} remaining
-    </div>
+    </h1>
+    <p class="lead text-muted">Your contribution helps us continue this important work</p>
   </div>
 
-  <div class="donation-card">
-    <form id="donationForm">
-      {{ form.hidden_tag() }}
+  <!-- Donation Card -->
+  <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+    <div class="card-body p-5">
+      <div class="row g-5">
+        <!-- Donation Form -->
+        <div class="col-lg-6">
+          <form id="donationForm" class="needs-validation" novalidate>
+            {{ form.hidden_tag() }}
 
-      <div class="mb-4">
-        <label class="form-label">Your Full Name</label>
-        <input type="text" class="form-control" id="donor_name"
-               name="donor_name" required placeholder="John Doe"
-               value="{{ form.donor_name.data }}">
-      </div>
+            <!-- Donor Info -->
+            <div class="mb-4">
+              <label class="form-label fs-5 fw-medium">Your Information</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text">
+                  <i class="fas fa-user text-muted"></i>
+                </span>
+                <input type="text" class="form-control form-control-lg" 
+                       id="donor_name" name="donor_name" required
+                       placeholder="Full name" value="{{ form.donor_name.data }}">
+                <div class="invalid-feedback">Please enter your name</div>
+              </div>
 
-      <div class="mb-4">
-        <label class="form-label">Email Address</label>
-        <input type="email" class="form-control" id="donor_email"
-               name="donor_email" required placeholder="john@example.com"
-               value="{{ form.donor_email.data }}">
-      </div>
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fas fa-envelope text-muted"></i>
+                </span>
+                <input type="email" class="form-control form-control-lg" 
+                       id="donor_email" name="donor_email" required
+                       placeholder="Email address" value="{{ form.donor_email.data }}">
+                <div class="invalid-feedback">Please enter a valid email</div>
+              </div>
+            </div>
 
-      <div class="mb-4">
-        <label class="form-label">Donation Amount</label>
-        <div class="input-group">
-          <span class="input-group-text">{{ currency_symbol }}</span>
-          <input type="number" class="form-control amount-input"
-                 id="amount" name="amount" step="0.01" min="1" required
-                 value="{{ form.amount.data }}" placeholder="Enter amount">
+            <!-- Amount Selection -->
+            <div class="mb-4">
+              <label class="form-label fs-5 fw-medium">Donation Amount</label>
+              <div class="d-grid gap-2 mb-3">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-outline-primary amount-btn" data-amount="25">$25</button>
+                  <button type="button" class="btn btn-outline-primary amount-btn" data-amount="50">$50</button>
+                  <button type="button" class="btn btn-outline-primary amount-btn" data-amount="100">$100</button>
+                </div>
+              </div>
+              
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0">
+                  <span class="text-primary fw-medium">{{ currency_symbol }}</span>
+                </span>
+                <input type="number" class="form-control form-control-lg border-start-0" 
+                       id="amount" name="amount" step="1" min="1" required
+                       placeholder="Other amount" value="{{ form.amount.data }}">
+                <div class="invalid-feedback">Minimum donation is {{ currency_symbol }}1</div>
+              </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="border-top pt-4 mt-4">
+              <div id="paymentMessages"></div>
+              <div id="paypal-button-container" class="mb-3"></div>
+              <div class="text-center">
+                <small class="text-muted">
+                  <i class="fas fa-lock-shield me-1"></i>
+                  Secure 256-bit SSL encryption
+                </small>
+              </div>
+            </div>
+          </form>
         </div>
-        <div class="helper-text">Minimum donation: {{ currency_symbol }}1</div>
-      </div>
 
-      <div id="paypal-button-container" class="mt-4"></div>
-      <div id="paymentMessages" class="mt-3 text-center text-sm text-red-500"></div>
-    </form>
+        <!-- Program Highlights -->
+        <div class="col-lg-6 bg-light p-5">
+          <div class="sticky-top" style="top: 2rem;">
+            <h3 class="h4 mb-4">How Your Donation Helps</h3>
+            <ul class="list-unstyled">
+              <li class="d-flex mb-3">
+                <i class="fas fa-check-circle text-primary me-2 mt-1"></i>
+                <span>{{ program.title }}</span>
+              </li>
+             
+            </ul>
+            
+            <div class="card border-0 bg-white shadow-sm mt-4">
+              <div class="card-body">
+                <h4 class="h6 mb-3">Featured Supporters</h4>
+                <div class="d-flex align-items-center mb-2">
+                  <div class="avatar-sm me-2">
+                    <img src="..." class="rounded-circle" alt="Supporter">
+                  </div>
+                  <div>
+                    <div class="fw-medium">John D.</div>
+                    <small class="text-muted">Donated $1000</small>
+                  </div>
+                </div>
+               <div class="d-flex align-items-center mb-2">
+                  <div class="avatar-sm me-2">
+                    <img src="..." class="rounded-circle" alt="Supporter">
+                  </div>
+                  <div>
+                    <div class="fw-medium">Oundo Isaac.</div>
+                    <small class="text-muted">Donated $80</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- PayPal SDK (ensure this is above your custom script) -->
+
+<!-- PayPal Integration -->
 <script src="https://www.paypal.com/sdk/js?client-id={{ config.PAYPAL_LIVE_CLIENT_ID }}&currency=USD&components=buttons&enable-funding=venmo"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+
   const msgBox = document.getElementById('paymentMessages');
   const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
@@ -63,18 +144,42 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => { msgBox.textContent = ''; }, 5000);
   }
 
+  // Amount Selection
+  document.querySelectorAll('.amount-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('amount').value = btn.dataset.amount;
+      document.querySelectorAll('.amount-btn').forEach(b => 
+        b.classList.remove('active', 'btn-primary'));
+      btn.classList.add('active', 'btn-primary');
+    });
+  });
+
+
+
+  // Form Validation
+  const form = document.getElementById('donationForm');
+  form.addEventListener('submit', (e) => {
+    if (!form.checkValidity()) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    form.classList.add('was-validated');
+  }, false);
+
+  // PayPal Integration
   paypal.Buttons({
     style: { layout: 'vertical', shape: 'rect' },
 
     createOrder: (data, actions) => {
-      const name   = document.getElementById('donor_name').value.trim();
-      const email  = document.getElementById('donor_email').value.trim();
+      const name = document.getElementById('donor_name').value.trim();
+      const email = document.getElementById('donor_email').value.trim();
       const amount = document.getElementById('amount').value.trim();
       const program_id = new URLSearchParams(window.location.search).get('program_id');
 
+      // Frontend validation
       if (!name || !email || !amount) {
         showMessage('Please fill all required fields');
-        throw new Error('Validation failed');
+        return Promise.reject('Validation failed');
       }
 
       return fetch('/paypal/initialize', {
@@ -83,19 +188,33 @@ document.addEventListener('DOMContentLoaded', () => {
           'Content-Type': 'application/json',
           'X-CSRFToken': csrfToken
         },
-        body: JSON.stringify({ donor_name: name, email, amount, program_id })
+        body: JSON.stringify({ 
+          donor_name: name, 
+          email: email, 
+          amount: amount, 
+          program_id: program_id 
+        })
       })
       .then(res => res.json())
       .then(res => {
         if (!res.status || !res.authorization_url) {
-          throw new Error(res.message || 'Could not initialize payment');
+          throw new Error(res.message || 'Payment initialization failed');
         }
-        const token = new URL(res.authorization_url).searchParams.get('token');
-        return token;
+        
+        // Extract token from approval URL
+        const url = new URL(res.authorization_url);
+        const token = url.searchParams.get('token');
+        
+        if (!token) {
+          throw new Error('Missing order token');
+        }
+        
+        return token; // Return the order ID
       });
     },
 
     onApprove: (data, actions) => {
+      // Redirect to PayPal's approval flow
       window.location.href = `/paypal/callback?token=${data.orderID}`;
     },
 
@@ -105,10 +224,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     onError: (err) => {
       console.error('PayPal Error:', err);
-      showMessage('An error occurred during payment');
+      showMessage('An error occurred during payment processing');
     }
 
   }).render('#paypal-button-container');
 });
+
+// Helper Functions
+function showToast(message, type = 'success') {
+  const toast = document.createElement('div');
+  toast.className = `toast align-items-center text-white bg-${type} border-0`;
+  toast.innerHTML = `
+    <div class="d-flex">
+      <div class="toast-body">${message}</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  `;
+  document.body.appendChild(toast);
+  new bootstrap.Toast(toast).show();
+}
 </script>
+
+<style>
+.donation-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.amount-btn {
+  transition: all 0.2s ease;
+}
+
+.amount-btn:hover {
+  transform: translateY(-2px);
+}
+
+.progress-wrapper {
+  max-width: 400px;
+}
+
+.input-group-text {
+  background: #fff;
+  border-color: #dee2e6;
+}
+
+.toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 9999;
+}
+</style>
 {% endblock %}

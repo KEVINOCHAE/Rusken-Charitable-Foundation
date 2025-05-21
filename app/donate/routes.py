@@ -22,7 +22,6 @@ donate_bp = Blueprint('donate', __name__)
 logger = logging.getLogger(__name__)
 
 
-
 @donate_bp.route('/donate', methods=['GET'])
 def donate():
     program_id = request.args.get('program_id', type=int)
@@ -35,21 +34,23 @@ def donate():
 
     # Pre-fill for logged-in users
     if current_user.is_authenticated:
-        form.donor_name.data  = current_user.username
+        form.donor_name.data = current_user.username
         form.donor_email.data = current_user.email
+    else:
+        form.donor_name.data = ''
+        form.donor_email.data = ''
 
     # Calculate how much remains on the program’s budget
     remaining = f"KSH {program.budget_remaining:,.2f}"
 
     return render_template(
         'donate/donate.html',
-        program           = program,
-        form              = form,
-        remaining         = remaining,
-        currency_symbol   = "KSH",
-        paypal_client_id  = current_app.config['PAYPAL_LIVE_CLIENT_ID']
+        program=program,
+        form=form,
+        remaining=remaining,
+        currency_symbol="KSH",
+        paypal_client_id=current_app.config['PAYPAL_LIVE_CLIENT_ID']
     )
-
 
 
 @donate_bp.route('/confirmation/<int:donation_id>')
