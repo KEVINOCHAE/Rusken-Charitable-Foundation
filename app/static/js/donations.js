@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         height: 45
       },
 
-      // Create order directly with PayPal (no backend needed)
+      // Create order directly with PayPal 
       createOrder: (data, actions) => {
         return actions.order.create({
           purchase_units: [{
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
               currency_code: 'USD',
               value: amount
             },
-            description: 'Charitable Donation'
+            description: 'Rusken Charitable Donation'
           }],
           application_context: {
             shipping_preference: 'NO_SHIPPING'

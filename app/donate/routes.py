@@ -48,7 +48,7 @@ def donate():
         program=program,
         form=form,
         remaining=remaining,
-        currency_symbol="KSH",
+        currency_symbol="USD",
         paypal_client_id=current_app.config['PAYPAL_LIVE_CLIENT_ID']
     )
 

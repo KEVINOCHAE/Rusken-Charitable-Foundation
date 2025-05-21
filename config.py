@@ -34,11 +34,11 @@ class Config:
 
     # Sandbox credentials (auto-created by PayPal)
     PAYPAL_SANDBOX_CLIENT_ID=os.getenv('PAYPAL_SANDBOX_CLIENT_ID')
-    PAYPAL_SANDBOX_CLIENT_SECRET=os.getenv(' PAYPAL_SANDBOX_CLIENT_SECRET')
+    PAYPAL_SANDBOX_CLIENT_SECRET=os.getenv('PAYPAL_SANDBOX_CLIENT_SECRET')
 
     # Live credentials (replace with your production app’s values)
     PAYPAL_LIVE_CLIENT_ID=os.getenv('PAYPAL_LIVE_CLIENT_ID')
-    PAYPAL_LIVE_CLIENT_SECRET=os.getenv(' PAYPAL_LIVE_CLIENT_SECRET')
+    PAYPAL_LIVE_CLIENT_SECRET=os.getenv('PAYPAL_LIVE_CLIENT_SECRET')
 
     # The Webhook ID you registered in the PayPal dashboard
-    PAYPAL_WEBHOOK_ID="89K00265TJ360532G"
+    PAYPAL_WEBHOOK_ID=os.getenv('PAYPAL_WEBHOOK_ID')
