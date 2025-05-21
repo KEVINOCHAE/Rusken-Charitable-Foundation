@@ -9,7 +9,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config:
     SECRET_KEY                  = os.getenv('SECRET_KEY', 's3kr3t_k3y')
-    SQLALCHEMY_DATABASE_URI     = os.getenv('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI     = "os.getenv('DATABASE_URL')"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     SESSION_COOKIE_SECURE       = True
@@ -30,7 +30,7 @@ class Config:
     ALLOWED_EXTENSIONS          = {'png', 'jpg', 'jpeg', 'gif'}
     MAX_CONTENT_LENGTH          = 4 * 1024 * 1024  # 4 MB
 
-    PAYPAL_ENV="live"
+    PAYPAL_ENV="sandbox"
 
     # Sandbox credentials (auto-created by PayPal)
     PAYPAL_SANDBOX_CLIENT_ID=os.getenv('PAYPAL_SANDBOX_CLIENT_ID')

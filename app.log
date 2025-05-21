@@ -36721,3 +36721,236 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'donate
 2025-05-21 15:05:17,302 [INFO] -  * Restarting with stat
 2025-05-21 15:05:18,269 [WARNING] -  * Debugger is active!
 2025-05-21 15:05:18,270 [INFO] -  * Debugger PIN: 110-965-326
+2025-05-21 15:18:56,757 [INFO] - 127.0.0.1 - - [21/May/2025 15:18:56] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-21 15:18:57,132 [INFO] - 127.0.0.1 - - [21/May/2025 15:18:57] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:18:57,139 [INFO] - 127.0.0.1 - - [21/May/2025 15:18:57] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:18:57,140 [INFO] - 127.0.0.1 - - [21/May/2025 15:18:57] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:18:57,146 [INFO] - 127.0.0.1 - - [21/May/2025 15:18:57] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:18:57,226 [INFO] - 127.0.0.1 - - [21/May/2025 15:18:57] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:18:57,264 [INFO] - 127.0.0.1 - - [21/May/2025 15:18:57] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:18:57,266 [INFO] - 127.0.0.1 - - [21/May/2025 15:18:57] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:18:57,548 [INFO] - 127.0.0.1 - - [21/May/2025 15:18:57] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:18:57,575 [INFO] - 127.0.0.1 - - [21/May/2025 15:18:57] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-21 15:18:57,653 [INFO] - 127.0.0.1 - - [21/May/2025 15:18:57] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:19:11,325 [INFO] - 127.0.0.1 - - [21/May/2025 15:19:11] "POST /paypal/initialize HTTP/1.1" 200 -
+2025-05-21 15:19:25,405 [INFO] - 127.0.0.1 - - [21/May/2025 15:19:25] "POST /paypal/initialize HTTP/1.1" 200 -
+2025-05-21 15:27:01,618 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:01] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-21 15:27:01,945 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:01] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:27:01,949 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:01] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:27:01,951 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:01] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:27:01,957 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:01] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:27:01,966 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:01] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:27:02,120 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:02] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:27:02,124 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:02] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:27:02,234 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:02] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:27:02,464 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:02] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:27:17,611 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:17] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-21 15:27:17,828 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:17] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:27:17,837 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:17] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:27:17,843 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:17] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:27:17,854 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:17] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:27:17,856 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:17] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:27:17,979 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:17] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:27:18,066 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:18] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:27:18,241 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:18] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:27:31,008 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:31] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-21 15:27:31,303 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:31] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:27:31,304 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:31] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:27:31,315 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:31] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:27:31,318 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:31] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:27:31,324 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:31] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:27:31,427 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:31] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:27:31,578 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:31] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:27:31,758 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:31] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:27:47,710 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:47] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-21 15:27:48,026 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:48] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:27:48,032 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:48] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:27:48,034 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:48] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:27:48,037 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:48] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:27:48,044 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:48] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:27:48,302 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:48] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:27:48,309 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:48] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:27:48,339 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:48] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:27:49,174 [INFO] - 127.0.0.1 - - [21/May/2025 15:27:49] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:30:51,186 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:51] "GET /programs HTTP/1.1" 200 -
+2025-05-21 15:30:51,450 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:51] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:30:51,451 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:51] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:30:51,456 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:51] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:30:51,479 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:51] "GET /static/css/programs.css HTTP/1.1" 200 -
+2025-05-21 15:30:51,483 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:51] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-05-21 15:30:51,502 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:51] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:30:51,508 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:51] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:30:51,582 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:51] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:30:51,680 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:51] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:30:51,702 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:51] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-21 15:30:55,394 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:55] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-21 15:30:55,682 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:55] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-21 15:30:55,693 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:55] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:30:55,697 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:55] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:30:55,700 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:55] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:30:55,706 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:55] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:30:55,808 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:55] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:30:55,814 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:55] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:30:55,931 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:55] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:30:56,078 [INFO] - 127.0.0.1 - - [21/May/2025 15:30:56] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:38:00,430 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/app/paypal/routes.py', reloading
+2025-05-21 15:38:00,960 [INFO] -  * Restarting with stat
+2025-05-21 15:38:04,375 [WARNING] -  * Debugger is active!
+2025-05-21 15:38:04,377 [INFO] -  * Debugger PIN: 110-965-326
+2025-05-21 15:38:09,936 [INFO] - 127.0.0.1 - - [21/May/2025 15:38:09] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-21 15:38:10,366 [INFO] - 127.0.0.1 - - [21/May/2025 15:38:10] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:38:10,428 [INFO] - 127.0.0.1 - - [21/May/2025 15:38:10] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:38:10,428 [INFO] - 127.0.0.1 - - [21/May/2025 15:38:10] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:38:10,433 [INFO] - 127.0.0.1 - - [21/May/2025 15:38:10] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:38:10,527 [INFO] - 127.0.0.1 - - [21/May/2025 15:38:10] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:38:10,562 [INFO] - 127.0.0.1 - - [21/May/2025 15:38:10] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:38:10,564 [INFO] - 127.0.0.1 - - [21/May/2025 15:38:10] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:38:10,746 [INFO] - 127.0.0.1 - - [21/May/2025 15:38:10] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:38:10,850 [INFO] - 127.0.0.1 - - [21/May/2025 15:38:10] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:38:34,812 [INFO] - 127.0.0.1 - - [21/May/2025 15:38:34] "POST /paypal/initialize HTTP/1.1" 200 -
+2025-05-21 15:39:08,258 [INFO] - 127.0.0.1 - - [21/May/2025 15:39:08] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-21 15:39:08,604 [INFO] - 127.0.0.1 - - [21/May/2025 15:39:08] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:39:08,607 [INFO] - 127.0.0.1 - - [21/May/2025 15:39:08] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:39:08,618 [INFO] - 127.0.0.1 - - [21/May/2025 15:39:08] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:39:08,619 [INFO] - 127.0.0.1 - - [21/May/2025 15:39:08] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:39:08,626 [INFO] - 127.0.0.1 - - [21/May/2025 15:39:08] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:39:08,792 [INFO] - 127.0.0.1 - - [21/May/2025 15:39:08] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:39:08,807 [INFO] - 127.0.0.1 - - [21/May/2025 15:39:08] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:39:08,977 [INFO] - 127.0.0.1 - - [21/May/2025 15:39:08] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:39:09,881 [INFO] - 127.0.0.1 - - [21/May/2025 15:39:09] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:40:37,848 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:37] "GET / HTTP/1.1" 200 -
+2025-05-21 15:40:38,054 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:40:38,057 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:40:38,066 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:40:38,102 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-05-21 15:40:38,175 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "GET /static/js/donations.js HTTP/1.1" 200 -
+2025-05-21 15:40:38,264 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:40:38,265 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:40:38,312 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-05-21 15:40:38,624 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
+2025-05-21 15:40:38,638 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:40:38,667 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "GET /static/images/mr.png HTTP/1.1" 200 -
+2025-05-21 15:40:38,695 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:38] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:40:40,321 [INFO] - 127.0.0.1 - - [21/May/2025 15:40:40] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-05-21 15:52:17,767 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/app/paypal/routes.py', reloading
+2025-05-21 15:52:18,091 [INFO] -  * Restarting with stat
+2025-05-21 15:52:19,897 [WARNING] -  * Debugger is active!
+2025-05-21 15:52:19,898 [INFO] -  * Debugger PIN: 110-965-326
+2025-05-21 15:52:23,601 [INFO] - 127.0.0.1 - - [21/May/2025 15:52:23] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-21 15:52:23,845 [INFO] - 127.0.0.1 - - [21/May/2025 15:52:23] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-21 15:52:23,850 [INFO] - 127.0.0.1 - - [21/May/2025 15:52:23] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-21 15:52:23,852 [INFO] - 127.0.0.1 - - [21/May/2025 15:52:23] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:52:23,856 [INFO] - 127.0.0.1 - - [21/May/2025 15:52:23] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:52:23,864 [INFO] - 127.0.0.1 - - [21/May/2025 15:52:23] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:52:23,925 [INFO] - 127.0.0.1 - - [21/May/2025 15:52:23] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:52:23,930 [INFO] - 127.0.0.1 - - [21/May/2025 15:52:23] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:52:23,993 [INFO] - 127.0.0.1 - - [21/May/2025 15:52:23] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:52:24,149 [INFO] - 127.0.0.1 - - [21/May/2025 15:52:24] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:52:35,535 [INFO] - 127.0.0.1 - - [21/May/2025 15:52:35] "POST /paypal/initialize HTTP/1.1" 200 -
+2025-05-21 15:54:50,701 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/config.py', reloading
+2025-05-21 15:54:50,944 [INFO] -  * Restarting with stat
+2025-05-21 15:54:51,961 [WARNING] -  * Debugger is active!
+2025-05-21 15:54:51,962 [INFO] -  * Debugger PIN: 110-965-326
+2025-05-21 15:54:54,699 [INFO] - 127.0.0.1 - - [21/May/2025 15:54:54] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-21 15:54:54,934 [INFO] - 127.0.0.1 - - [21/May/2025 15:54:54] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:54:54,936 [INFO] - 127.0.0.1 - - [21/May/2025 15:54:54] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:54:54,945 [INFO] - 127.0.0.1 - - [21/May/2025 15:54:54] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:54:54,951 [INFO] - 127.0.0.1 - - [21/May/2025 15:54:54] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:54:54,962 [INFO] - 127.0.0.1 - - [21/May/2025 15:54:54] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:54:55,029 [INFO] - 127.0.0.1 - - [21/May/2025 15:54:55] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 15:54:55,035 [INFO] - 127.0.0.1 - - [21/May/2025 15:54:55] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:54:57,832 [INFO] - 127.0.0.1 - - [21/May/2025 15:54:57] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:54:59,142 [INFO] - 127.0.0.1 - - [21/May/2025 15:54:59] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:55:07,804 [INFO] - 127.0.0.1 - - [21/May/2025 15:55:07] "POST /paypal/initialize HTTP/1.1" 200 -
+2025-05-21 15:56:00,449 [INFO] - 127.0.0.1 - - [21/May/2025 15:56:00] "GET /paypal/callback?token=4C964363A78641037 HTTP/1.1" 200 -
+2025-05-21 15:56:02,068 [INFO] - 127.0.0.1 - - [21/May/2025 15:56:02] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-21 15:57:32,374 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/config.py', reloading
+2025-05-21 15:57:32,615 [INFO] -  * Restarting with stat
+2025-05-21 15:57:34,694 [WARNING] -  * Debugger is active!
+2025-05-21 15:57:34,694 [INFO] -  * Debugger PIN: 110-965-326
+2025-05-21 15:57:47,087 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 15:57:47,087 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-21 15:57:47,088 [INFO] -  * Restarting with stat
+2025-05-21 15:57:48,154 [WARNING] -  * Debugger is active!
+2025-05-21 15:57:48,155 [INFO] -  * Debugger PIN: 110-965-326
+2025-05-21 15:58:19,874 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:19] "GET /donate/find-donations HTTP/1.1" 200 -
+2025-05-21 15:58:20,017 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:20] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:58:20,022 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:20] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:58:20,028 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:20] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:58:20,030 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:20] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:58:20,099 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:20] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:58:20,104 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:20] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:58:27,785 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:27] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:58:36,397 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:36] "[32mPOST /donate/find-donations HTTP/1.1[0m" 302 -
+2025-05-21 15:58:36,415 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:36] "GET /donate/find-donations HTTP/1.1" 200 -
+2025-05-21 15:58:36,714 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:36] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:58:36,719 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:36] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:58:36,722 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:36] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:58:36,727 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:36] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:58:36,832 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:36] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:58:36,838 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:36] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:58:38,949 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:38] "GET /categories HTTP/1.1" 200 -
+2025-05-21 15:58:58,816 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:58] "GET /donate/find-donations?token=ImFmdXlhLmJAZ21haWwuY29tIg.aC3N9A.n42p8kgW_FYBaS1GME0mbS-D6Fg HTTP/1.1" 200 -
+2025-05-21 15:58:59,060 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:59] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 15:58:59,062 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:59] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:58:59,067 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:59] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 15:58:59,070 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:59] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 15:58:59,175 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:59] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 15:58:59,210 [INFO] - 127.0.0.1 - - [21/May/2025 15:58:59] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 15:59:01,007 [INFO] - 127.0.0.1 - - [21/May/2025 15:59:01] "GET /categories HTTP/1.1" 200 -
+2025-05-21 16:01:09,730 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 16:01:09,735 [INFO] - [33mPress CTRL+C to quit[0m
+2025-05-21 16:01:09,747 [INFO] -  * Restarting with stat
+2025-05-21 16:01:10,822 [WARNING] -  * Debugger is active!
+2025-05-21 16:01:10,854 [INFO] -  * Debugger PIN: 110-965-326
+2025-05-21 16:01:34,182 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "GET /programs/category/education HTTP/1.1" 200 -
+2025-05-21 16:01:34,519 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[33mGET /media/programs/fa962543566745cd85ebd1fb6647d9ee.jpg HTTP/1.1[0m" 404 -
+2025-05-21 16:01:34,526 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[33mGET /media/programs/9cb049d6376a439a8c3e7dc1cf32f8df.jpg HTTP/1.1[0m" 404 -
+2025-05-21 16:01:34,528 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[33mGET /media/programs/e4080026ea084e8eb06f73a3e784178c.jpg HTTP/1.1[0m" 404 -
+2025-05-21 16:01:34,532 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[33mGET /media/programs/f4bedc59a4d0437293762382367a2a38.jpg HTTP/1.1[0m" 404 -
+2025-05-21 16:01:34,551 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 16:01:34,552 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 16:01:34,566 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 16:01:34,582 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "GET /static/css/programs.css HTTP/1.1" 200 -
+2025-05-21 16:01:34,624 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 16:01:34,754 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[33mGET /media/programs/fa962543566745cd85ebd1fb6647d9ee.jpg HTTP/1.1[0m" 404 -
+2025-05-21 16:01:34,765 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[33mGET /media/programs/9cb049d6376a439a8c3e7dc1cf32f8df.jpg HTTP/1.1[0m" 404 -
+2025-05-21 16:01:34,766 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[33mGET /media/programs/e4080026ea084e8eb06f73a3e784178c.jpg HTTP/1.1[0m" 404 -
+2025-05-21 16:01:34,768 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[33mGET /media/programs/f4bedc59a4d0437293762382367a2a38.jpg HTTP/1.1[0m" 404 -
+2025-05-21 16:01:34,772 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 16:01:34,837 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:34] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 16:01:35,809 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:35] "GET /categories HTTP/1.1" 200 -
+2025-05-21 16:01:38,525 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:38] "GET /donate/donate?program_id=10 HTTP/1.1" 200 -
+2025-05-21 16:01:38,824 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:38] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-05-21 16:01:38,828 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:38] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-05-21 16:01:38,833 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:38] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 16:01:38,838 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:38] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 16:01:38,849 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:38] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 16:01:38,955 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:38] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 16:01:39,041 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:39] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 16:01:40,122 [INFO] - 127.0.0.1 - - [21/May/2025 16:01:40] "GET /categories HTTP/1.1" 200 -
+2025-05-21 16:02:07,370 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:07] "POST /paypal/initialize HTTP/1.1" 200 -
+2025-05-21 16:02:28,875 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:28] "GET /paypal/callback?token=0J952310XC1972433 HTTP/1.1" 200 -
+2025-05-21 16:02:29,398 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-21 16:02:34,192 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:34] "GET /donate/find-donations HTTP/1.1" 200 -
+2025-05-21 16:02:34,356 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:34] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 16:02:34,361 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:34] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 16:02:34,364 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:34] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 16:02:34,416 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:34] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 16:02:34,460 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:34] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 16:02:34,475 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:34] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 16:02:34,732 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:34] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-21 16:02:35,245 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:35] "GET /categories HTTP/1.1" 200 -
+2025-05-21 16:02:46,880 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:46] "[32mPOST /donate/find-donations HTTP/1.1[0m" 302 -
+2025-05-21 16:02:46,902 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:46] "GET /donate/find-donations HTTP/1.1" 200 -
+2025-05-21 16:02:47,165 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:47] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 16:02:47,169 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:47] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 16:02:47,174 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:47] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 16:02:47,198 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:47] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 16:02:47,300 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:47] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 16:02:47,438 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:47] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 16:02:48,225 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:48] "GET /categories HTTP/1.1" 200 -
+2025-05-21 16:03:44,161 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/config.py', reloading
+2025-05-21 16:03:44,537 [INFO] -  * Restarting with stat
