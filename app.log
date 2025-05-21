@@ -36695,3 +36695,29 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'donate
 2025-05-21 14:45:56,338 [INFO] -  * Restarting with stat
 2025-05-21 14:45:57,345 [WARNING] -  * Debugger is active!
 2025-05-21 14:45:57,346 [INFO] -  * Debugger PIN: 110-965-326
+2025-05-21 14:53:43,065 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/app/paypal/routes.py', reloading
+2025-05-21 14:53:43,743 [INFO] -  * Restarting with stat
+2025-05-21 14:53:46,332 [WARNING] -  * Debugger is active!
+2025-05-21 14:53:46,333 [INFO] -  * Debugger PIN: 110-965-326
+2025-05-21 14:55:52,713 [INFO] - The CSRF session token is missing.
+2025-05-21 14:55:52,714 [INFO] - 127.0.0.1 - - [21/May/2025 14:55:52] "[31m[1mPOST /paypal/initialize HTTP/1.1[0m" 400 -
+2025-05-21 14:55:58,728 [INFO] - 127.0.0.1 - - [21/May/2025 14:55:58] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-05-21 14:55:58,979 [INFO] - 127.0.0.1 - - [21/May/2025 14:55:58] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 14:55:59,050 [INFO] - 127.0.0.1 - - [21/May/2025 14:55:59] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-05-21 14:55:59,077 [INFO] - 127.0.0.1 - - [21/May/2025 14:55:59] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-05-21 14:55:59,081 [INFO] - 127.0.0.1 - - [21/May/2025 14:55:59] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 14:55:59,271 [INFO] - 127.0.0.1 - - [21/May/2025 14:55:59] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-05-21 14:55:59,367 [INFO] - 127.0.0.1 - - [21/May/2025 14:55:59] "[33mGET /donate/... HTTP/1.1[0m" 404 -
+2025-05-21 14:55:59,422 [INFO] - 127.0.0.1 - - [21/May/2025 14:55:59] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-05-21 14:55:59,652 [INFO] - 127.0.0.1 - - [21/May/2025 14:55:59] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
+2025-05-21 14:55:59,835 [INFO] - 127.0.0.1 - - [21/May/2025 14:55:59] "GET /categories HTTP/1.1" 200 -
+2025-05-21 14:56:00,107 [INFO] - 127.0.0.1 - - [21/May/2025 14:56:00] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-05-21 14:56:09,588 [INFO] - 127.0.0.1 - - [21/May/2025 14:56:09] "POST /paypal/initialize HTTP/1.1" 200 -
+2025-05-21 15:02:39,833 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/app/paypal/routes.py', reloading
+2025-05-21 15:02:40,066 [INFO] -  * Restarting with stat
+2025-05-21 15:02:46,675 [WARNING] -  * Debugger is active!
+2025-05-21 15:02:46,676 [INFO] -  * Debugger PIN: 110-965-326
+2025-05-21 15:05:17,071 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/app/paypal/routes.py', reloading
+2025-05-21 15:05:17,302 [INFO] -  * Restarting with stat
+2025-05-21 15:05:18,269 [WARNING] -  * Debugger is active!
+2025-05-21 15:05:18,270 [INFO] -  * Debugger PIN: 110-965-326

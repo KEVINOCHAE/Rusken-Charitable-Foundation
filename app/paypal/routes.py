@@ -14,13 +14,13 @@ from flask import current_app, g
 import requests
 import base64
 from flask_login import current_user
-from app import db
+from app import db,csrf
 from app.admin.models import Donation
 from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment, LiveEnvironment
 from paypalcheckoutsdk.orders import OrdersCreateRequest, OrdersCaptureRequest
 
 logger = logging.getLogger(__name__)
-
+logging.basicConfig(level=logging.INFO)
 
 paypal_bp = Blueprint('paypal', __name__, url_prefix='/paypal')
 
@@ -170,6 +170,7 @@ def initialize():
 
 
 @paypal_bp.route('/callback')
+@csrf.exempt
 def callback():
     order_id = request.args.get('token')  # PayPal uses `token` param
     if not order_id:
