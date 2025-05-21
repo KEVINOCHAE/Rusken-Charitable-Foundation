@@ -36954,3 +36954,6 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'donate
 2025-05-21 16:02:48,225 [INFO] - 127.0.0.1 - - [21/May/2025 16:02:48] "GET /categories HTTP/1.1" 200 -
 2025-05-21 16:03:44,161 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/config.py', reloading
 2025-05-21 16:03:44,537 [INFO] -  * Restarting with stat
+2025-05-21 16:06:38,098 [INFO] -  * Restarting with stat
+2025-05-21 16:06:40,492 [WARNING] -  * Debugger is active!
+2025-05-21 16:06:40,493 [INFO] -  * Debugger PIN: 110-965-326
