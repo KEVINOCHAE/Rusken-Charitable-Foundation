@@ -36687,3 +36687,11 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'donate
 2025-05-21 14:12:49,552 [INFO] - 127.0.0.1 - - [21/May/2025 14:12:49] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
 2025-05-21 14:12:49,577 [INFO] - 127.0.0.1 - - [21/May/2025 14:12:49] "[33mGET /static/js/donation.js HTTP/1.1[0m" 404 -
 2025-05-21 14:12:49,711 [INFO] - 127.0.0.1 - - [21/May/2025 14:12:49] "GET /categories HTTP/1.1" 200 -
+2025-05-21 14:42:58,857 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/app/paypal/routes.py', reloading
+2025-05-21 14:43:03,402 [INFO] -  * Restarting with stat
+2025-05-21 14:43:18,861 [WARNING] -  * Debugger is active!
+2025-05-21 14:43:18,937 [INFO] -  * Debugger PIN: 110-965-326
+2025-05-21 14:45:56,105 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/rusken/app/paypal/routes.py', reloading
+2025-05-21 14:45:56,338 [INFO] -  * Restarting with stat
+2025-05-21 14:45:57,345 [WARNING] -  * Debugger is active!
+2025-05-21 14:45:57,346 [INFO] -  * Debugger PIN: 110-965-326

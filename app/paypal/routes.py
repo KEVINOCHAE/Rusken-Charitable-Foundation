@@ -19,6 +19,7 @@ from app.admin.models import Donation
 from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment, LiveEnvironment
 from paypalcheckoutsdk.orders import OrdersCreateRequest, OrdersCaptureRequest
 
+logger = logging.getLogger(__name__)
 
 
 paypal_bp = Blueprint('paypal', __name__, url_prefix='/paypal')
