@@ -30,10 +30,15 @@ class Config:
     ALLOWED_EXTENSIONS          = {'png', 'jpg', 'jpeg', 'gif'}
     MAX_CONTENT_LENGTH          = 4 * 1024 * 1024  # 4 MB
 
+    PAYPAL_ENV="live"
 
-    PAYPAL_CLIENT_ID="AfXbJQIC4J5SDGzACSiJNIP6NZUKtts74UeEh_JDuBPQyajNrpreEQXRF1grPnT31UYb9t_IovHCD35y"
-    PAYPAL_SECRET="EL1kh9BtIjUcn03MIDLAAgYp8s3-EfKom50gZE4DpLVoyOcnSW3-789est4a5VLqQN-H8d4C4zY9YdTX"
-    ENV = "production"
-    PAYPAL_API_BASE="https://api-m.paypal.com"
+    # Sandbox credentials (auto-created by PayPal)
+    PAYPAL_SANDBOX_CLIENT_ID="AfXbJQIC4J5SDGzACSiJNIP6NZUKtts74UeEh_JDuBPQyajNrpreEQXRF1grPnT31UYb9t_IovHCD35y"
+    PAYPAL_SANDBOX_CLIENT_SECRET="EL1kh9BtIjUcn03MIDLAAgYp8s3-EfKom50gZE4DpLVoyOcnSW3-789est4a5VLqQN-H8d4C4zY9YdTX"
 
- 
+    # Live credentials (replace with your production app’s values)
+    PAYPAL_LIVE_CLIENT_ID="AR0b83Ro8IIg_iYOCzlfcDOvMxYcfoJZjqUoemlfuj7a2aDX91NdNL7Di4X1FWPreYdu3NsYzyyxJwuF"
+    PAYPAL_LIVE_CLIENT_SECRET="EBkr5bvgqIbEzXPT8K25kF4vujo53n6dydO4m3MS9yPodEpJo0djl0Z-IByP5iCW1W2wBAApUKC_h7eZ"
+
+    # The Webhook ID you registered in the PayPal dashboard
+    PAYPAL_WEBHOOK_ID="89K00265TJ360532G"

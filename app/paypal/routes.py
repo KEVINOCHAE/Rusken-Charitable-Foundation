@@ -8,42 +8,74 @@ from flask import (
     current_app, flash, redirect,
     url_for, render_template
 )
+from cachetools import TTLCache
+import logging
+from flask import current_app, g
+import requests
+import base64
 from flask_login import current_user
 from app import db
 from app.admin.models import Donation
-from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment
-from paypalcheckoutsdk.orders import OrdersCreateRequest
+from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment, LiveEnvironment
+from paypalcheckoutsdk.orders import OrdersCreateRequest, OrdersCaptureRequest
+
+
 
 paypal_bp = Blueprint('paypal', __name__, url_prefix='/paypal')
 
 class PaymentError(Exception): pass
 
 
+_token_cache = TTLCache(maxsize=1, ttl=25200)  # 7 hours
+
 def _paypal_api_base():
-   
-    return "api-m.paypal.com"
+    env = current_app.config.get("PAYPAL_ENV", "live")
+    return f"api-m.{'sandbox.' if env == 'sandbox' else ''}paypal.com"
 
 def _get_access_token():
-    cid    = current_app.config['PAYPAL_CLIENT_ID']
-    secret = current_app.config['PAYPAL_SECRET']
-    creds  = base64.b64encode(f"{cid}:{secret}".encode()).decode()
+    # 1. Return cached token if still valid
+    if token := _token_cache.get("access_token"):
+        return token
 
-    # Build the correct URL: https://api-m.paypal.com/v1/oauth2/token
-    url = f"https://{_paypal_api_base()}/v1/oauth2/token"
-    resp = requests.post(
-        url,
-        headers={
-            'Authorization': f'Basic {creds}',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        data={'grant_type':'client_credentials'},
-        timeout=10
-    )
+    # 2. Select the correct credentials
+    cfg = current_app.config
+    if cfg['PAYPAL_ENV'] == 'sandbox':
+        cid    = cfg.get('PAYPAL_SANDBOX_CLIENT_ID')
+        secret = cfg.get('PAYPAL_SANDBOX_CLIENT_SECRET')
+    else:
+        cid    = cfg.get('PAYPAL_LIVE_CLIENT_ID')
+        secret = cfg.get('PAYPAL_LIVE_CLIENT_SECRET')
 
-    if resp.status_code != 200:
-        raise PaymentError(f"PayPal auth failed: {resp.status_code} {resp.text}")
+    if not cid or not secret:
+        raise PaymentError(f"Missing PayPal credentials for {cfg['PAYPAL_ENV']}")
 
-    return resp.json()['access_token']
+    # 3. Build and call the OAuth endpoint
+    creds = base64.b64encode(f"{cid}:{secret}".encode()).decode()
+    url   = f"https://{_paypal_api_base()}/v1/oauth2/token"
+
+    try:
+        resp = requests.post(
+            url,
+            headers={
+                'Authorization': f'Basic {creds}',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data={'grant_type': 'client_credentials'},
+            timeout=(3, 10)
+        )
+        resp.raise_for_status()
+    except Timeout:
+        current_app.logger.error("PayPal token request timed out")
+        raise PaymentError("PayPal authentication timeout")
+    except RequestException as e:
+        current_app.logger.error(f"PayPal auth failed: {e}")
+        raise PaymentError(f"PayPal auth error: {e}")
+
+    token = resp.json().get('access_token')
+    _token_cache["access_token"] = token
+    return token
+
+
 
 
 @paypal_bp.route('/initialize', methods=['POST'])
@@ -222,3 +254,53 @@ def _redirect_after(donation):
     if current_user.is_authenticated:
         return redirect(url_for('donate.confirmation', donation_id=donation.id))
     return render_template('donate/guest_confirmation.html', donation=donation)
+
+
+@paypal_bp.route('/webhook', methods=['POST'])
+def webhook():
+    # 1. Gather PayPal headers
+    transmission_id    = request.headers.get('Paypal-Transmission-Id')
+    transmission_time  = request.headers.get('Paypal-Transmission-Time')
+    cert_url           = request.headers.get('Paypal-Cert-Url')
+    auth_algo          = request.headers.get('Paypal-Auth-Algo')
+    transmission_sig   = request.headers.get('Paypal-Transmission-Sig')
+    webhook_id         = current_app.config['PAYPAL_WEBHOOK_ID']  # your live webhook ID
+    body               = request.get_data(as_text=True)
+
+    # 2. Verify signature
+    token = _get_access_token()  # reuse your existing token helper
+    verify_resp = requests.post(
+        f"https://{_paypal_api_base()}/v1/notifications/verify-webhook-signature",
+        json={
+            "transmission_id": transmission_id,
+            "transmission_time": transmission_time,
+            "cert_url": cert_url,
+            "auth_algo": auth_algo,
+            "transmission_sig": transmission_sig,
+            "webhook_id": webhook_id,
+            "webhook_event": json.loads(body)
+        },
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}"
+        }
+    )
+    verify_resp.raise_for_status()
+    verification = verify_resp.json()
+    if verification.get("verification_status") != "SUCCESS":
+        current_app.logger.warning("Failed PayPal webhook verification")
+        return abort(400)
+
+    # 3. Process only completed captures
+    event = json.loads(body)
+    if event.get('event_type') != 'PAYMENT.CAPTURE.COMPLETED':
+        return '', 204
+
+    order_id = event['resource']['custom_id']
+    donation = Donation.query.filter_by(gateway_reference=order_id).first()
+    if donation and donation.status != 'completed':
+        donation.status = 'completed'
+        donation.updated_at = datetime.utcnow()
+        db.session.commit()
+
+    return '', 200

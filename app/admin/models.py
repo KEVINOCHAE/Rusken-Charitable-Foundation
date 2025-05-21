@@ -292,3 +292,13 @@ def validate_donation(mapper, connection, target):
 @hybrid_property
 def is_authenticated_donation(self):
     return self.user_id is not None       
+
+
+class WebhookEvent(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    transmission_id = db.Column(db.String(64), unique=True, nullable=False)
+    event_type = db.Column(db.String(64), nullable=False)
+    resource_id = db.Column(db.String(64), nullable=False)
+    payload = db.Column(db.Text, nullable=True)  # optional: store raw event
+    verified = db.Column(db.Boolean, default=False)
+    processed_at = db.Column(db.DateTime, default=datetime.utcnow)

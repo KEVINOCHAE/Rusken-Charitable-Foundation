@@ -322,9 +322,9 @@
   </div>
 </div>
 
-<script src="https://www.paypal.com/sdk/js?client-id={{ config.PAYPAL_CLIENT_ID }}&currency=USD&components=buttons&enable-funding=venmo&buyer-country=KE"></script>
+<script src="https://www.paypal.com/sdk/js?client-id={{ config.PAYPAL_LIVE_CLIENT_ID }}&currency=USD&components=buttons&enable-funding=venmo"></script>
 
-
+<script src="{{ url_for('static', filename='js/donations.js') }}"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {

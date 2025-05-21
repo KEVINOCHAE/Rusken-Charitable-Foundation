@@ -614,4 +614,32 @@ body {
 }
 
 
-    
+    /* PayPal Donate Button Styles */
+.btn-paypal {
+  background: linear-gradient(135deg, #0070ba 0%, #005ea6 100%);
+  color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-paypal img {
+  filter: brightness(0) invert(1);
+}
+
+.btn-paypal:hover,
+.btn-paypal:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-paypal:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Sync the displayed amount on hover/focus (optional) */
+.btn-paypal:hover #paypalButtonAmount,
+.btn-paypal:focus #paypalButtonAmount {
+  text-decoration: underline;
+}
