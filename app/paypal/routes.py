@@ -78,6 +78,7 @@ def _get_access_token():
 
 
 
+
 @paypal_bp.route('/initialize', methods=['POST'])
 def initialize():
     data       = request.get_json() or {}
@@ -88,25 +89,23 @@ def initialize():
         current_user.username if current_user.is_authenticated else 'Anonymous'
     )
 
-    # 1. Validate input
+    # 1. Validate
     if not email or not raw_amount:
         return jsonify(status=False, message="Email & amount required"), 400
-
     try:
         amount = Decimal(str(raw_amount)).quantize(Decimal('0.01'))
-        if amount <= 0:
-            raise InvalidOperation()
+        if amount <= 0: raise InvalidOperation()
     except:
         return jsonify(status=False, message="Invalid amount"), 400
 
-    # 2. Create pending donation
+    # 2. Create pending Donation
     donation = Donation(
         program_id       = program_id,
         user_id          = current_user.id if current_user.is_authenticated else None,
         donor_name       = donor_name,
         donor_email      = email,
         amount           = amount,
-        currency         = 'USD',  # PayPal supports USD as default
+        currency         = 'USD',   # PayPal orders in USD
         status           = 'pending',
         created_at       = datetime.utcnow(),
         payment_gateway  = 'paypal'
@@ -117,36 +116,30 @@ def initialize():
     # 3. Build PayPal order payload
     callback_url = url_for('paypal.callback', _external=True)
     cancel_url   = url_for('main.home', _external=True)
-
-    metadata = {
-        "donation_id": donation.id,
-        "program_id": program_id,
-        "user_id": current_user.id if current_user.is_authenticated else None,
-        "donor_name": donor_name,
-        "general": program_id is None
-    }
-
     purchase_unit = {
         "reference_id": f"donation_{donation.id}",
         "amount": {
             "currency_code": "USD",
             "value": str(amount)
         },
-        "custom_id": json.dumps(metadata)
+        # Store program_id/general flag in custom_id
+        "custom_id": json.dumps({
+            "donation_id": donation.id,
+            "program_id": program_id,
+            "general": program_id is None
+        })
     }
-
     order_payload = {
         "intent": "CAPTURE",
         "purchase_units": [purchase_unit],
         "application_context": {
             "return_url": callback_url,
-            "cancel_url": cancel_url,
-            "user_action": "PAY_NOW"  # Ensures immediate capture behavior
+            "cancel_url": cancel_url
         }
     }
 
-    # 4. Call PayPal to create the order
     try:
+        # 4. Create PayPal order
         token = _get_access_token()
         resp = requests.post(
             f"https://{_paypal_api_base()}/v2/checkout/orders",
@@ -164,12 +157,11 @@ def initialize():
         return jsonify(status=False, message="Could not initialize PayPal payment"), 500
 
     order = resp.json()
-
-    # 5. Save order ID for later capture
+    # 5. Save PayPal order ID as reference, commit
     donation.gateway_reference = order['id']
     db.session.commit()
 
-    # 6. Find approval link and return to frontend
+    # 6. Extract approval link
     for link in order.get('links', []):
         if link.get('rel') == 'approve':
             return jsonify(status=True, authorization_url=link['href'])
@@ -258,11 +250,14 @@ def callback():
 
     return redirect(url_for('main.home'))
 
+
 def _redirect_after(donation):
     from flask_login import current_user
     if current_user.is_authenticated:
         return redirect(url_for('donate.confirmation', donation_id=donation.id))
     return render_template('donate/guest_confirmation.html', donation=donation)
+
+
 
 
 

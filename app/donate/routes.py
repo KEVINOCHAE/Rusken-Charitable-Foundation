@@ -14,6 +14,7 @@ import requests
 from app.utils.emails import send_donation_access_email
 from app.utils.tokens import generate_email_token, verify_email_token
 import logging
+from app import csrf,db
 from paystackapi.transaction import Transaction
 from app.admin.models import Program,Donation, User
 from .forms import DonationForm, FindDonationsForm

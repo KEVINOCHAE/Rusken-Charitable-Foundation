@@ -99,7 +99,8 @@ def create_app(config_class=None):
 
     app.jinja_env.filters['program_image_url'] = program_image_url
 
-        # in your app factory or main module
+
+           # in your app factory or main module
     #@app.context_processor
     #def inject_paypal_id():
      #   return dict(paypal_client_id=app.config['PAYPAL_CLIENT_ID'])

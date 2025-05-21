@@ -30,7 +30,7 @@ class Config:
     ALLOWED_EXTENSIONS          = {'png', 'jpg', 'jpeg', 'gif'}
     MAX_CONTENT_LENGTH          = 4 * 1024 * 1024  # 4 MB
 
-    PAYPAL_ENV="sandbox"
+    PAYPAL_ENV="live"
 
     # Sandbox credentials (auto-created by PayPal)
     PAYPAL_SANDBOX_CLIENT_ID=os.getenv('PAYPAL_SANDBOX_CLIENT_ID')
