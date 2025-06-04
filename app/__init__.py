@@ -49,7 +49,8 @@ def create_app(config_class=None):
     from app.programs.routes import program_bp
     from app.donate.routes import donate_bp
     from app.paystack.routes import paystack_bp
-
+    
+    
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(admin_bp, url_prefix='/admin')

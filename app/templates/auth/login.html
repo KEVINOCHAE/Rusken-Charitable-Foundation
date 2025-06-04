@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <!-- Email -->
     <div class="form-group" data-aos="fade-up" data-aos-delay="100">
-      {{ form.email(class="form-input", placeholder="Email", autocomplete="email", **{'aria-describedby': 'emailHelp'}) }}
+      {{ form.email(class="form-input", placeholder="your@email.com", autocomplete="email", **{'aria-describedby': 'emailHelp'}) }}
       <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
       {% for error in form.email.errors %}
         <small class="text-error" id="emailHelp">{{ error }}</small>

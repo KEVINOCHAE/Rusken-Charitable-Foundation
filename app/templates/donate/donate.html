@@ -5,7 +5,7 @@
 {% block content %}
 
 
-<div class="container py-5">
+<div class="container py-5 mt-5">
   <div class="donation-header">
     <h3>
       <i class="fas fa-hands-helping me-2"></i>
@@ -66,66 +66,5 @@
     <p class="mt-4 font-semibold text-gray-700">Securing your donation...</p>
   </div>
 </div>
-
-
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const payButton = document.getElementById('payButton');
-  const paymentLoading = document.getElementById('paymentLoading');
-  const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-
-  function getQueryParam(param) {
-    return new URLSearchParams(window.location.search).get(param);
-  }
-  function showMessage(text, type) {
-    const msg = document.getElementById('paymentMessages');
-    msg.textContent = text;
-    msg.className = `text-center text-sm KES{type==='error'?'text-red-500':'text-green-500'}`;
-    setTimeout(()=>{ msg.textContent=''; msg.className=''; }, 5000);
-  }
-
-  payButton.addEventListener('click', async () => {
-    const name       = document.getElementById('donor_name')?.value.trim();
-    const email      = document.getElementById('donor_email')?.value.trim();
-    const amount     = document.getElementById('amount')?.value.trim();
-    const program_id = getQueryParam('program_id');
-
-    if (!name || !email || !amount || !program_id) {
-      showMessage('Please fill all required fields', 'error');
-      return;
-    }
-
-    paymentLoading.style.display = 'flex';
-    payButton.disabled = true;
-
-    try {
-      const res = await fetch('/paystack/initialize', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrfToken
-        },
-        body: JSON.stringify({ name, email, amount, program_id })
-      });
-      const data = await res.json();
-
-      // ← FIXED HERE: read from top‑level
-      if (data.status && data.authorization_url) {
-        window.location.href = data.authorization_url;
-      } else {
-        throw new Error(data.message || 'Payment initialization failed');
-      }
-
-    } catch (error) {
-      console.error('Payment Error:', error);
-      showMessage(error.message, 'error');
-      paymentLoading.style.display = 'none';
-      payButton.disabled = false;
-    }
-  });
-});
-</script>
-
 
 {% endblock %}

@@ -16,6 +16,7 @@ class DonationForm(FlaskForm):
     donor_name = StringField(
         'Name (optional)',
         validators=[
+            DataRequired(message="We need your Name for Reciepts."),
             Length(max=100, message="Name cannot exceed 100 characters.")
         ]
     )
