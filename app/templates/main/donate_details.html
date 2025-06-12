@@ -1,0 +1,319 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Rusken-Charitable-Foundation  | Home{% endblock %}
+
+{% block content %}
+
+<section class="donate-hero text-center mb-4 mt-5 pt-5 py-6 bg-gradient-primary text-white position-relative overflow-hidden">
+    <div class="container position-relative z-2">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+          <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInDown">Empower Sustainable Change</h1>
+          <p class="lead mb-0 fs-5 " style="color: #00aa9c;">Your contribution creates ripples of transformation</p>
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave"></div>
+  </section>
+
+  <section id="donate-methods" class="py-6 bg-light">
+    <div class="container">
+  
+      <div class="row g-4">
+        <!-- M-Pesa: PayBill 625625 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-header bg-gradient-mpesa text-center">
+              <img src="{{ url_for('static', filename='images/mpesah.png') }}"
+                   alt="M-Pesa" height="60">
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">M-Pesa: PayBill 625625</h5>
+              <h5 class="card-title">M-Pesa: Account No:7716862316</h5>
+              <p class="card-text flex-grow-1">Lipa na M-Pesa via our primary PayBill.</p>
+              <button class="btn btn-primary mt-auto"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#mpesaDetails1"
+                      aria-expanded="false"
+                      aria-controls="mpesaDetails1">
+                How to Donate
+              </button>
+              <div class=" mt-3" id="mpesaDetails1">
+                <ol class="list-unstyled small mb-0">
+                  <li>Open your M-Pesa App or Safaricom SIM toolkit.</li>
+                  <li>Select <strong>Lipa na M-Pesa</strong> → <strong>Pay Bill</strong>.</li>
+                  <li>Enter PayBill Number: <code>625625</code>.</li>
+                  <li>Enter Account Number: <code>7716862316</code>.</li>
+                  <li>Enter the amount → Enter your M-Pesa PIN → Confirm details.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- M-Pesa: PayBill 522522 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-header bg-gradient-mpesa text-center">
+              <img src="{{ url_for('static', filename='images/lipa.webp') }}"
+                   alt="M-Pesa" height="60">
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">M-Pesa: PayBill 522522</h5>
+              <h5 class="card-title">M-Pesa: Acoount No. 1335841350</h5>
+              <p class="card-text flex-grow-1">Use our secondary PayBill.</p>
+              <button class="btn btn-primary mt-auto"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#mpesaDetails2"
+                      aria-expanded="false"
+                      aria-controls="mpesaDetails2">
+                How to Donate
+              </button>
+              <div class=" mt-3" id="mpesaDetails2">
+                <ol class="list-unstyled small mb-0">
+                  <li>Open your M-Pesa App or Safaricom SIM toolkit.</li>
+                  <li>Select <strong>Lipa na M-Pesa</strong> → <strong>Pay Bill</strong>.</li>
+                  <li>Enter PayBill Number: <code>522522</code>.</li>
+                  <li>Enter Account Number: <code>1335841350</code>.</li>
+                  <li>Enter the amount → Enter your M-Pesa PIN → Confirm details.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- USD – National Bank Transfer & Cheque -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-header bg-gradient-bank text-center">
+              <img src="{{ url_for('static', filename='images/national.svg') }}"
+                   alt="National Bank" height="60">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">USD – National Bank Transfer &amp; Cheque</h5>
+              <dl class="row small mb-0">
+                <dt class="col-5">Bank Name:</dt>
+                <dd class="col-7">National Bank of Kenya Limited</dd>
+  
+                <dt class="col-5">Currency:</dt>
+                <dd class="col-7">USD</dd>
+  
+                <dt class="col-5">Account Name:</dt>
+                <dd class="col-7">Rusken Charitable Foundation</dd>
+                
+                <dt class="col-5">Account Number:</dt>
+                <dd class="col-7"><code>7716816462</code></dd>
+                
+                <dt class="col-5">Branch:</dt>
+                <dd class="col-7">Kenyatta Avenue</dd>
+  
+                <dt class="col-5">Bank Code:</dt>
+                <dd class="col-7">12</dd>
+  
+                <dt class="col-5">Branch Code:</dt>
+                <dd class="col-7">002</dd>
+  
+                <dt class="col-5">SWIFT Code:</dt>
+                <dd class="col-7"><code>NBKEKENXXXX</code></dd>
+  
+                <dt class="col-5">Intl Routing:</dt>
+                <dd class="col-7 text-muted small">
+                  JP Morgan, Chase Bank NA New York / <code>CHASUS33XXX</code> / 544728219
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+  
+        <!-- USD – Kenya Commercial Bank Transfer & Cheque -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-header bg-gradient-bank text-center">
+              <img src="{{ url_for('static', filename='images/kcb.svg') }}"
+                   alt="KCB Bank" height="60">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">USD – Kenya Commercial Bank Transfer &amp; Cheque</h5>
+              <dl class="row small mb-0">
+                <dt class="col-5">Bank Name:</dt>
+                <dd class="col-7">Kenya Commercial Bank</dd>
+  
+                <dt class="col-5">Currency:</dt>
+                <dd class="col-7">USD</dd>
+  
+                <dt class="col-5">Account Name:</dt>
+                <dd class="col-7">Rusken Charitable Foundation</dd>
+                
+                <dt class="col-5">Account Number:</dt>
+                <dd class="col-7"><code>1335841342</code></dd>
+
+                <dt class="col-5">Branch:</dt>
+                <dd class="col-7">Upper Hill Platinum Centre</dd>
+  
+                <dt class="col-5">Bank Code:</dt>
+                <dd class="col-7">01</dd>
+  
+                <dt class="col-5">Branch Code:</dt>
+                <dd class="col-7">332</dd>
+  
+                <dt class="col-5">SWIFT Code:</dt>
+                <dd class="col-7"><code>KCBLKENX</code></dd>
+  
+                <dt class="col-5">Intl Routing:</dt>
+                <dd class="col-7 text-muted small">
+                  JP Morgan, Chase Manhattan Bank NA New York / <code>CHASUS33</code> / 1100000917
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+  
+        <!-- KES – National Bank Transfer & Cheque -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-header bg-gradient-bank text-center">
+              <img src="{{ url_for('static', filename='images/national.svg') }}"
+                   alt="National Bank" height="60">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">KES – National Bank Transfer &amp; Cheque</h5>
+              <dl class="row small mb-0">
+                <dt class="col-5">Bank Name:</dt>
+                <dd class="col-7">National Bank of Kenya Limited</dd>
+  
+                <dt class="col-5">Currency:</dt>
+                <dd class="col-7">KES</dd>
+  
+                <dt class="col-5">Account Name:</dt>
+                <dd class="col-7">Rusken Charitable Foundation</dd>
+  
+                <dt class="col-5">Account Number:</dt>
+                <dd class="col-7"><code>7716862316</code></dd>
+  
+                <dt class="col-5">Bank Code:</dt>
+                <dd class="col-7">12</dd>
+  
+                <dt class="col-5">Branch Code:</dt>
+                <dd class="col-7">002</dd>
+  
+                <dt class="col-5">SWIFT Code:</dt>
+                <dd class="col-7"><code>NBKEKENXXXX</code></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+  
+        <!-- KES – Kenya Commercial Bank Transfer & Cheque -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-header bg-gradient-bank text-center">
+              <img src="{{ url_for('static', filename='images/kcb.svg') }}"
+                   alt="KCB Bank" height="60">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">KES – Kenya Commercial Bank Transfer &amp; Cheque</h5>
+              <dl class="row small mb-0">
+                <dt class="col-5">Bank Name:</dt>
+                <dd class="col-7">Kenya Commercial Bank</dd>
+  
+                <dt class="col-5">Currency:</dt>
+                <dd class="col-7">KES</dd>
+  
+                <dt class="col-5">Account Name:</dt>
+                <dd class="col-7">Rusken Charitable Foundation</dd>
+  
+                <dt class="col-5">Account Number:</dt>
+                <dd class="col-7"><code>1335841350</code></dd>
+  
+                <dt class="col-5">Bank Code:</dt>
+                <dd class="col-7">01</dd>
+  
+                <dt class="col-5">Branch Code:</dt>
+                <dd class="col-7">332</dd>
+  
+                <dt class="col-5">SWIFT Code:</dt>
+                <dd class="col-7"><code>KCBLKENX</code></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Other Ways to Give -->
+      <div class="mt-5 mb-3 pt-4 border-top text-center">
+        <h3 class="h5 fw-semibold mb-3">Other Ways to Give</h3>
+        <div class="row justify-content-center g-4">
+          <div class="col-auto">
+            <div class="badge-card p-4 bg-white shadow-sm rounded text-center">
+              <i class="fas fa-box-open fa-2x text-secondary mb-2"></i>
+              <p class="mb-0 small">In-Kind Gifts<br>Goods, equipment, materials</p>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="badge-card p-4 bg-white shadow-sm rounded text-center">
+              <i class="fas fa-hands-helping fa-2x text-secondary mb-2"></i>
+              <p class="mb-0 small">Volunteer<br>Local, national & virtual</p>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="badge-card p-4 bg-white shadow-sm rounded text-center">
+              <i class="fas fa-envelope fa-2x text-secondary mb-2"></i>
+              <p class="mb-0 small">Contact Us<br>
+                <a href="mailto:ruskencf2024@gmail.com">ruskencf2024@gmail.com</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+<style>
+    /* Gradients */
+:root {
+  --gradient-mpesa: linear-gradient(45deg, #00B140 0%, #007A3D 100%);
+  --gradient-bank: linear-gradient(45deg, #2A2F4F 0%, #4A5568 100%);
+}
+.bg-gradient-mpesa { background: var(--gradient-mpesa); }
+.bg-gradient-bank  { background: var(--gradient-bank); }
+
+
+
+.donate-hero {
+    background: linear-gradient(135deg, #2A2F4F 0%, #917FB3 100%);
+  }
+
+  .hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%23ffffff" fill-opacity="1" d="M0,160L48,149.3C96,139,192,117,288,128C384,139,480,181,576,192C672,203,768,181,864,160C960,139,1056,117,1152,112C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+    background-size: cover;
+  }
+
+
+/* Buttons & Toggles */
+.btn-primary {
+  background-color: #49235A;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(73,35,90,0.2);
+}
+
+/* Card hover lift */
+.card.shadow-sm:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+.card { transition: transform 0.3s; }
+
+</style>  
+  {% endblock %}

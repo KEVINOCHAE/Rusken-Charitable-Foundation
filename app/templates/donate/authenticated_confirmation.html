@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}Donation Confirmed{% endblock %}
+
+{% block head %}
+{{ super() }}
+<style>
+  .impact-card {
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--bs-primary);
+  }
+  .impact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  .checkmark-circle {
+    width: 80px;
+    height: 80px;
+    background: var(--bs-success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-3 pt-1 mb-5">
+  <div class="text-center mb-5">
+    <div class="checkmark-circle mx-auto mb-4">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3">
+        <path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h1 class="display-5 fw-bold">Thank You, {{ current_user.first_name }}!</h1>
+    <p class="lead">Your donation is now complete.</p>
+  </div>
+
+  <div class="row g-4">
+    <!-- Transaction Card -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-light">
+          <h5 class="mb-0"><i class="bi bi-receipt me-2"></i> Donation Details</h5>
+        </div>
+        <div class="card-body">
+          <dl class="row">
+            <dt class="col-sm-5">Amount:</dt>
+            <dd class="col-sm-7">{{ donation.amount|currency }} {{ donation.currency }}</dd>
+
+            <dt class="col-sm-5">Date:</dt>
+            <dd class="col-sm-7">{{ donation.created_at|datetime_format }}</dd>
+
+            <dt class="col-sm-5">Payment Method:</dt>
+            <dd class="col-sm-7">•••• {{ donation.payment_method_last4 }}</dd>
+
+            {% if donation.program and program_url %}
+            <dt class="col-sm-5">Program:</dt>
+            <dd class="col-sm-7">
+              <a href="{{ program_url }}">
+                {{ donation.program.title }}
+              </a>
+            </dd>
+            {% endif %}
+          </dl>
+
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+            <a href="{{ receipt_url }}" class="btn btn-outline-primary">
+              <i class="bi bi-download me-2"></i>Download Receipt
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Impact Card -->
+    <div class="col-lg-6">
+      <div class="card impact-card h-100">
+        <div class="card-header bg-light">
+          <h5 class="mb-0"><i class="bi bi-graph-up me-2"></i> Your Impact</h5>
+        </div>
+        <div class="card-body">
+          <div class="row text-center">
+            <div class="col-6 border-end">
+              <h2 class="text-primary">{{ impact_stats.total_donated|currency }}</h2>
+              <p class="text-muted mb-0">Total Given</p>
+            </div>
+            <div class="col-6">
+              <h2 class="text-success">{{ impact_stats.donation_count }}</h2>
+              <p class="text-muted mb-0">Total Donations</p>
+            </div>
+          </div>
+
+          {% if user_donations %}
+          <hr>
+          <h6 class="mb-3">Recent Donations:</h6>
+          <div class="list-group list-group-flush">
+            {% for d in user_donations %}
+            <div class="list-group-item border-0 px-0 py-2">
+              <div class="d-flex justify-content-between">
+                <span>
+                  {{ d.amount|currency }} 
+                  {% if d.program %}to {{ d.program.title }}{% endif %}
+                </span>
+                <small class="text-muted">{{ d.created_at|datetime_format('short') }}</small>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Next Steps -->
+  <div class="row mt-5">
+    <div class="col-12 text-center">
+      <a href="{{ url_for('main.home') }}" class="btn btn-primary px-4 me-3">
+        Return Home
+      </a>
+      {% if donation.program and program_url %}
+      <a href="{{ program_url }}" 
+         class="btn btn-outline-primary px-4">
+        View Program
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Confetti effect
+  confetti({
+    particleCount: 150,
+    spread: 70,
+    origin: { y: 0.6 },
+    ticks: 200
+  });
+
+  // Add subtle animation to impact card
+  const impactCard = document.querySelector('.impact-card');
+  if (impactCard) {
+    setTimeout(() => {
+      impactCard.classList.add('animate__animated', 'animate__pulse');
+    }, 1000);
+  }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+<style>
+  .donation-history-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  .donation-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #2e7d32;
+    padding: 1.5rem;
+  }
+  .donation-title {
+    color: #2e7d32;
+    font-weight: 600;
+  }
+  .donation-email {
+    font-size: 1.1rem;
+    color: #495057;
+  }
+  .table thead th {
+    background-color: #2e7d32;
+    color: white;
+    border-bottom: none;
+  }
+  .table tbody tr {
+    transition: all 0.2s ease;
+  }
+  .table tbody tr:hover {
+    background-color: rgba(46, 125, 50, 0.05);
+  }
+  .badge-completed {
+    background-color: #2e7d32;
+    padding: 0.35em 0.65em;
+  }
+  .badge-pending {
+    background-color: #ffc107;
+    color: #212529;
+    padding: 0.35em 0.65em;
+  }
+  .receipt-btn {
+    border-color: #2e7d32;
+    color: #2e7d32;
+    transition: all 0.3s ease;
+  }
+  .receipt-btn:hover {
+    background-color: #2e7d32;
+    color: white;
+  }
+  .dataTables_wrapper .dataTables_info,
+  .dataTables_wrapper .dataTables_filter input {
+    color: #6c757d;
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #2e7d32 !important;
+    border: 1px solid #dee2e6;
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #2e7d32 !important;
+    color: white !important;
+    border: none;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card donation-history-card mb-3">
+        <div class="donation-header text-center">
+          <img src="{{ url_for('static', filename='images/Rusken-Charity-Foundation.png') }}" 
+               alt="Rusken Foundation Logo" 
+               style="height: 60px; margin-bottom: 1rem;">
+          <h2 class="donation-title mb-2">Your Donation History</h2>
+          <p class="donation-email mb-0">
+            <i class="bi bi-envelope-fill me-2"></i>{{ email }}
+          </p>
+        </div>
+        
+<div class="mt-4 text-center mb-2">
+            {% if current_user.is_authenticated %}
+              <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-secondary me-2">
+                <i class="bi bi-arrow-left me-1"></i> Back to Dashboard
+              </a>
+            {% else %}
+              <a href="{{ url_for('auth.register', email=email) }}" class="btn btn-success me-2">
+                <i class="bi bi-person-plus me-1"></i> Create Account
+              </a>
+            {% endif %}
+            <a href="{{ url_for('main.home') }}" class="btn btn-outline-primary">
+              <i class="bi bi-house me-1"></i> Return Home
+            </a>
+          </div>
+        </div>
+</div>
+
+        <div class="card-body p-4">
+          {% if not donations %}
+            <div class="alert alert-info text-center">
+              <i class="bi bi-info-circle-fill me-2"></i>
+              No donations found for this email address
+            </div>
+          {% else %}
+            <div class="table-responsive">
+              <table id="donationsTable" class="table table-hover" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Program</th>
+                    <th>Receipt</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for donation in donations %}
+                  <tr>
+                    <td data-order="{{ donation.created_at.strftime('%Y-%m-%d') }}">
+                      {{ donation.created_at.strftime('%b %d, %Y') }}
+                    </td>
+                    <td data-order="{{ donation.amount }}">
+                      KSh{{ "{:,.2f}".format(donation.amount) }}
+                    </td>
+                  <td>
+  <span class="badge rounded-pill
+    {% if donation.status == 'completed' %}
+      bg-success
+    {% else %}
+      bg-warning text-dark
+    {% endif %}">
+    <i class="bi bi-{% if donation.status == 'completed' %}check-circle{% else %}clock{% endif %} me-1"></i>
+    {{ donation.status|title }}
+  </span>
+</td>
+
+                    <td>
+                      {% if donation.program %}
+                        {{ donation.program.title }}
+                      {% else %}
+                        <span class="text-muted">General Donation</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <a href="{{ url_for('donate.download_receipt', donation_id=donation.id, token=request.args.get('token')) }}" 
+                         class="btn btn-sm receipt-btn">
+                        <i class="bi bi-file-earmark-pdf me-1"></i> Download
+                      </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% endif %}
+          
+          
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#donationsTable').DataTable({
+        order: [[0, 'desc']],
+        language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search donations...",
+            lengthMenu: "Show _MENU_ donations per page",
+            info: "Showing _START_ to _END_ of _TOTAL_ donations",
+            infoEmpty: "No donations to show",
+            zeroRecords: "No matching donations found"
+        },
+        dom: '<"top"f>rt<"bottom"lip><"clear">',
+        responsive: true
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Edit Program</h2>
+
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            {{ form.title.label(class="form-label") }}
+            {{ form.title(class="form-control", placeholder="Program Name") }}
+            {% if form.title.errors %}
+                <div class="text-danger">{{ form.name.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.description.label(class="form-label") }}
+            {{ form.description(class="form-control", placeholder="Intro Description") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.story.label(class="form-label") }}
+            {{ form.story(class="form-control", placeholder="Full Description", rows="5") }}
+            {% if form.story.errors %}
+                <div class="text-danger">{{ form.story.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.category_id.label(class="form-label") }}
+            {{ form.category_id(class="form-select") }}
+            {% if form.category_id.errors %}
+                <div class="text-danger">{{ form.category_id.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.annual_budget.label(class="form-label") }}
+            {{ form.annual_budget(class="form-control", placeholder="Annual Budget") }}
+            {% if form.annual_budget.errors %}
+                <div class="text-danger">{{ form.annual_budget.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Program</button>
+        <a href="{{ url_for('program.list_programs') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

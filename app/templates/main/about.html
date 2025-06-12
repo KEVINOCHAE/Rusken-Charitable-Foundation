@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us {% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/about.css')}}">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!-- Animate.css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+
+<style>
+body {
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .hero-banner {
+        background: url('{{ url_for("static", filename="images/yr.jpg") }}') no-repeat center/cover;
+        position: relative;
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 150px 4px;
+        overflow: hidden;
+        z-index: 1;
+      }
+      
+      
+      .hero-banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+          radial-gradient(circle at 20% 50%, rgba(78, 205, 196, 0.1) 0%, transparent 30%),
+          rgba(0, 0, 0, 0.2); /* dark overlay underneath gradient */
+        z-index: -1;
+      }
+      
+      /* Ensure all child content appears above overlays */
+      .hero-banner > * {
+        position: relative;
+        z-index: 2;
+      }
+      
+      .hero-content {
+        max-width: 800px;
+        padding: 2rem;
+        z-index: 2;
+      }
+      
+      .hero-banner h2 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin-bottom: 1.5rem;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        animation: fadeInDown 1s both;
+        font-weight: 700;
+      }
+      
+      .hero-banner p {
+        font-size: 1.25rem;
+        margin-bottom: 2.5rem;
+        opacity: 0.9;
+      }
+      
+      .hero-cta {
+        display: inline-block;
+        background: transparent;
+        color: white;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--transition);
+      z-index: 100;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .hero-cta:hover {
+        transform: translateY(-3px);
+        
+      }
+      
+      .hero-cta::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.2) 100%);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+      }
+      
+      .hero-cta:hover::after {
+        transform: translateX(100%);
+      }
+
+      /* Ensure content stays above overlay */
+.hero-banner > * {
+    position: relative;
+    z-index: 2;
+}
+
+</style>
+<!-- AOS init -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out-quad',
+        once: true
+    });
+</script>
+
+<!-- Hero Banner -->
+<section class="hero-banner">
+    <div class="hero-content" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="animate__animated animate__fadeInDown hero-cta">About Rusken Charitable Foundation </h2>
+        
+        <p class="animate__animated animate__fadeIn animate__delay-1s">Reducing poverty by empowering Youth & Community through sustainability</p>
+        <a href="{{ url_for('auth.login') }}" class="hero-cta animate__animated animate__fadeInUp animate__delay-2s btn btn-outline-primary">Join Our Mission</a>
+    </div>
+</section>
+
+<!-- About Us Content -->
+<div class="container">
+    <section class="about-grid">
+        <div data-aos="fade-right">
+            <h2 class="section-title">Who We Are</h2>
+            <p class="lead">Founded in 2024, Rusken Charitable Foundation (RCF) supports community development through Education, Economic Empowerment, Agricultural Growth, Environmental Conservation, and Talent Development.</p>
+            <h2 class="section-title mt-5">Our Objective</h2>
+            <p class="lead">We empower rural youth by offering education, microfinance support, agricultural training, and environmental education, aiming to foster sustainable livelihoods and reduce poverty.</p>
+        </div>
+        <img src="{{ url_for('static', filename='images/er.jpg') }}" 
+             class="about-img floating" 
+             alt="About Us Image"
+             data-aos="fade-left"
+             data-aos-delay="200">
+    </section>
+
+    <!-- Mission Section -->
+    <h3 class="section-title" data-aos="fade-up">Core Principles</h3>
+    <section class="mission-cards">
+        <div class="mission-card" data-aos="fade-up" data-aos-delay="100">
+            
+            <i class="fas fa-eye"></i>
+            <h3>Vision</h3>
+            <p>We envision a society where people work together to eliminate conditions that perpetuate misery and poverty, using education and collaboration as tools for change.</p>
+        </div>
+        <div class="mission-card" data-aos="fade-up" data-aos-delay="200">
+            <i class="fas fa-bullseye"></i>
+            <h3>Mission</h3>
+            <p>Initiating community development programmes to help disadvantaged people escape poverty and improve their quality of life.</p>
+        </div>
+        <div class="mission-card" data-aos="fade-up" data-aos-delay="300">
+            <i class="fas fa-heart"></i>
+            <h3>Values</h3>
+            <p>Innovation • Integrity • Sustainability • Collaboration • Empowerment</p>
+        </div>
+    </section>
+
+    <!-- Operations -->
+    <section class="operations-section">
+        <div data-aos="fade-right">
+            <h2 class="section-title">How We Operate</h2>
+            <ul class="operations-list">
+                <li>Making grants to individuals in need</li>
+                <li>Providing vocational training to communities</li>
+                <li>Offering microfinance loans to entrepreneurs</li>
+                <li>Supporting education through scholarships and materials</li>
+            </ul>
+        </div>
+        <img src="{{ url_for('static', filename='images/malawi.jpg') }}" 
+             class="about-img floating delay-1" 
+             alt="Operations"
+             data-aos="fade-left"
+             data-aos-delay="200">
+    </section>
+
+    <!-- Development Approach -->
+    <section data-aos="fade-up">
+        <h2 class="section-title">Our Development Approach</h2>
+        <p class="lead text-center max-w-3xl mx-auto">We believe in community-led development through active participation at every stage of our initiatives.</p>
+        <ul class="development-list">
+            <li> Identifying the areas of need</li>
+            <li> Identifying the necessary resources required to mitigate the needs</li>
+            <li> Identifying the means of raising the necessary resources</li>
+            <li> Raising the resources; properly utilizing them in a timely manner for target projects</li>
+            <li> Developing the methodologyand annual plans for implementing the interventions</li>
+            <li> Implementing the requisite strategies</li>
+            <li> Monitoring and evaluation of the programmes of the foundation</li>
+            <li> Effective leadership in partnership with the board of trustees</li>
+            <li> Partnering with the patron, board of trustees and other volunteers</li>
+            <li> Supporting the Board in the creation of a local and international network to publicise and popularise the opportunities in the foundation through a well maintained and constantly up-dated foundation website</li>
+            <li> Increasing awareness, nationally, of the foundation’s mission, vision, goals and ways to assist and become involved</li>
+            <li> Providing data and information for the foundation website and social media platforms to ensure robust engagement with the public and make the foundation more vibrant</li>
+        </ul>
+    </section>
+</div>
+
+<!-- Parallax CTA -->
+<section class="parallax-cta" style="background: linear-gradient(rgba(42, 63, 84, 0), rgba(42, 63, 84, 0)), url('{{ url_for("static", filename="images/tr.jpg") }}') fixed center/cover; padding: 6rem 0; text-align: center; color: white;">
+    <div class="container" data-aos="zoom-in">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Ready to Make a Difference?</h2>
+        <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem;">Join us in creating sustainable change through community empowerment.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="{{ url_for('auth.login') }}" class="hero-cta" style="background: var(--accent); box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);">
+                Get Involved
+            </a>
+            <a href="{{ url_for('main.home') }}#donate" class="hero-cta" style="background: transparent; border: 2px solid white;">
+                Donate Now
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,175 @@
+{% block head %}
+{{ super() }}
+<style>
+  /* Add custom container width */
+  .donation-history-container .container {
+    max-width: 1600px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  
+  /* Make table use full width */
+  #donationsTable {
+    width: 100% !important;
+  }
+  
+  /* Adjust card padding */
+  .donation-card {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  
+  /* Remove side padding on table container */
+  .table-responsive {
+    padding: 0;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="donation-history-container">
+  <div class="container-fluid">  <!-- Changed from container to container-fluid -->
+    <div class="row justify-content-center px-0">  <!-- Added px-0 -->
+      <div class="col-12">  <!-- Changed from col-lg-12 to col-12 -->
+        <div class="card donation-card mb-5">
+          <div class="donation-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h2 class="mb-1">
+                  <i class="bi bi-heart-fill me-2"></i>My Donation History
+                </h2>
+                <p class="mb-0 opacity-75">Your generous contributions to Rusken Foundation</p>
+              </div>
+              <div class="donation-summary-card px-4 py-3 text-center">
+                <p class="mb-1 text-muted small">TOTAL DONATED</p>
+                <div class="total-donated">KSh{{ "{:,.2f}".format(total_donated) }}</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-body p-4">
+            <div class="table-responsive">
+              <table id="donationsTable" class="table table-hover" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Program</th>
+                    <th>Receipt</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for donation in donations.items %}
+                  <tr>
+                    <td data-order="{{ donation.created_at.strftime('%Y-%m-%d %H:%M:%S') }}">
+                      {{ donation.created_at.strftime('%b %d, %Y %I:%M %p') }}
+                    </td>
+                    <td data-order="{{ donation.amount }}">
+                      <span class="fw-semibold">KSh{{ "{:,.2f}".format(donation.amount) }}</span>
+                    </td>
+                    <td>
+                      <span class="badge status-badge {% if donation.status == 'completed' %}badge-completed{% else %}badge-pending{% endif %}">
+                        <i class="bi bi-{% if donation.status == 'completed' %}check-circle{% else %}clock{% endif %}-fill me-1"></i>
+                        {{ donation.status|title }}
+                      </span>
+                    </td>
+                    <td>
+                      {% if donation.program %}
+                        <a href="{{ url_for('main.program_detail', slug=donation.program.slug) }}" 
+                           class="program-link">
+                          {{ donation.program.title }}
+                        </a>
+                      {% else %}
+                        <span class="text-muted">Rusken CF</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <a href="{{ url_for('donate.download_receipt', donation_id=donation.id) }}" 
+                         class="btn receipt-btn">
+                        <i class="bi bi-file-earmark-pdf me-1"></i> Receipt
+                      </a>
+                    </td>
+                  </tr>
+                  {% else %}
+                  <tr>
+                    <td colspan="5">
+                      <div class="empty-state">
+                        <div class="empty-state-icon">
+                          <i class="bi bi-gift"></i>
+                        </div>
+                        <h4 class="mb-2">No Donations Yet</h4>
+                        <p class="text-muted mb-4">Your donation history will appear here once you make a contribution</p>
+                        <a href="{{ url_for('main.programs') }}" class="btn btn-success px-4">
+                          <i class="bi bi-heart-fill me-1"></i> Support a Program
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#donationsTable').DataTable({
+        dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+             "<'row'<'col-sm-12'tr>>" +
+             "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        pageLength: 10,
+        order: [[0, 'desc']],
+        language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search donations...",
+            lengthMenu: "Show _MENU_ donations",
+            zeroRecords: "No matching donations found",
+            info: "Showing _START_ to _END_ of _TOTAL_ donations",
+            infoEmpty: "No donations available",
+            infoFiltered: "(filtered from _MAX_ total donations)",
+            paginate: {
+                first: "First",
+                last: "Last",
+                next: "<i class='bi bi-chevron-right'></i>",
+                previous: "<i class='bi bi-chevron-left'></i>"
+            }
+        },
+        initComplete: function() {
+            $('.dataTables_filter input').addClass('form-control');
+            $('.dataTables_length select').addClass('form-select');
+        },
+        {% if donations.items %}
+        buttons: [
+            {
+                extend: 'csv',
+                text: '<i class="bi bi-file-earmark-spreadsheet me-1"></i> Export',
+                className: 'btn btn-light border',
+                exportOptions: {
+                    columns: [0, 1, 2, 3]
+                }
+            }
+        ]
+        {% endif %}
+    });
+    
+    // Add custom styling to DataTables elements
+    $('.dataTables_wrapper .btn').removeClass('btn-secondary');
+});
+</script>
+{% endblock %}
