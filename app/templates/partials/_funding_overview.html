@@ -1,0 +1,29 @@
+{% set goal = program.annual_budget or 0 %}
+{% set raised = total_donated or 0 %}
+{% set donated_pct = (raised / goal * 100) if goal else 0 %}
+
+<div class="bg-gray-50 rounded-xl p-6 shadow-lg">
+  <h3 class="text-xl font-semibold mb-4">Funding Progress</h3>
+
+  <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden mb-4">
+    <div class="bg-green-500 h-full text-white text-xs font-bold text-center transition-all duration-500" style="width: {{ donated_pct }}%">
+      {{ donated_pct|round(1) }}%
+    </div>
+  </div>
+
+  <div class="flex justify-between text-sm text-gray-600">
+    <div>
+      <span class="block font-bold text-lg text-gray-800">KES {{ "{:,.0f}".format(raised) }}</span>
+      <span>Raised</span>
+    </div>
+    <div>
+      <span class="block font-bold text-lg text-gray-800">KES {{ "{:,.0f}".format(goal) }}</span>
+      <span>Goal</span>
+    </div>
+  </div>
+
+  <a href="{{ url_for('donate.donate', program_id=program.id) }}"
+     class="block w-full mt-6 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md text-center font-semibold transition">
+    <i class="fas fa-hand-holding-heart mr-2"></i> Support Now
+  </a>
+</div>
