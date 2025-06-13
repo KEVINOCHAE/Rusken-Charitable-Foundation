@@ -295,18 +295,13 @@
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
           <i class="fas fa-arrow-left me-2"></i> Back
         </button>
-       <!-- <button type="submit" form="generalDonationForm" class="btn btn-primary btn-donate-now">
+       <button type="submit" form="generalDonationForm" class="btn btn-primary btn-donate-now">
           <span class="donate-text">Donate Now</span>
           <span class="donate-amount ms-1" id="footerDonationAmount">KSH 100.00</span>
           <i class="fas fa-arrow-right ms-2"></i>
-        </button>-->
+        </button>
 
-        <!-- In footer -->
-        <button type="button" class="btn btn-warning btn-donate-now" id="openComingSoonModal">
-  <span class="donate-text">Donate Now</span>
-  <span class="donate-amount ms-1" id="footerDonationAmount">KSH 100.00</span>
-  <i class="fas fa-clock ms-2"></i>
-</button>
+        
 
  <!-- Security Badge -->
          <div class="security-badge text-center mt-4">
@@ -324,34 +319,6 @@
 </div>
 
 
-<!-- Coming Soon Modal -->
-<div class="modal fade" id="comingSoonModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content rounded-4 border-0 shadow">
-      <div class="modal-header bg-warning text-white rounded-top">
-        <h5 class="modal-title"><i class="fas fa-tools me-2"></i> Payment Coming Soon</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center p-4">
-        <p class="mb-3">
-          Our online payment is currently being finalized. You can still donate using our alternative options.
-        </p>
-        <a href="{{ url_for('main.donate_details') }}" class="btn btn-primary">
-          View Alternative Donation Methods
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<script>
-  document.getElementById('openComingSoonModal').addEventListener('click', function () {
-    const comingSoonModal = new bootstrap.Modal(document.getElementById('comingSoonModal'));
-    comingSoonModal.show();
-  });
-</script>
 
 
 

@@ -20,11 +20,9 @@ def initialize_payment():
         current_user.username if current_user.is_authenticated else 'Anonymous'
     )
 
-    # 1. Validate required fields (unchanged)
     if not email or not raw_amount:
         return jsonify({'status': False, 'message': 'Amount and email are required'}), 400
 
-    # 2. Validate amount format (unchanged)
     try:
         amount = Decimal(str(raw_amount)).quantize(Decimal('0.01'))
         if amount <= 0:
@@ -33,7 +31,6 @@ def initialize_payment():
         return jsonify({'status': False, 'message': 'Invalid amount format'}), 400
 
     try:
-        # 3. Create pending Donation record (unchanged)
         donation = Donation(
             program_id=program_id,
             user_id=current_user.id if current_user.is_authenticated else None,
@@ -47,7 +44,6 @@ def initialize_payment():
         db.session.add(donation)
         db.session.flush()
 
-        # 4. Build metadata & callback URL
         metadata = {
             'donation_id': donation.id,
             'donor_email': email,
@@ -56,38 +52,47 @@ def initialize_payment():
             'program_id': program_id,
             'general': program_id is None
         }
-        
-        # 5. Initialize DPO transaction
+
         payload = {
             "CompanyToken": current_app.config["DPO_COMPANY_TOKEN"],
             "Request": "createToken",
             "Transaction": {
-                "PaymentAmount": str(amount), 
+                "PaymentAmount": str(amount),
                 "PaymentCurrency": "KES",
-                "CompanyRef": f"DONATION_{donation.id}", 
+                "CompanyRef": f"DONATION_{donation.id}",
                 "CustomerEmail": email,
                 "CustomerFirstName": donor_name.split()[0] if donor_name else "",
                 "CustomerLastName": " ".join(donor_name.split()[1:]) if donor_name else "",
-                "ServiceType": current_app.config["DPO_SERVICE_TYPE"],  
+                "ServiceType": current_app.config["DPO_SERVICE_TYPE"],
                 "RedirectURL": url_for('donate.payment_callback', _external=True),
                 "BackURL": url_for('donate.payment_cancel', _external=True),
-                "CompanyFields": [  # Pass metadata as custom fields
+                "CompanyFields": [
                     {"key": k, "value": str(v)} for k, v in metadata.items()
                 ]
             }
         }
-        
-        # 6. Call DPO API
+
+        # Make DPO API call
         resp = requests.post(
-            current_app.config["DPO_API_URL"], 
+            current_app.config["DPO_API_URL"],
             json=payload,
             timeout=10
         )
-        resp.raise_for_status()
-        result = resp.json()
 
-        # 7. Handle DPO initialization failure
-        if result.get("Result") != "000":  # DPO success code
+        current_app.logger.info(f"DPO Raw Response: {resp.status_code} - {resp.text}")
+
+        if resp.status_code != 200:
+            raise Exception(f"DPO returned status {resp.status_code}")
+
+        if not resp.content.strip():
+            raise Exception("DPO returned an empty response")
+
+        try:
+            result = resp.json()
+        except ValueError:
+            raise Exception(f"DPO response is not valid JSON: {resp.text}")
+
+        if result.get("Result") != "000":
             db.session.rollback()
             current_app.logger.error(f"DPO init error: {result.get('ResultExplanation')}")
             return jsonify({
@@ -95,12 +100,10 @@ def initialize_payment():
                 'message': result.get('ResultExplanation', 'Payment initialization failed')
             }), 400
 
-        # 8. Save DPO references
-        donation.gateway_reference = result['TransToken']  # DPO transaction token
+        donation.gateway_reference = result['TransToken']
         donation.payment_gateway = 'dpo'
         db.session.commit()
 
-        # 9. Return DPO payment URL for redirect
         return jsonify({
             'status': True,
             'authorization_url': f"{current_app.config['DPO_PAYMENT_PAGE']}?ID={result['TransToken']}",
@@ -114,6 +117,7 @@ def initialize_payment():
             'status': False,
             'message': 'An unexpected error occurred while processing your payment'
         }), 500
+
 
 
 
