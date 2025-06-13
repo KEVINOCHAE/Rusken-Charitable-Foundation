@@ -34996,3 +34996,26 @@ requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://secu
 2025-06-13 12:43:14,366 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:43:14] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
 2025-06-13 12:43:14,370 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:43:14] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
 2025-06-13 12:43:14,585 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:43:14] "GET /categories HTTP/1.1" 200 -
+2025-06-13 12:43:55,879 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 12:43:55,879 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-13 12:43:55,880 [INFO] -  * Restarting with stat
+2025-06-13 12:43:56,978 [WARNING] -  * Debugger is active!
+2025-06-13 12:43:56,979 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 12:51:30,881 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:30] "GET /programs/education-2 HTTP/1.1" 200 -
+2025-06-13 12:51:31,077 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:31] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-06-13 12:51:31,083 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:31] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 12:51:31,086 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:31] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-06-13 12:51:31,089 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:31] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 12:51:31,095 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:31] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-06-13 12:51:31,456 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:31] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-06-13 12:51:31,459 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:31] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 12:51:32,327 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:32] "GET /categories HTTP/1.1" 200 -
+2025-06-13 12:51:51,556 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:51] "GET /programs/education-2 HTTP/1.1" 200 -
+2025-06-13 12:51:51,692 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:51] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 12:51:51,693 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:51] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 12:51:51,697 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:51] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-06-13 12:51:51,699 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:51] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-06-13 12:51:52,082 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:52] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 12:51:52,760 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:52] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-06-13 12:51:52,900 [INFO] - 127.0.0.1 - - [13/Jun/2025 12:51:52] "GET /categories HTTP/1.1" 200 -

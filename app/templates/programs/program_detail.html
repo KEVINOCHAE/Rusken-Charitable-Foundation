@@ -1,71 +1,71 @@
 {% extends "base.html" %}
 {% block title %}{{ program.title }} – Program Details{% endblock %}
 
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+{% endblock %}
+
 {% block content %}
-<section class="relative w-full min-h-[70vh] flex items-center justify-center bg-black text-white">
+<section class="relative h-[60vh] flex items-center justify-center text-white text-center">
   {% set img = program.images.first() %}
-  <img src="{{ img|program_image_url }}" class="absolute inset-0 w-full h-full object-cover z-0 opacity-40" alt="Program Image">
-  <div class="absolute inset-0 bg-black/50 z-10"></div>
-  <div class="relative z-20 text-center px-6 max-w-3xl">
-    <div class="inline-block px-4 py-1 rounded-full text-sm bg-blue-600 text-white mb-4">
-      {{ program.category.name }}
-    </div>
-    <h1 class="text-4xl md:text-5xl font-bold leading-tight">{{ program.title }}</h1>
-    <p class="mt-3 text-sm text-gray-200">
+  <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url('{{ img|program_image_url }}');"></div>
+  <div class="absolute inset-0 bg-black/60 z-10"></div>
+  <div class="relative z-20 px-4">
+    <span class="bg-indigo-600 px-3 py-1 rounded-full text-sm tracking-wide uppercase">{{ program.category.name }}</span>
+    <h1 class="text-4xl font-bold mt-4">{{ program.title }}</h1>
+    <p class="mt-2 text-gray-300">
       Started on {{ program.created_at.strftime('%B %d, %Y') }} | by {{ program.author.username }}
     </p>
-    <a href="{{ url_for('donate.donate', program_id=program.id) }}"
-       class="mt-6 inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-300">
-      <i class="fas fa-hand-holding-heart mr-2"></i>Donate Now
+    <a href="{{ url_for('donate.donate', program_id=program.id) }}" class="inline-block mt-4 bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2 rounded-full font-semibold transition">
+      <i class="fas fa-hand-holding-heart mr-2"></i> Support Now
     </a>
   </div>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
-  <!-- Description and Story -->
-  <div class="lg:col-span-2 space-y-8">
-    <div>
-      <h2 class="text-2xl font-bold mb-2 text-gray-800">Program Description</h2>
-      <p class="text-gray-700 leading-relaxed">{{ program.description }}</p>
-    </div>
-    <div>
-      <h2 class="text-2xl font-bold mb-2 text-gray-800">Full Story</h2>
-      <div class="prose max-w-none prose-slate">{{ program.story|safe }}</div>
-    </div>
-    <div class="text-center mt-10 lg:hidden">
-      <a href="{{ url_for('donate.donate', program_id=program.id) }}"
-         class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300">
-        <i class="fas fa-hand-holding-heart mr-2"></i>Support Now
-      </a>
-    </div>
-  </div>
+<!-- Main Content -->
+<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
-  <!-- Funding Progress -->
-  <div class="bg-white rounded-xl p-6 shadow-md space-y-6">
-    <h3 class="text-xl font-semibold text-gray-800">Funding Progress</h3>
-    {% set goal = program.annual_budget or 0 %}
-    {% set raised = total_donated or 0 %}
-    {% set donated_pct = (raised / goal * 100) if goal else 0 %}
-    <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
-      <div class="h-4 bg-green-500 text-xs text-white text-right pr-2 rounded-full" style="width: {{ donated_pct|round(1) }}%;">
-        {{ donated_pct|round(1) }}%
+    <!-- Left Column: Description and Story -->
+    <div class="lg:col-span-2 space-y-10">
+
+      <!-- Description -->
+      <div data-aos="fade-right">
+        <h2 class="text-2xl font-semibold mb-3">Description</h2>
+        <p class="text-gray-700 leading-relaxed">{{ program.description }}</p>
+      </div>
+
+      <!-- Full Story -->
+      <div data-aos="fade-up" data-aos-delay="100">
+        <h2 class="text-2xl font-semibold mb-3">Full Story</h2>
+        <div class="prose max-w-none">
+          {{ program.story | safe }}
+        </div>
+      </div>
+
+      <!-- Mobile Funding Overview -->
+      <div class="lg:hidden" data-aos="fade-up">
+        {% include 'partials/_funding_overview.html' %}
       </div>
     </div>
-    <div class="flex justify-between text-sm text-gray-600 mt-2">
-      <div><strong>KES{{ "{:,.0f}".format(raised) }}</strong> Raised</div>
-      <div><strong>KES{{ "{:,.0f}".format(goal) }}</strong> Goal</div>
+
+    <!-- Right Column: Funding Box -->
+    <div class="hidden lg:block" data-aos="fade-left">
+      {% include 'partials/_funding_overview.html' %}
     </div>
-    <a href="{{ url_for('donate.donate', program_id=program.id) }}"
-       class="block w-full text-center bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold transition">
-      <i class="fas fa-donate mr-1"></i>Donate Now
+  </div>
+
+  <!-- CTA -->
+  <div class="text-center mt-16" data-aos="zoom-in">
+    <a href="{{ url_for('main.all_programs') }}" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold transition">
+      <i class="fas fa-arrow-left mr-2"></i> Explore Other Programs
     </a>
   </div>
-</section>
+</div>
 
-<section class="text-center py-10">
-  <a href="{{ url_for('main.all_programs') }}"
-     class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition font-medium">
-    <i class="fas fa-arrow-left"></i> Explore Other Programs
-  </a>
-</section>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init({ once: true });
+</script>
 {% endblock %}
