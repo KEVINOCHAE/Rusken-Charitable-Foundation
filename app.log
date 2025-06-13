@@ -36407,3 +36407,105 @@ Exception: DPO returned status 403
 2025-06-13 20:56:20,278 [INFO] -  * Restarting with stat
 2025-06-13 20:56:21,662 [WARNING] -  * Debugger is active!
 2025-06-13 20:56:21,663 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 20:57:07,871 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 20:57:07,871 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-13 20:57:07,872 [INFO] -  * Restarting with stat
+2025-06-13 20:57:08,862 [WARNING] -  * Debugger is active!
+2025-06-13 20:57:08,863 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 21:25:54,239 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py', reloading
+2025-06-13 21:25:54,553 [INFO] -  * Restarting with stat
+2025-06-13 21:25:56,341 [WARNING] -  * Debugger is active!
+2025-06-13 21:25:56,342 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 21:26:20,265 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:26:20] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-06-13 21:26:20,473 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:26:20] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-13 21:26:20,475 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:26:20] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 21:26:20,476 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:26:20] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 21:26:20,478 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:26:20] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-13 21:26:20,850 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:26:20] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 21:26:35,638 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:26:35] "GET /categories HTTP/1.1" 200 -
+2025-06-13 21:26:47,612 [ERROR] - Unexpected error: HTTPSConnectionPool(host='secure.3gdirectpay.com', port=443): Max retries exceeded with url: /API/v6/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f6186cb3090>: Failed to resolve 'secure.3gdirectpay.com' ([Errno -2] Name or service not known)"))
+Traceback (most recent call last):
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/urllib3/connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f6186cb3090>: Failed to resolve 'secure.3gdirectpay.com' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='secure.3gdirectpay.com', port=443): Max retries exceeded with url: /API/v6/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f6186cb3090>: Failed to resolve 'secure.3gdirectpay.com' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py", line 97, in initialize_payment
+    resp = requests.post(current_app.config["DPO_API_URL"], data=payload_xml, headers=headers, timeout=15)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='secure.3gdirectpay.com', port=443): Max retries exceeded with url: /API/v6/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f6186cb3090>: Failed to resolve 'secure.3gdirectpay.com' ([Errno -2] Name or service not known)"))
+2025-06-13 21:26:47,687 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:26:47] "[35m[1mPOST /dpo/initialize HTTP/1.1[0m" 500 -
+2025-06-13 21:29:40,225 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py', reloading
+2025-06-13 21:29:40,590 [INFO] -  * Restarting with stat
+2025-06-13 21:29:44,225 [WARNING] -  * Debugger is active!
+2025-06-13 21:29:44,225 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 21:29:50,528 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:29:50] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-06-13 21:29:50,762 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:29:50] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-13 21:29:50,762 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:29:50] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-13 21:29:50,778 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:29:50] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 21:29:50,782 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:29:50] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 21:29:51,153 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:29:51] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 21:29:52,797 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:29:52] "GET /categories HTTP/1.1" 200 -
+2025-06-13 21:29:52,839 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:29:52] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-06-13 21:30:57,433 [DEBUG] - DPO API Attempt 1: 403 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<TITLE>ERROR...
+2025-06-13 21:30:57,434 [WARNING] - Payment validation failed: DPO returned status 403
+2025-06-13 21:30:57,437 [INFO] - 127.0.0.1 - - [13/Jun/2025 21:30:57] "[31m[1mPOST /dpo/initialize HTTP/1.1[0m" 400 -
