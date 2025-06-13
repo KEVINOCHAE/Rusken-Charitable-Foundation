@@ -36227,3 +36227,50 @@ Request ID: dmokpagmha3KA8m1TcS_ck96LhWbnX4btrZBPi2mTqSgTBB59X7XzQ==
 2025-06-13 20:06:09,035 [ERROR] - DPO Connection Error: 403 Client Error: Forbidden for url: https://secure.3gdirectpay.com/API/v6/
 2025-06-13 20:06:09,037 [WARNING] - Payment validation failed: Payment service unavailable. Please try again later.
 2025-06-13 20:06:09,039 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:06:09] "[31m[1mPOST /dpo/initialize HTTP/1.1[0m" 400 -
+2025-06-13 20:23:07,552 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 20:23:07,552 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-13 20:23:07,553 [INFO] -  * Restarting with stat
+2025-06-13 20:23:08,529 [WARNING] -  * Debugger is active!
+2025-06-13 20:23:08,530 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 20:23:34,640 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:23:34] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-06-13 20:23:34,835 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:23:34] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-06-13 20:23:34,839 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:23:34] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-06-13 20:23:34,844 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:23:34] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 20:23:34,846 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:23:34] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 20:23:35,234 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:23:35] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 20:23:41,683 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:23:41] "GET /categories HTTP/1.1" 200 -
+2025-06-13 20:23:45,336 [ERROR] - Payment processing failed: Could not build url for endpoint 'api.dpo_webhook'. Did you mean 'main.home' instead?
+Traceback (most recent call last):
+  File "/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py", line 100, in initialize_payment
+    "NotificationURL": url_for('api.dpo_webhook', _external=True),
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/flask/helpers.py", line 220, in url_for
+    return current_app.url_for(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/flask/app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/flask/app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bha/Desktop/Flask/ruskencfhosted/rus/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'api.dpo_webhook'. Did you mean 'main.home' instead?
+2025-06-13 20:23:45,389 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:23:45] "[35m[1mPOST /dpo/initialize HTTP/1.1[0m" 500 -
+2025-06-13 20:26:13,008 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py', reloading
+2025-06-13 20:26:13,319 [INFO] -  * Restarting with stat
+2025-06-13 20:26:14,493 [WARNING] -  * Debugger is active!
+2025-06-13 20:26:14,494 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 20:26:20,530 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:26:20] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-06-13 20:26:20,753 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:26:20] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-06-13 20:26:20,757 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:26:20] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-06-13 20:26:20,760 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:26:20] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 20:26:20,762 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:26:20] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 20:26:21,220 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:26:21] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 20:26:21,524 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:26:21] "GET /categories HTTP/1.1" 200 -
+2025-06-13 20:26:24,403 [DEBUG] - DPO API Response [403]: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<TITLE>ERROR...
+2025-06-13 20:26:24,404 [WARNING] - Payment validation failed: Payment service blocked by security rules
+2025-06-13 20:26:24,405 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:26:24] "[31m[1mPOST /dpo/initialize HTTP/1.1[0m" 400 -
