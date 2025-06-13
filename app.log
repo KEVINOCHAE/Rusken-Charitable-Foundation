@@ -36116,3 +36116,114 @@ Traceback (most recent call last):
     raise Exception(f"DPO returned status {resp.status_code}")
 Exception: DPO returned status 403
 2025-06-13 19:51:23,578 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:51:23] "[35m[1mPOST /dpo/initialize HTTP/1.1[0m" 500 -
+2025-06-13 19:53:37,184 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 19:53:37,185 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-13 19:53:37,186 [INFO] -  * Restarting with stat
+2025-06-13 19:53:38,216 [WARNING] -  * Debugger is active!
+2025-06-13 19:53:38,217 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 19:54:29,587 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 19:54:29,587 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-13 19:54:29,588 [INFO] -  * Restarting with stat
+2025-06-13 19:54:30,638 [WARNING] -  * Debugger is active!
+2025-06-13 19:54:30,639 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 19:55:19,223 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:55:19] "GET / HTTP/1.1" 200 -
+2025-06-13 19:55:19,444 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:55:19] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-13 19:55:19,448 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:55:19] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 19:55:19,450 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:55:19] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-13 19:55:19,462 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:55:19] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 19:55:19,464 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:55:19] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-06-13 19:55:19,863 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:55:19] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 19:55:19,870 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:55:19] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-06-13 19:55:20,088 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:55:20] "GET /static/images/mr.png HTTP/1.1" 200 -
+2025-06-13 19:55:20,089 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:55:20] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
+2025-06-13 19:55:21,028 [INFO] - 127.0.0.1 - - [13/Jun/2025 19:55:21] "GET /categories HTTP/1.1" 200 -
+2025-06-13 20:03:43,752 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py', reloading
+2025-06-13 20:03:44,036 [INFO] -  * Restarting with stat
+2025-06-13 20:03:45,667 [WARNING] -  * Debugger is active!
+2025-06-13 20:03:45,668 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 20:03:56,836 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:03:56] "GET / HTTP/1.1" 200 -
+2025-06-13 20:03:57,067 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:03:57] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-13 20:03:57,072 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:03:57] "[36mGET /static/css/page.css HTTP/1.1[0m" 304 -
+2025-06-13 20:03:57,076 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:03:57] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-13 20:03:57,079 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:03:57] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 20:03:57,082 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:03:57] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 20:03:57,402 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:03:57] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 20:03:57,405 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:03:57] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-06-13 20:03:57,587 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:03:57] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
+2025-06-13 20:03:57,593 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:03:57] "[36mGET /static/images/mr.png HTTP/1.1[0m" 304 -
+2025-06-13 20:04:00,641 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:00] "GET /categories HTTP/1.1" 200 -
+2025-06-13 20:04:02,653 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:02] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-06-13 20:04:05,490 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:05] "GET /programs HTTP/1.1" 200 -
+2025-06-13 20:04:05,767 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:05] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-13 20:04:05,771 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:05] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-13 20:04:05,775 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:05] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 20:04:05,779 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:05] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 20:04:05,780 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:05] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-06-13 20:04:06,233 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:06] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-06-13 20:04:06,235 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:06] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 20:04:06,493 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:06] "GET /categories HTTP/1.1" 200 -
+2025-06-13 20:04:12,995 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:12] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-06-13 20:04:13,240 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:13] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-06-13 20:04:13,245 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:13] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-06-13 20:04:13,250 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:13] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 20:04:13,252 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:13] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 20:04:13,729 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:13] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 20:04:13,957 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:13] "GET /categories HTTP/1.1" 200 -
+2025-06-13 20:04:13,998 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:13] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-06-13 20:04:30,277 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:04:30] "[35m[1mPOST /dpo/initialize HTTP/1.1[0m" 500 -
+2025-06-13 20:05:19,416 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py', reloading
+2025-06-13 20:05:19,658 [INFO] -  * Restarting with stat
+2025-06-13 20:05:20,651 [WARNING] -  * Debugger is active!
+2025-06-13 20:05:20,652 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 20:05:26,562 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:05:26] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-06-13 20:05:26,733 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:05:26] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-13 20:05:26,736 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:05:26] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-13 20:05:26,742 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:05:26] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 20:05:26,755 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:05:26] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 20:05:27,125 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:05:27] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 20:05:27,428 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:05:27] "GET /categories HTTP/1.1" 200 -
+2025-06-13 20:05:28,917 [ERROR] - Payment processing failed
+Traceback (most recent call last):
+  File "/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py", line 42, in initialize_payment
+    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+           ^^
+NameError: name 're' is not defined
+2025-06-13 20:05:28,918 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:05:28] "[35m[1mPOST /dpo/initialize HTTP/1.1[0m" 500 -
+2025-06-13 20:05:50,170 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py', reloading
+2025-06-13 20:05:50,500 [INFO] -  * Restarting with stat
+2025-06-13 20:05:51,830 [WARNING] -  * Debugger is active!
+2025-06-13 20:05:51,831 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-13 20:06:04,532 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:06:04] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-06-13 20:06:04,752 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:06:04] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-13 20:06:04,756 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:06:04] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-13 20:06:04,772 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:06:04] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-13 20:06:04,773 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:06:04] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-13 20:06:05,176 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:06:05] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-13 20:06:05,378 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:06:05] "GET /categories HTTP/1.1" 200 -
+2025-06-13 20:06:05,391 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:06:05] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-06-13 20:06:06,980 [INFO] - Initializing DPO payment for donation 57
+2025-06-13 20:06:09,035 [DEBUG] - DPO API Response: 403 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<TITLE>ERROR: The request could not be satisfied</TITLE>
+</HEAD><BODY>
+<H1>403 ERROR</H1>
+<H2>The request could not be satisfied.</H2>
+<HR noshade size="1px">
+Request blocked.
+We can't connect to the server for this app or website at this time. There might be too much traffic or a configuration error. Try again later, or contact the app or website owner.
+<BR clear="all">
+If you provide content to customers through CloudFront, you can find steps to troubleshoot and help prevent this error by reviewing the CloudFront documentation.
+<BR clear="all">
+<HR noshade size="1px">
+<PRE>
+Generated by cloudfront (CloudFront)
+Request ID: dmokpagmha3KA8m1TcS_ck96LhWbnX4btrZBPi2mTqSgTBB59X7XzQ==
+</PRE>
+<ADDRESS>
+</ADDRESS>
+</BODY></HTML>
+2025-06-13 20:06:09,035 [ERROR] - DPO Connection Error: 403 Client Error: Forbidden for url: https://secure.3gdirectpay.com/API/v6/
+2025-06-13 20:06:09,037 [WARNING] - Payment validation failed: Payment service unavailable. Please try again later.
+2025-06-13 20:06:09,039 [INFO] - 127.0.0.1 - - [13/Jun/2025 20:06:09] "[31m[1mPOST /dpo/initialize HTTP/1.1[0m" 400 -
