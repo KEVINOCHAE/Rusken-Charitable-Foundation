@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app, url_for
 from flask_login import current_user
 import requests
-from app import db
+from app import db,csrf
 from app.admin.models import Donation
 from decimal import Decimal, InvalidOperation
 from datetime import datetime, timedelta
@@ -16,6 +16,7 @@ def build_dpo_payload(company_token, donation, donor_name, email, amount, servic
     """Build properly escaped XML payload for DPO API with all required fields"""
     first_name = donor_name.split()[0] if donor_name else ""
     last_name = " ".join(donor_name.split()[1:]) if donor_name and len(donor_name.split()) > 1 else ""
+    service_date = datetime.utcnow().strftime('%Y/%m/%d')
     
     return f"""<?xml version="1.0" encoding="utf-8"?>
 <API3G>
@@ -45,13 +46,14 @@ def build_dpo_payload(company_token, donation, donor_name, email, amount, servic
       <Service>
         <ServiceType>{escape(service_type)}</ServiceType>
         <ServiceDescription>Donation Payment</ServiceDescription>
-        <ServiceDate>{datetime.utcnow().strftime('%Y/%m/%d')}</ServiceDate>
+        <ServiceDate>{service_date}</ServiceDate>
       </Service>
     </Services>
   </Transaction>
 </API3G>"""
 
 @dpo_bp.route('/initialize', methods=['POST'])
+@csrf.exempt  # If using CSRF protection
 def initialize_payment():
     """
     Initialize DPO payment transaction with all required fields
@@ -62,7 +64,8 @@ def initialize_payment():
         current_app.logger.error("Missing DPO configuration")
         return jsonify({
             'status': False,
-            'message': 'Payment system temporarily unavailable'
+            'message': 'Payment system temporarily unavailable',
+            'error': 'MISSING_CONFIGURATION'
         }), 500
 
     # Request validation
@@ -76,11 +79,11 @@ def initialize_payment():
 
     # Validate required fields
     if not email:
-        return jsonify({'status': False, 'message': 'Email is required'}), 400
+        return jsonify({'status': False, 'message': 'Email is required', 'error': 'VALIDATION_ERROR'}), 400
     if not re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', email):
-        return jsonify({'status': False, 'message': 'Invalid email format'}), 400
+        return jsonify({'status': False, 'message': 'Invalid email format', 'error': 'VALIDATION_ERROR'}), 400
     if not raw_amount:
-        return jsonify({'status': False, 'message': 'Amount is required'}), 400
+        return jsonify({'status': False, 'message': 'Amount is required', 'error': 'VALIDATION_ERROR'}), 400
 
     # Validate amount
     try:
@@ -88,9 +91,9 @@ def initialize_payment():
         if amount <= Decimal('0.00'):
             raise ValueError('Amount must be positive')
         if amount > Decimal('1000000.00'):
-            return jsonify({'status': False, 'message': 'Amount exceeds maximum limit'}), 400
+            return jsonify({'status': False, 'message': 'Amount exceeds maximum limit', 'error': 'VALIDATION_ERROR'}), 400
     except (InvalidOperation, ValueError):
-        return jsonify({'status': False, 'message': 'Invalid amount format'}), 400
+        return jsonify({'status': False, 'message': 'Invalid amount format', 'error': 'VALIDATION_ERROR'}), 400
 
     try:
         # Create donation record
