@@ -31,13 +31,8 @@ class Config:
     MAX_CONTENT_LENGTH          = 4 * 1024 * 1024  # 4 MB
 
     # DPO Credentials
-    DPO_COMPANY_TOKEN = "your_company_token" 
+    DPO_COMPANY_TOKEN = "8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3" 
     DPO_SERVICE_TYPE = "5525"  
-                 
-    #DPO_API_URL = "https://secure1.sandbox.directpay.online/API/v6/"
-    #DPO_PAYMENT_PAGE = "https://secure1.sandbox.directpay.online/payv2.php"
-
-
-    # For production:
+    
     DPO_API_URL = "https://secure.3gdirectpay.com/API/v6/"
-    DPO_PAYMENT_PAGE = "https://secure.3gdirectpay.com/payv2.php"
+    DPO_PAYMENT_PAGE = "https://secure.3gdirectpay.com/payv2.php?ID=TransToken"

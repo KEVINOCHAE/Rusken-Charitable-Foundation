@@ -62,13 +62,13 @@ def initialize_payment():
             "CompanyToken": current_app.config["DPO_COMPANY_TOKEN"],
             "Request": "createToken",
             "Transaction": {
-                "PaymentAmount": str(amount),  # DPO expects string amount
+                "PaymentAmount": str(amount), 
                 "PaymentCurrency": "KES",
-                "CompanyRef": f"DONATION_{donation.id}",  # Unique reference
+                "CompanyRef": f"DONATION_{donation.id}", 
                 "CustomerEmail": email,
                 "CustomerFirstName": donor_name.split()[0] if donor_name else "",
                 "CustomerLastName": " ".join(donor_name.split()[1:]) if donor_name else "",
-                "ServiceType": current_app.config["DPO_SERVICE_TYPE"],  # e.g., 5525
+                "ServiceType": current_app.config["DPO_SERVICE_TYPE"],  
                 "RedirectURL": url_for('donate.payment_callback', _external=True),
                 "BackURL": url_for('donate.payment_cancel', _external=True),
                 "CompanyFields": [  # Pass metadata as custom fields

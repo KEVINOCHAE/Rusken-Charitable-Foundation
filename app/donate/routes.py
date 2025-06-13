@@ -151,7 +151,7 @@ def donate():
         'donate/donate.html',
         program=program,
         form=form,
-        currency_symbol=current_app.config.get("CURRENCY_SYMBOL", "$")  # Optional
+        currency_symbol=current_app.config.get("CURRENCY_SYMBOL", "KES")  # Optional
     )
 
 
