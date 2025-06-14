@@ -12,20 +12,13 @@ import time
 
 dpo_bp = Blueprint('dpo', __name__)
 
-# DPO Configuration Constants
-DPO_COMPANY_TOKEN = "8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3"  # Your test token
-DPO_SERVICE_TYPE = "5525"  # Your test service type
-DPO_API_URL = "https://secure.3gdirectpay.com/API/v6/"
-DPO_PAYMENT_URL = "https://secure.3gdirectpay.com/payv2.php"
-DPO_PTL = 5  # Payment time limit in hours (5 hours is standard for DPO)
-
 def build_dpo_payload(donation, email, amount):
     """Build XML payload matching DPO's exact specification with proper escaping"""
     service_date = datetime.utcnow().strftime('%Y/%m/%d %H:%M')
-    
+
     return f"""<?xml version="1.0" encoding="utf-8"?>
 <API3G>
-  <CompanyToken>{escape(DPO_COMPANY_TOKEN)}</CompanyToken>
+  <CompanyToken>{escape(current_app.config['DPO_COMPANY_TOKEN'])}</CompanyToken>
   <Request>createToken</Request>
   <Transaction>
     <PaymentAmount>{escape(str(amount))}</PaymentAmount>
@@ -34,11 +27,11 @@ def build_dpo_payload(donation, email, amount):
     <RedirectURL>{escape(url_for('donate.payment_callback', _external=True))}</RedirectURL>
     <BackURL>{escape(url_for('donate.payment_cancel', _external=True))}</BackURL>
     <CompanyRefUnique>0</CompanyRefUnique>
-    <PTL>{DPO_PTL}</PTL>
+    <PTL>{current_app.config.get('DPO_PTL', 5)}</PTL>
   </Transaction>
   <Services>
     <Service>
-      <ServiceType>{escape(DPO_SERVICE_TYPE)}</ServiceType>
+      <ServiceType>{escape(current_app.config['DPO_SERVICE_TYPE'])}</ServiceType>
       <ServiceDescription>Donation Payment</ServiceDescription>
       <ServiceDate>{service_date}</ServiceDate>
     </Service>
@@ -48,7 +41,62 @@ def build_dpo_payload(donation, email, amount):
 @dpo_bp.route('/initialize', methods=['POST'])
 @csrf.exempt
 def initialize_payment():
-   
+    """
+    Initialize DPO payment transaction
+    ---
+    tags: [Payments]
+    consumes: application/json
+    produces: application/json
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+            amount:
+              type: number
+              minimum: 1
+            program_id:
+              type: integer
+            donor_name:
+              type: string
+    responses:
+      200:
+        description: Payment initialized successfully
+        schema:
+          type: object
+          properties:
+            status:
+              type: boolean
+            authorization_url:
+              type: string
+            reference:
+              type: string
+            expires_in_hours:
+              type: integer
+            expires_at:
+              type: string
+              format: date-time
+      400:
+        description: Invalid request
+      500:
+        description: Server error
+    """
+    # Validate configurations
+    required_configs = ['DPO_API_URL', 'DPO_COMPANY_TOKEN', 'DPO_SERVICE_TYPE', 'DPO_PAYMENT_URL']
+    missing_configs = [key for key in required_configs if not current_app.config.get(key)]
+    if missing_configs:
+        current_app.logger.error(f"Missing DPO configurations: {missing_configs}")
+        return jsonify({
+            'status': False,
+            'message': 'Payment system temporarily unavailable',
+            'error': 'MISSING_CONFIGURATION'
+        }), 500
+
     # Request validation
     data = request.get_json() or {}
     email = data.get('email', '').strip()
@@ -98,7 +146,6 @@ def initialize_payment():
         for attempt in range(max_retries):
             try:
                 xml_payload = build_dpo_payload(donation, email, amount)
-
                 headers = {
                     "Content-Type": "application/xml",
                     "Accept": "application/xml",
@@ -106,7 +153,7 @@ def initialize_payment():
                 }
 
                 resp = requests.post(
-                    DPO_API_URL,
+                    current_app.config['DPO_API_URL'],
                     data=xml_payload,
                     headers=headers,
                     timeout=(3.05, 15)  # Connect timeout, read timeout
@@ -135,10 +182,10 @@ def initialize_payment():
 
                 return jsonify({
                     'status': True,
-                    'authorization_url': f"{DPO_PAYMENT_URL}?ID={trans_token}",
+                    'authorization_url': f"{current_app.config['DPO_PAYMENT_URL']}?ID={trans_token}",
                     'reference': trans_token,
-                    'expires_in_hours': DPO_PTL,
-                    'expires_at': (datetime.utcnow() + timedelta(hours=DPO_PTL)).isoformat()
+                    'expires_in_hours': current_app.config.get('DPO_PTL', 5),
+                    'expires_at': (datetime.utcnow() + timedelta(hours=current_app.config.get('DPO_PTL', 5))).isoformat()
                 }), 200
 
             except requests.exceptions.RequestException as e:
