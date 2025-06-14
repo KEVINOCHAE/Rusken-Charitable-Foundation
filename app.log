@@ -36825,3 +36825,29 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='secure.3gdirectpa
 2025-06-14 16:32:18,784 [INFO] -  * Restarting with stat
 2025-06-14 16:32:21,176 [WARNING] -  * Debugger is active!
 2025-06-14 16:32:21,177 [INFO] -  * Debugger PIN: 764-674-973
+2025-06-14 16:37:37,083 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-14 16:37:37,084 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-14 16:37:37,086 [INFO] -  * Restarting with stat
+2025-06-14 16:37:38,317 [WARNING] -  * Debugger is active!
+2025-06-14 16:37:38,318 [INFO] -  * Debugger PIN: 764-674-973
+2025-06-14 16:42:21,034 [INFO] - The CSRF session token is missing.
+2025-06-14 16:42:21,059 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:21] "[31m[1mPOST /auth/login HTTP/1.1[0m" 400 -
+2025-06-14 16:42:22,453 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:22] "GET / HTTP/1.1" 200 -
+2025-06-14 16:42:23,090 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:23] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-14 16:42:23,106 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:23] "GET /static/css/page.css HTTP/1.1" 200 -
+2025-06-14 16:42:23,118 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:23] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-14 16:42:23,184 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:23] "GET /static/images/mr.png HTTP/1.1" 200 -
+2025-06-14 16:42:23,948 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:23] "[36mGET /static/images/wryp.jpg HTTP/1.1[0m" 304 -
+2025-06-14 16:42:23,963 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:23] "[36mGET /static/images/rg.png HTTP/1.1[0m" 304 -
+2025-06-14 16:42:24,129 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:24] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-14 16:42:24,146 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:24] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-14 16:42:25,619 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:25] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-14 16:42:29,050 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:29] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-06-14 16:42:41,632 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:41] "GET /categories HTTP/1.1" 200 -
+2025-06-14 16:42:47,390 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:47] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-06-14 16:42:57,879 [DEBUG] - DPO API Attempt 1: 403 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<TITLE>ERROR...
+2025-06-14 16:42:57,881 [WARNING] - Payment validation failed: DPO returned status 403
+2025-06-14 16:42:57,883 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:57] "[31m[1mPOST /dpo/initialize HTTP/1.1[0m" 400 -

@@ -4,23 +4,6 @@
 {% block head %}
 {{ super() }}
 <style>
-  .impact-card {
-    transition: all 0.3s ease;
-    border-left: 4px solid var(--bs-primary);
-  }
-  .impact-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  }
-  .checkmark-circle {
-    width: 80px;
-    height: 80px;
-    background: var(--bs-success);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   .confetti-canvas {
     position: fixed;
     top: 0;
@@ -34,108 +17,93 @@
 {% endblock %}
 
 {% block content %}
-
-<div class="container mt-5 pt-1 mb-5">
-  <div class="text-center mb-5">
-    <div class="checkmark-circle mx-auto mb-4">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3">
-        <path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/>
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <!-- Confirmation Icon and Message -->
+  <div class="text-center mb-10">
+    <div class="mx-auto flex items-center justify-center w-20 h-20 rounded-full bg-green-500 shadow-md mb-4 animate-bounce">
+      <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+        <path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </div>
-    <h1 class="display-5 fw-bold">Thank You, {{ current_user.first_name }}!</h1>
-    <p class="lead">Your donation is now complete.</p>
+    <h1 class="text-3xl font-bold text-gray-800">Thank You, {{ current_user.first_name }}!</h1>
+    <p class="mt-2 text-lg text-gray-600">Your donation was successfully completed.</p>
   </div>
 
-  <div class="row g-4">
-    <!-- Transaction Card -->
-    <div class="col-lg-6">
-      <div class="card shadow-sm h-100">
-        <div class="card-header bg-light">
-          <h5 class="mb-0"><i class="bi bi-receipt me-2"></i> Donation Details</h5>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Donation Details -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-600 hover:shadow-xl transition-all duration-300">
+      <h2 class="text-xl font-semibold mb-4 flex items-center gap-2 text-blue-800">
+        <i class="bi bi-receipt"></i> Donation Details
+      </h2>
+      <dl class="space-y-3 text-gray-700">
+        <div class="flex justify-between">
+          <dt class="font-medium">Amount:</dt>
+          <dd>{{ donation.amount|currency }} {{ donation.currency }}</dd>
         </div>
-        <div class="card-body">
-          <dl class="row">
-            <dt class="col-sm-5">Amount:</dt>
-            <dd class="col-sm-7">{{ donation.amount|currency }} {{ donation.currency }}</dd>
-
-            <dt class="col-sm-5">Date:</dt>
-            <dd class="col-sm-7">{{ donation.created_at|datetime_format }}</dd>
-
-            <dt class="col-sm-5">Payment Method:</dt>
-            <dd class="col-sm-7">•••• {{ donation.payment_method_last4 }}</dd>
-
-            {% if donation.program and program_url %}
-            <dt class="col-sm-5">Program:</dt>
-            <dd class="col-sm-7">
-              <a href="{{ program_url }}">
-                {{ donation.program.title }}
-              </a>
-            </dd>
-            {% endif %}
-          </dl>
-
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-            <a href="{{ receipt_url }}" class="btn btn-outline-primary">
-              <i class="bi bi-download me-2"></i>Download Receipt
-            </a>
-          </div>
+        <div class="flex justify-between">
+          <dt class="font-medium">Date:</dt>
+          <dd>{{ donation.created_at|datetime_format }}</dd>
         </div>
+        <div class="flex justify-between">
+          <dt class="font-medium">Payment Method:</dt>
+          <dd>•••• {{ donation.payment_method_last4 }}</dd>
+        </div>
+        {% if donation.program and program_url %}
+        <div class="flex justify-between">
+          <dt class="font-medium">Program:</dt>
+          <dd><a href="{{ program_url }}" class="text-blue-600 hover:underline">{{ donation.program.title }}</a></dd>
+        </div>
+        {% endif %}
+      </dl>
+      <div class="mt-6 text-right">
+        <a href="{{ receipt_url }}" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 border border-blue-600 px-4 py-2 rounded-lg transition">
+          <i class="bi bi-download"></i> Download Receipt
+        </a>
       </div>
     </div>
 
-    <!-- Impact Card -->
-    <div class="col-lg-6">
-      <div class="card impact-card h-100">
-        <div class="card-header bg-light">
-          <h5 class="mb-0"><i class="bi bi-graph-up me-2"></i> Your Impact</h5>
+    <!-- Impact Section -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border-l-4 border-green-500">
+      <h2 class="text-xl font-semibold mb-4 flex items-center gap-2 text-green-700">
+        <i class="bi bi-graph-up"></i> Your Impact
+      </h2>
+      <div class="grid grid-cols-2 text-center border rounded-lg overflow-hidden">
+        <div class="p-4 border-r">
+          <h3 class="text-2xl font-bold text-blue-600">{{ impact_stats.total_donated|currency }}</h3>
+          <p class="text-sm text-gray-500">Total Given</p>
         </div>
-        <div class="card-body">
-          <div class="row text-center">
-            <div class="col-6 border-end">
-              <h2 class="text-primary">{{ impact_stats.total_donated|currency }}</h2>
-              <p class="text-muted mb-0">Total Given</p>
-            </div>
-            <div class="col-6">
-              <h2 class="text-success">{{ impact_stats.donation_count }}</h2>
-              <p class="text-muted mb-0">Total Donations</p>
-            </div>
-          </div>
-
-          {% if user_donations %}
-          <hr>
-          <h6 class="mb-3">Recent Donations:</h6>
-          <div class="list-group list-group-flush">
-            {% for d in user_donations %}
-            <div class="list-group-item border-0 px-0 py-2">
-              <div class="d-flex justify-content-between">
-                <span>
-                  {{ d.amount|currency }} 
-                  {% if d.program %}to {{ d.program.title }}{% endif %}
-                </span>
-                <small class="text-muted">{{ d.created_at|datetime_format('short') }}</small>
-              </div>
-            </div>
-            {% endfor %}
-          </div>
-          {% endif %}
+        <div class="p-4">
+          <h3 class="text-2xl font-bold text-green-600">{{ impact_stats.donation_count }}</h3>
+          <p class="text-sm text-gray-500">Total Donations</p>
         </div>
       </div>
+
+      {% if user_donations %}
+      <div class="mt-6">
+        <h4 class="font-semibold text-gray-800 mb-2">Recent Donations:</h4>
+        <ul class="divide-y divide-gray-200">
+          {% for d in user_donations %}
+          <li class="py-2 flex justify-between text-sm text-gray-700">
+            <span>{{ d.amount|currency }} {% if d.program %}to {{ d.program.title }}{% endif %}</span>
+            <span class="text-gray-400">{{ d.created_at|datetime_format('short') }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
     </div>
   </div>
 
   <!-- Next Steps -->
-  <div class="row mt-5">
-    <div class="col-12 text-center">
-      <a href="{{ url_for('main.home') }}" class="btn btn-primary px-4 me-3">
-        Return Home
-      </a>
-      {% if donation.program and program_url %}
-      <a href="{{ program_url }}" 
-         class="btn btn-outline-primary px-4">
-        View Program
-      </a>
-      {% endif %}
-    </div>
+  <div class="mt-12 text-center">
+    <a href="{{ url_for('main.home') }}" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition-all mr-3">
+      Return Home
+    </a>
+    {% if donation.program and program_url %}
+    <a href="{{ program_url }}" class="inline-block border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50 transition-all">
+      View Program
+    </a>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
@@ -144,22 +112,13 @@
 {{ super() }}
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Confetti effect
+document.addEventListener('DOMContentLoaded', () => {
   confetti({
     particleCount: 150,
     spread: 70,
     origin: { y: 0.6 },
     ticks: 200
   });
-
-  // Add subtle animation to impact card
-  const impactCard = document.querySelector('.impact-card');
-  if (impactCard) {
-    setTimeout(() => {
-      impactCard.classList.add('animate__animated', 'animate__pulse');
-    }, 1000);
-  }
 });
 </script>
 {% endblock %}
