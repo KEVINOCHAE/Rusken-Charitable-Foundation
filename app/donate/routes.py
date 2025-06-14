@@ -25,13 +25,11 @@ from xml.sax.saxutils import escape
 donate_bp = Blueprint('donate', __name__)
 logger = logging.getLogger(__name__)
 
-# Enhanced DPO Configuration
+# DPO Configuration
 DPO_CONFIG = {
+    
     'VERIFY_URL': "https://secure.3gdirectpay.com/API/v6/verify",
-    'TIMEOUT': 15,  # seconds
-    'ALLOWED_IPS': {'196.201.214.200', '196.201.214.206'},  # DPO production IPs
-    'MAX_RETRIES': 3,
-    'RETRY_DELAY': 2  # seconds
+    'TIMEOUT': 15  # seconds
 }
 
 # -----------------------------
@@ -39,148 +37,96 @@ DPO_CONFIG = {
 # -----------------------------
 @donate_bp.route('/payment-callback', methods=['GET'])
 def payment_callback():
-    """Handle DPO payment notifications with IP whitelisting and request validation"""
-    # Verify source IP
-    client_ip = request.remote_addr
-    if client_ip not in DPO_CONFIG['ALLOWED_IPS']:
-        current_app.logger.warning(f"Blocked callback from unauthorized IP: {client_ip}")
-        return make_response("Unauthorized", 403)
-
+    """Handle DPO payment notifications"""
     transaction_token = request.args.get('TransactionToken')
+    response = make_response("OK", 200)
+
     if not transaction_token:
         current_app.logger.error("DPO callback missing TransactionToken")
-        return make_response("Missing token", 400)
+        return response
 
     try:
-        # Pass minimal data to background thread
+        # Start background processing with proper app context
+        app = current_app._get_current_object()
         thread = threading.Thread(
             target=process_dpo_callback,
-            args=(transaction_token,),
+            args=(app, transaction_token),
             daemon=True
         )
         thread.start()
-        return make_response("OK", 200)
     except Exception as e:
-        current_app.logger.error(f"Callback thread failed: {str(e)}", exc_info=True)
-        return make_response("Processing error", 500)
+        current_app.logger.error(f"Failed to start callback processing: {str(e)}", exc_info=True)
+
+    return response
 
 # -----------------------------
 # Background Callback Processor
 # -----------------------------
-def process_dpo_callback(transaction_token):
-    """Process payment verification and update donation status with retries"""
-    with current_app.app_context():
-        for attempt in range(DPO_CONFIG['MAX_RETRIES']):
+def process_dpo_callback(app, transaction_token):
+    """Process payment verification and update donation status"""
+    with app.app_context():
+        try:
+            # 1. Verify transaction with DPO
+            transaction = verify_dpo_transaction(transaction_token)
+            if not transaction or transaction.get('status') != 'Completed':
+                raise ValueError("Transaction verification failed")
+
+            # 2. Get donation record
+            donation = Donation.query.filter_by(gateway_reference=transaction_token).first()
+            if not donation:
+                raise ValueError(f"No donation found for token: {transaction_token}")
+
+            # 3. Check for duplicate processing
+            if donation.status == 'completed':
+                current_app.logger.info(f"Duplicate callback for donation {donation.id}")
+                return
+
+            # 4. Validate amount
             try:
-                # 1. Verify transaction with DPO
-                transaction = verify_dpo_transaction(transaction_token)
-                if not transaction:
-                    raise ValueError("Transaction verification failed")
-                    
-                if transaction.get('status') != 'Completed':
-                    raise ValueError(f"Transaction not completed: {transaction.get('status')}")
+                dpo_amount = Decimal(str(transaction['transactionAmount'])).quantize(Decimal('0.01'))
+                if dpo_amount != donation.amount:
+                    raise ValueError(f"Amount mismatch: DPO {dpo_amount} vs DB {donation.amount}")
+            except (InvalidOperation, ValueError) as e:
+                raise ValueError(f"Invalid transaction amount: {str(e)}")
 
-                # 2. Get donation record with lock
-                donation = Donation.query.filter_by(
-                    gateway_reference=transaction_token
-                ).with_for_update().first()
-                
-                if not donation:
-                    raise ValueError(f"No donation found for token: {transaction_token}")
+            # 5. Update donation status
+            donation.status = 'completed'
+            donation.completed_at = datetime.utcnow()
+            donation.gateway_response = transaction
+            db.session.commit()
 
-                # 3. Check for duplicate processing
-                if donation.status == 'completed':
-                    current_app.logger.warning(f"Duplicate callback for donation {donation.id}")
-                    return
-
-                # 4. Validate amount with tolerance
-                try:
-                    dpo_amount = Decimal(str(transaction['transactionAmount'])).quantize(Decimal('0.01'))
-                    if abs(dpo_amount - donation.amount) > Decimal('0.01'):
-                        raise ValueError(
-                            f"Amount mismatch: DPO {dpo_amount} vs DB {donation.amount}"
-                        )
-                except (InvalidOperation, ValueError) as e:
-                    current_app.logger.error(f"Amount validation failed: {str(e)}")
-                    raise
-
-                # 5. Update donation status
-                donation.status = 'completed'
-                donation.completed_at = datetime.utcnow()
-                donation.gateway_response = {
-                    'transactionToken': transaction_token,
-                    'status': transaction['status'],
-                    'amount': transaction['transactionAmount']
-                }  # Store minimal response
-
-                db.session.commit()
-
-                # 6. Queue receipt task
-                current_app.task_queue.enqueue(
-                    send_donation_receipt,
-                    donation.id
-                )
-                return  # Success, exit retry loop
-
+            # 6. Send receipt asynchronously
+            try:
+                threading.Thread(
+                    target=send_donation_receipt,
+                    args=(app, donation),
+                    daemon=True
+                ).start()
             except Exception as e:
-                current_app.logger.error(
-                    f"Callback attempt {attempt+1} failed: {str(e)}", 
-                    exc_info=(attempt == DPO_CONFIG['MAX_RETRIES'] - 1)  # Full traceback on last attempt
-                )
-                db.session.rollback()
-                if attempt < DPO_CONFIG['MAX_RETRIES'] - 1:
-                    time.sleep(DPO_CONFIG['RETRY_DELAY'] * (attempt + 1))
-                else:
-                    # Critical failure handling
-                    current_app.logger.critical(
-                        f"Permanent failure processing transaction {transaction_token}"
-                    )
-                    # Implement alerting (e.g., email admin, log to monitoring system)
+                current_app.logger.error(f"Failed to queue receipt: {str(e)}")
+
+        except Exception as e:
+            current_app.logger.error(f"Callback processing failed: {str(e)}", exc_info=True)
+            db.session.rollback()
+            raise
+
 
 # -----------------------------
 # Payment Cancellation Handler
 # -----------------------------
 @donate_bp.route('/payment-cancel', methods=['GET'])
 def payment_cancel():
-    """Handle payment cancellation with CSRF protection"""
+    """Handle payment cancellation"""
     program_id = request.args.get('program_id')
-    session_token = request.args.get('session_id')
-    
-    # Validate session to prevent CSRF
-    if not session_token or session_token != session.get('donation_session'):
-        flash('Invalid session', 'danger')
-        return redirect(url_for('main.home'))
-
-    # Validate program exists
-    if not Program.query.get(program_id):
-        flash('Invalid program', 'danger')
-        return redirect(url_for('main.home'))
-
     flash('Your donation was not completed. You may try again if you wish.', 'warning')
     return redirect(url_for('donate.donate', program_id=program_id))
-
-# -----------------------------
-# Secure XML Helper
-# -----------------------------
-class SecureXMLParser:
-    """XML parser with security protections"""
-    @staticmethod
-    def parse(xml_content):
-        # Disable dangerous XML features
-        parser = ET.XMLParser(
-            resolve_entities=False,
-            forbid_dtd=True,
-            forbid_entities=True
-        )
-        return ET.fromstring(xml_content, parser=parser)
 
 # -----------------------------
 # Helper Functions
 # -----------------------------
 def verify_dpo_transaction(token):
-    """Securely verify transaction with DPO API"""
+    """Verify transaction with DPO API"""
     try:
-        # Use XML templates to prevent injection
         payload = f"""<?xml version="1.0" encoding="utf-8"?>
 <API3G>
   <CompanyToken>{escape(current_app.config['DPO_COMPANY_TOKEN'])}</CompanyToken>
@@ -192,72 +138,50 @@ def verify_dpo_transaction(token):
             DPO_CONFIG['VERIFY_URL'],
             data=payload,
             headers={'Content-Type': 'application/xml'},
-            timeout=DPO_CONFIG['TIMEOUT'],
-            verify=True  # Enable SSL verification
+            timeout=DPO_CONFIG['TIMEOUT']
         )
 
-        response.raise_for_status()
+        if response.status_code != 200:
+            raise ValueError(f"DPO API returned {response.status_code}")
 
-        # Use secure XML parser
-        root = SecureXMLParser.parse(response.content)
-
-        # Validate response structure
+        root = ET.fromstring(response.content)
         if root.findtext("Result") != "000":
-            error_msg = root.findtext("ResultExplanation") or "Verification failed"
-            current_app.logger.warning(f"DPO verification failed: {error_msg}")
-            return None
+            raise ValueError(root.findtext("ResultExplanation") or "Verification failed")
 
         return {
             'transactionToken': token,
             'transactionAmount': root.findtext("TransactionAmount"),
-            'status': 'Completed'
+            'status': 'Completed',
+            'raw_response': response.text
         }
 
-    except requests.exceptions.RequestException as e:
-        current_app.logger.error(f"DPO API connection failed: {str(e)}")
-    except ET.ParseError as e:
-        current_app.logger.error(f"Invalid XML response: {str(e)}")
     except Exception as e:
-        current_app.logger.error(f"Verification error: {str(e)}")
-    
-    return None
+        current_app.logger.error(f"Transaction verification failed: {str(e)}", exc_info=True)
+        return None
 
-def send_donation_receipt(donation_id):
-    """Send donation receipt email with error handling"""
-    try:
-        donation = Donation.query.get(donation_id)
-        if not donation:
-            current_app.logger.error(f"Receipt failed: Donation {donation_id} not found")
-            return
+def send_donation_receipt(app, donation):
+    """Send donation receipt email"""
+    with app.app_context():
+        try:
+            # Implement actual email sending logic here
+            # Example using Flask-Mail:
+            # msg = Message("Donation Receipt",
+            #              recipients=[donation.donor_email])
+            # msg.body = f"Thank you for your donation of {donation.amount}"
+            # mail.send(msg)
+            
+            current_app.logger.info(f"Receipt sent for donation {donation.id}")
+        except Exception as e:
+            current_app.logger.error(f"Failed to send receipt: {str(e)}", exc_info=True)
 
-        # Implement actual email sending logic
-        # msg = Message(
-        #     "Donation Receipt",
-        #     recipients=[donation.donor_email]
-        # )
-        # msg.html = render_template('email/receipt.html', donation=donation)
-        # mail.send(msg)
-        
-        current_app.logger.info(f"Receipt sent for donation {donation.id}")
-    except Exception as e:
-        current_app.logger.error(f"Failed to send receipt: {str(e)}", exc_info=True)
 
-# -----------------------------
-# DPO Redirect Handler (Enhanced)
-# -----------------------------
 @donate_bp.route('/dpo-redirect', methods=['GET'])
 def dpo_redirect():
     """
-    Handles post-payment redirect from DPO with idempotent processing
-    and session validation
+    Called by DPO after user completes payment.
+    Verifies the transaction, updates the donation, then redirects to confirmation.
     """
     transaction_token = request.args.get('TransactionToken')
-    session_token = request.args.get('SessionID')
-
-    # Validate session
-    if not session_token or session_token != session.get('donation_session'):
-        flash('Invalid session', 'danger')
-        return redirect(url_for('main.home'))
 
     if not transaction_token:
         flash("Missing transaction token. We could not verify your donation.", "danger")
@@ -266,26 +190,20 @@ def dpo_redirect():
     try:
         # 1. Verify transaction with DPO
         transaction = verify_dpo_transaction(transaction_token)
-        if not transaction:
-            raise ValueError("Payment verification failed")
-
-        if transaction.get('status') != 'Completed':
+        if not transaction or transaction.get('status') != 'Completed':
             raise ValueError("Payment not completed")
 
-        # 2. Find donation with lock
-        donation = Donation.query.filter_by(
-            gateway_reference=transaction_token
-        ).with_for_update().first()
-        
+        # 2. Find donation in DB
+        donation = Donation.query.filter_by(gateway_reference=transaction_token).first()
         if not donation:
             raise ValueError("Donation record not found")
 
-        # 3. Update donation if not already completed
+        # 3. Prevent duplicate updates
         if donation.status != 'completed':
-            # 4. Amount check with tolerance
+            # 4. Amount check
             try:
                 dpo_amount = Decimal(str(transaction['transactionAmount'])).quantize(Decimal('0.01'))
-                if abs(dpo_amount - donation.amount) > Decimal('0.01'):
+                if dpo_amount != donation.amount:
                     raise ValueError(f"Payment mismatch: DPO={dpo_amount}, DB={donation.amount}")
             except (InvalidOperation, ValueError) as e:
                 raise ValueError(f"Invalid transaction amount: {str(e)}")
@@ -293,30 +211,28 @@ def dpo_redirect():
             # 5. Update donation
             donation.status = 'completed'
             donation.completed_at = datetime.utcnow()
-            donation.gateway_response = {
-                'transactionToken': transaction_token,
-                'status': 'Completed',
-                'amount': transaction['transactionAmount']
-            }
+            donation.gateway_response = transaction
             db.session.commit()
 
-            # 6. Queue receipt (don't block user response)
+            # 6. Send receipt (background)
             try:
-                current_app.task_queue.enqueue(send_donation_receipt, donation.id)
+                threading.Thread(
+                    target=send_donation_receipt,
+                    args=(current_app._get_current_object(), donation),
+                    daemon=True
+                ).start()
             except Exception as e:
                 current_app.logger.warning(f"Failed to queue receipt: {e}")
 
-        # 7. Clear session token
-        session.pop('donation_session', None)
-
-        # 8. Redirect to appropriate confirmation
+        # 7. Redirect to appropriate confirmation
+        from flask_login import current_user
         if current_user.is_authenticated:
             return redirect(url_for('donate.confirmation', donation_id=donation.id))
         else:
             return render_template('donate/guest_confirmation.html', donation=donation)
 
     except Exception as e:
-        current_app.logger.error(f"DPO redirect processing failed: {str(e)}", exc_info=True)
+        current_app.logger.error(f"DPO redirect verification failed: {str(e)}", exc_info=True)
         flash("There was a problem verifying your donation. Please contact support.", "danger")
         return redirect(url_for('main.home'))
 
