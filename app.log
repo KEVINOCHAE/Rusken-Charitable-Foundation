@@ -36632,3 +36632,21 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='secure.3gdirectpa
 <TITLE>ERROR...
 2025-06-14 08:58:01,208 [WARNING] - Payment validation failed: DPO returned status 403
 2025-06-14 08:58:01,209 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:58:01] "[31m[1mPOST /dpo/initialize HTTP/1.1[0m" 400 -
+2025-06-14 09:17:16,360 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-14 09:17:16,361 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-14 09:17:16,362 [INFO] -  * Restarting with stat
+2025-06-14 09:17:17,409 [WARNING] -  * Debugger is active!
+2025-06-14 09:17:17,409 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 09:19:07,875 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py', reloading
+2025-06-14 09:19:08,219 [INFO] -  * Restarting with stat
+2025-06-14 09:19:09,328 [WARNING] -  * Debugger is active!
+2025-06-14 09:19:09,329 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 09:20:17,157 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py', reloading
+2025-06-14 09:20:17,405 [INFO] -  * Restarting with stat
+2025-06-14 09:20:18,686 [WARNING] -  * Debugger is active!
+2025-06-14 09:20:18,687 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 09:23:57,570 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/config.py', reloading
+2025-06-14 09:23:58,519 [INFO] -  * Restarting with stat
+2025-06-14 09:24:02,500 [WARNING] -  * Debugger is active!
+2025-06-14 09:24:02,500 [INFO] -  * Debugger PIN: 765-811-279

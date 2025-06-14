@@ -34,4 +34,4 @@ class Config:
     DPO_COMPANY_TOKEN = "8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3" 
     DPO_SERVICE_TYPE = "5525"  
     DPO_API_URL = "https://secure.3gdirectpay.com/API/v6/"
-    DPO_PAYMENT_PAGE = "https://secure.3gdirectpay.com/payv2.php?ID=TransToken"
+    DPO_PAYMENT_URL = "https://secure.3gdirectpay.com/payv2.php?ID=TransToken"
