@@ -15,17 +15,22 @@ dpo_bp = Blueprint('dpo', __name__)
 def build_dpo_payload(donation, email, amount):
     """Build XML payload with proper callback and redirect URLs"""
     service_date = datetime.utcnow().strftime('%Y/%m/%d %H:%M')
-    
+
+    # Where the user is redirected after successful payment
     user_redirect_url = url_for(
-        'donate.payment_complete', 
+        'donate.confirmation', 
         donation_id=donation.id,
         _external=True
     )
+
+    # Where the user goes if they cancel payment
     user_back_url = url_for(
         'donate.payment_cancel',
         program_id=donation.program_id,
         _external=True
     )
+
+    # Where DPO calls your server to notify about payment completion
     callback_url = url_for('donate.payment_callback', _external=True)
 
     return f"""<?xml version="1.0" encoding="utf-8"?>
@@ -52,54 +57,11 @@ def build_dpo_payload(donation, email, amount):
 </API3G>"""
 
 
+
 @dpo_bp.route('/initialize', methods=['POST'])
 @csrf.exempt
 def initialize_payment():
-    """
-    Initialize DPO payment transaction
-    ---
-    tags: [Payments]
-    consumes: application/json
-    produces: application/json
-    parameters:
-      - in: body
-        name: body
-        required: true
-        schema:
-          type: object
-          properties:
-            email:
-              type: string
-              format: email
-            amount:
-              type: number
-              minimum: 1
-            program_id:
-              type: integer
-            donor_name:
-              type: string
-    responses:
-      200:
-        description: Payment initialized successfully
-        schema:
-          type: object
-          properties:
-            status:
-              type: boolean
-            authorization_url:
-              type: string
-            reference:
-              type: string
-            expires_in_hours:
-              type: integer
-            expires_at:
-              type: string
-              format: date-time
-      400:
-        description: Invalid request
-      500:
-        description: Server error
-    """
+    
     # Validate configurations
     required_configs = ['DPO_API_URL', 'DPO_COMPANY_TOKEN', 'DPO_SERVICE_TYPE', 'DPO_PAYMENT_URL']
     missing_configs = [key for key in required_configs if not current_app.config.get(key)]
