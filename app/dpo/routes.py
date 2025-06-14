@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app, url_for
 from flask_login import current_user
 import requests
-from app import db,csrf
+from app import db, csrf
 from app.admin.models import Donation
 from decimal import Decimal, InvalidOperation
 from datetime import datetime, timedelta
@@ -12,62 +12,43 @@ import time
 
 dpo_bp = Blueprint('dpo', __name__)
 
-def build_dpo_payload(company_token, donation, donor_name, email, amount, service_type):
-    """Build properly escaped XML payload for DPO API with all required fields"""
-    first_name = donor_name.split()[0] if donor_name else ""
-    last_name = " ".join(donor_name.split()[1:]) if donor_name and len(donor_name.split()) > 1 else ""
-    service_date = datetime.utcnow().strftime('%Y/%m/%d')
+# DPO Configuration Constants
+DPO_COMPANY_TOKEN = "8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3"  # Your test token
+DPO_SERVICE_TYPE = "5525"  # Your test service type
+DPO_API_URL = "https://secure.3gdirectpay.com/API/v6/"
+DPO_PAYMENT_URL = "https://secure.3gdirectpay.com/payv2.php"
+DPO_PTL = 5  # Payment time limit in hours (5 hours is standard for DPO)
+
+def build_dpo_payload(donation, email, amount):
+    """Build XML payload matching DPO's exact specification with proper escaping"""
+    service_date = datetime.utcnow().strftime('%Y/%m/%d %H:%M')
     
     return f"""<?xml version="1.0" encoding="utf-8"?>
 <API3G>
-  <CompanyToken>{escape(company_token)}</CompanyToken>
+  <CompanyToken>{escape(DPO_COMPANY_TOKEN)}</CompanyToken>
   <Request>createToken</Request>
   <Transaction>
     <PaymentAmount>{escape(str(amount))}</PaymentAmount>
     <PaymentCurrency>KES</PaymentCurrency>
     <CompanyRef>{escape(f"DONATION_{donation.id}")}</CompanyRef>
-    <CustomerEmail>{escape(email)}</CustomerEmail>
-    <CustomerFirstName>{escape(first_name)}</CustomerFirstName>
-    <CustomerLastName>{escape(last_name)}</CustomerLastName>
     <RedirectURL>{escape(url_for('donate.payment_callback', _external=True))}</RedirectURL>
     <BackURL>{escape(url_for('donate.payment_cancel', _external=True))}</BackURL>
-    <ServiceType>{escape(service_type)}</ServiceType>
-    <CompanyFields>
-      <CompanyField>
-        <Key>donation_id</Key>
-        <Value>{donation.id}</Value>
-      </CompanyField>
-      <CompanyField>
-        <Key>donor_email</Key>
-        <Value>{email}</Value>
-      </CompanyField>
-    </CompanyFields>
-    <Services>
-      <Service>
-        <ServiceType>{escape(service_type)}</ServiceType>
-        <ServiceDescription>Donation Payment</ServiceDescription>
-        <ServiceDate>{service_date}</ServiceDate>
-      </Service>
-    </Services>
+    <CompanyRefUnique>0</CompanyRefUnique>
+    <PTL>{DPO_PTL}</PTL>
   </Transaction>
+  <Services>
+    <Service>
+      <ServiceType>{escape(DPO_SERVICE_TYPE)}</ServiceType>
+      <ServiceDescription>Donation Payment</ServiceDescription>
+      <ServiceDate>{service_date}</ServiceDate>
+    </Service>
+  </Services>
 </API3G>"""
 
 @dpo_bp.route('/initialize', methods=['POST'])
-@csrf.exempt  # If using CSRF protection
+@csrf.exempt
 def initialize_payment():
-    """
-    Initialize DPO payment transaction with all required fields
-    """
-    # Configuration validation
-    required_configs = ['DPO_API_URL', 'DPO_COMPANY_TOKEN', 'DPO_SERVICE_TYPE', 'DPO_PAYMENT_PAGE']
-    if any(not current_app.config.get(key) for key in required_configs):
-        current_app.logger.error("Missing DPO configuration")
-        return jsonify({
-            'status': False,
-            'message': 'Payment system temporarily unavailable',
-            'error': 'MISSING_CONFIGURATION'
-        }), 500
-
+   
     # Request validation
     data = request.get_json() or {}
     email = data.get('email', '').strip()
@@ -116,26 +97,19 @@ def initialize_payment():
         
         for attempt in range(max_retries):
             try:
-                xml_payload = build_dpo_payload(
-                    current_app.config["DPO_COMPANY_TOKEN"],
-                    donation,
-                    donor_name,
-                    email,
-                    amount,
-                    current_app.config["DPO_SERVICE_TYPE"]
-                )
+                xml_payload = build_dpo_payload(donation, email, amount)
 
                 headers = {
                     "Content-Type": "application/xml",
                     "Accept": "application/xml",
-                    "User-Agent": "FlaskDPOClient/1.0"
+                    "User-Agent": "DPO-Client/1.0"
                 }
 
                 resp = requests.post(
-                    current_app.config["DPO_API_URL"],
+                    DPO_API_URL,
                     data=xml_payload,
                     headers=headers,
-                    timeout=(3.05, 15)
+                    timeout=(3.05, 15)  # Connect timeout, read timeout
                 )
                 
                 current_app.logger.debug(f"DPO API Attempt {attempt + 1}: {resp.status_code} - {resp.text[:200]}...")
@@ -144,31 +118,28 @@ def initialize_payment():
                     raise ValueError(f"DPO returned status {resp.status_code}")
 
                 # Parse XML response
-                try:
-                    root = ET.fromstring(resp.content)
-                    result_code = root.findtext("Result")
-                    result_explanation = root.findtext("ResultExplanation")
-                    trans_token = root.findtext("TransToken")
+                root = ET.fromstring(resp.content)
+                result_code = root.findtext("Result")
+                trans_token = root.findtext("TransToken")
+                result_explanation = root.findtext("ResultExplanation")
 
-                    if result_code != "000":
-                        raise ValueError(result_explanation or "DPO initialization failed")
-                    if not trans_token:
-                        raise ValueError("Missing transaction token in response")
+                if result_code != "000":
+                    raise ValueError(result_explanation or "Payment initialization failed")
+                if not trans_token:
+                    raise ValueError("Missing transaction token in response")
 
-                    # Save successful transaction
-                    donation.gateway_reference = trans_token
-                    donation.payment_gateway = 'dpo'
-                    db.session.commit()
+                # Save successful transaction
+                donation.gateway_reference = trans_token
+                donation.payment_gateway = 'dpo'
+                db.session.commit()
 
-                    return jsonify({
-                        'status': True,
-                        'authorization_url': f"{current_app.config['DPO_PAYMENT_PAGE']}?ID={trans_token}",
-                        'reference': trans_token,
-                        'expires_at': (datetime.utcnow() + timedelta(minutes=30)).isoformat()
-                    }), 200
-
-                except ET.ParseError as e:
-                    raise ValueError(f"Invalid XML response: {str(e)}")
+                return jsonify({
+                    'status': True,
+                    'authorization_url': f"{DPO_PAYMENT_URL}?ID={trans_token}",
+                    'reference': trans_token,
+                    'expires_in_hours': DPO_PTL,
+                    'expires_at': (datetime.utcnow() + timedelta(hours=DPO_PTL)).isoformat()
+                }), 200
 
             except requests.exceptions.RequestException as e:
                 last_exception = e

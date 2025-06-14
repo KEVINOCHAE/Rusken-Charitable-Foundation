@@ -36603,3 +36603,32 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='secure.3gdirectpa
 2025-06-13 23:49:59,454 [INFO] - 127.0.0.1 - - [13/Jun/2025 23:49:59] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
 2025-06-13 23:49:59,458 [INFO] - 127.0.0.1 - - [13/Jun/2025 23:49:59] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
 2025-06-13 23:50:00,010 [INFO] - 127.0.0.1 - - [13/Jun/2025 23:50:00] "GET /categories HTTP/1.1" 200 -
+2025-06-14 08:57:29,114 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-14 08:57:29,128 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-14 08:57:29,130 [INFO] -  * Restarting with stat
+2025-06-14 08:57:30,096 [WARNING] -  * Debugger is active!
+2025-06-14 08:57:30,097 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 08:57:39,889 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:39] "GET /programs/category/education HTTP/1.1" 200 -
+2025-06-14 08:57:40,509 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:40] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-14 08:57:40,557 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:40] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-14 08:57:40,774 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:40] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-14 08:57:40,799 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:40] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-14 08:57:40,852 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:40] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-06-14 08:57:41,584 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:41] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-06-14 08:57:41,609 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:41] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-14 08:57:41,825 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:41] "GET /categories HTTP/1.1" 200 -
+2025-06-14 08:57:41,892 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:41] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-06-14 08:57:45,237 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:45] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-06-14 08:57:45,584 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:45] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-06-14 08:57:45,588 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:45] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-06-14 08:57:45,597 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:45] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-14 08:57:45,599 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:45] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-14 08:57:46,147 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:46] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-14 08:57:46,456 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:46] "GET /categories HTTP/1.1" 200 -
+2025-06-14 08:57:46,478 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:57:46] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-06-14 08:58:01,187 [DEBUG] - DPO API Attempt 1: 403 - <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<TITLE>ERROR...
+2025-06-14 08:58:01,208 [WARNING] - Payment validation failed: DPO returned status 403
+2025-06-14 08:58:01,209 [INFO] - 127.0.0.1 - - [14/Jun/2025 08:58:01] "[31m[1mPOST /dpo/initialize HTTP/1.1[0m" 400 -
