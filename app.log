@@ -36851,3 +36851,9 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='secure.3gdirectpa
 <TITLE>ERROR...
 2025-06-14 16:42:57,881 [WARNING] - Payment validation failed: DPO returned status 403
 2025-06-14 16:42:57,883 [INFO] - 127.0.0.1 - - [14/Jun/2025 16:42:57] "[31m[1mPOST /dpo/initialize HTTP/1.1[0m" 400 -
+2025-06-14 17:08:22,071 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-14 17:08:22,071 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-14 17:08:22,073 [INFO] -  * Restarting with stat
+2025-06-14 17:08:23,339 [WARNING] -  * Debugger is active!
+2025-06-14 17:08:23,369 [INFO] -  * Debugger PIN: 764-674-973
