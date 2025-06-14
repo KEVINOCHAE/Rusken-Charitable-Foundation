@@ -110,72 +110,6 @@ def process_dpo_callback(app, transaction_token):
             db.session.rollback()
             raise
 
-# -----------------------------
-# Payment Completion Handler
-# -----------------------------
-@donate_bp.route('/payment-complete', methods=['GET'])
-def payment_complete():
-    """Handle user redirect after payment processing"""
-    donation_id = request.args.get('donation_id')
-    
-    if not donation_id or not donation_id.isdigit():
-        flash('Invalid donation reference', 'danger')
-        return redirect(url_for('main.home'))
-
-    donation = Donation.query.get(int(donation_id))
-    
-    if not donation:
-        flash('Donation not found', 'danger')
-        return redirect(url_for('main.home'))
-
-    if donation.status == 'completed':
-        flash('Thank you for your donation!', 'success')
-        return redirect(url_for('donate.thank_you'))
-
-    # Show processing page with auto-refresh
-    return """
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="refresh" content="3">
-        <title>Processing Your Donation</title>
-        <style>
-            .processing-container {
-                max-width: 600px;
-                margin: 2rem auto;
-                padding: 2rem;
-                text-align: center;
-                background: #f8f9fa;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .spinner {
-                margin: 0 auto 1.5rem;
-                width: 50px;
-                height: 50px;
-                border: 5px solid #f3f3f3;
-                border-top: 5px solid #3498db;
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-            }
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="processing-container">
-            <div class="spinner"></div>
-            <h1>Processing Your Donation</h1>
-            <p>We're verifying your payment. This page will refresh automatically.</p>
-            <p><small>Transaction ID: {donation_id}</small></p>
-        </div>
-    </body>
-    </html>
-    """.format(donation_id=donation_id)
 
 # -----------------------------
 # Payment Cancellation Handler
@@ -265,52 +199,58 @@ def donate():
 
 
 
-
 @donate_bp.route('/confirmation/<int:donation_id>')
-@login_required
 def confirmation(donation_id):
     try:
-        # 1. Verify donation belongs to current user
-        donation = Donation.query.filter_by(
-            id=donation_id,
-            user_id=current_user.id
-        ).first_or_404()
+        donation = Donation.query.get_or_404(donation_id)
 
-        # 2. Prepare confirmation data
+        # If donation is linked to a user, ensure only they can view it
+        if donation.user_id and (
+            not current_user.is_authenticated or current_user.id != donation.user_id
+        ):
+            flash("Please log in to view this donation.", "warning")
+            return redirect(url_for("auth.login", next=request.url))
+
+        # Shared data for both guest and authenticated confirmation
         confirmation_data = {
             'donation': donation,
-            'receipt_url': url_for('donate.download_receipt', donation_id=donation.id),
-            'user_donations': Donation.query.filter_by(
-                user_id=current_user.id
-            ).order_by(Donation.created_at.desc()).limit(5).all(),
-            'impact_stats': {
-                'total_donated': db.session.query(
-                    func.sum(Donation.amount)
-                ).filter_by(
-                    user_id=current_user.id
-                ).scalar() or 0,
-                'donation_count': Donation.query.filter_by(
-                    user_id=current_user.id
-                ).count()
-            }
+            'receipt_url': url_for('donate.download_receipt', donation_id=donation.id)
         }
 
-        # 3. Add program details if applicable
+        if current_user.is_authenticated:
+            confirmation_data.update({
+                'user_donations': Donation.query.filter_by(
+                    user_id=current_user.id
+                ).order_by(Donation.created_at.desc()).limit(5).all(),
+                'impact_stats': {
+                    'total_donated': db.session.query(
+                        func.sum(Donation.amount)
+                    ).filter_by(user_id=current_user.id).scalar() or 0,
+                    'donation_count': Donation.query.filter_by(
+                        user_id=current_user.id
+                    ).count()
+                }
+            })
+
+        # Include program if available
         if donation.program_id:
             program = Program.query.get(donation.program_id)
             if program:
                 confirmation_data['program'] = program
                 confirmation_data['program_url'] = url_for('main.program_detail', slug=program.slug)
 
-        return render_template(
-            'donate/authenticated_confirmation.html',
-            **confirmation_data
-        )
+        # Render appropriate template
+        if current_user.is_authenticated and donation.user_id == current_user.id:
+            return render_template("donate/authenticated_confirmation.html", **confirmation_data)
+        else:
+            return render_template("donate/guest_confirmation.html", **confirmation_data)
 
     except Exception as e:
         current_app.logger.error(f"Confirmation error: {str(e)}")
-        flash('Error loading donation details', 'danger')
-        return redirect(url_for('main.home'))
+        flash("Error loading donation details", "danger")
+        return redirect(url_for("main.home"))
+
+
 
 
 @donate_bp.route('/receipt/<int:donation_id>')
@@ -392,24 +332,3 @@ def find_donations():
     
     return render_template('donate/find_donations.html', form=form)
 
-
-@donate_bp.route('/thank-you', methods=['GET'])
-def thank_you():
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Thank You</title>
-        <style>
-            body { font-family: Arial, sans-serif; text-align: center; padding: 4rem; background: #f9f9f9; }
-            .message { background: #fff; padding: 2rem; border-radius: 8px; display: inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-        </style>
-    </head>
-    <body>
-        <div class="message">
-            <h1>🎉 Thank You for Your Donation!</h1>
-            <p>Your support helps us make a real difference.</p>
-        </div>
-    </body>
-    </html>
-    """
