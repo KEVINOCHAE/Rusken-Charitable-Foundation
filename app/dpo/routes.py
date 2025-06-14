@@ -13,8 +13,20 @@ import time
 dpo_bp = Blueprint('dpo', __name__)
 
 def build_dpo_payload(donation, email, amount):
-    """Build XML payload matching DPO's exact specification with proper escaping"""
+    """Build XML payload with proper callback and redirect URLs"""
     service_date = datetime.utcnow().strftime('%Y/%m/%d %H:%M')
+    
+    user_redirect_url = url_for(
+        'donate.payment_complete', 
+        donation_id=donation.id,
+        _external=True
+    )
+    user_back_url = url_for(
+        'donate.payment_cancel',
+        program_id=donation.program_id,
+        _external=True
+    )
+    callback_url = url_for('donate.payment_callback', _external=True)
 
     return f"""<?xml version="1.0" encoding="utf-8"?>
 <API3G>
@@ -24,8 +36,9 @@ def build_dpo_payload(donation, email, amount):
     <PaymentAmount>{escape(str(amount))}</PaymentAmount>
     <PaymentCurrency>KES</PaymentCurrency>
     <CompanyRef>{escape(f"DONATION_{donation.id}")}</CompanyRef>
-    <RedirectURL>{escape(url_for('donate.payment_callback', _external=True))}</RedirectURL>
-    <BackURL>{escape(url_for('donate.payment_cancel', _external=True))}</BackURL>
+    <RedirectURL>{escape(user_redirect_url)}</RedirectURL>
+    <BackURL>{escape(user_back_url)}</BackURL>
+    <CallbackURL>{escape(callback_url)}</CallbackURL>
     <CompanyRefUnique>0</CompanyRefUnique>
     <PTL>{current_app.config.get('DPO_PTL', 5)}</PTL>
   </Transaction>
@@ -37,6 +50,7 @@ def build_dpo_payload(donation, email, amount):
     </Service>
   </Services>
 </API3G>"""
+
 
 @dpo_bp.route('/initialize', methods=['POST'])
 @csrf.exempt
