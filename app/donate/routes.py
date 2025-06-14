@@ -175,6 +175,68 @@ def send_donation_receipt(app, donation):
             current_app.logger.error(f"Failed to send receipt: {str(e)}", exc_info=True)
 
 
+@donate_bp.route('/dpo-redirect', methods=['GET'])
+def dpo_redirect():
+    """
+    Called by DPO after user completes payment.
+    Verifies the transaction, updates the donation, then redirects to confirmation.
+    """
+    transaction_token = request.args.get('TransactionToken')
+
+    if not transaction_token:
+        flash("Missing transaction token. We could not verify your donation.", "danger")
+        return redirect(url_for('main.home'))
+
+    try:
+        # 1. Verify transaction with DPO
+        transaction = verify_dpo_transaction(transaction_token)
+        if not transaction or transaction.get('status') != 'Completed':
+            raise ValueError("Payment not completed")
+
+        # 2. Find donation in DB
+        donation = Donation.query.filter_by(gateway_reference=transaction_token).first()
+        if not donation:
+            raise ValueError("Donation record not found")
+
+        # 3. Prevent duplicate updates
+        if donation.status != 'completed':
+            # 4. Amount check
+            try:
+                dpo_amount = Decimal(str(transaction['transactionAmount'])).quantize(Decimal('0.01'))
+                if dpo_amount != donation.amount:
+                    raise ValueError(f"Payment mismatch: DPO={dpo_amount}, DB={donation.amount}")
+            except (InvalidOperation, ValueError) as e:
+                raise ValueError(f"Invalid transaction amount: {str(e)}")
+
+            # 5. Update donation
+            donation.status = 'completed'
+            donation.completed_at = datetime.utcnow()
+            donation.gateway_response = transaction
+            db.session.commit()
+
+            # 6. Send receipt (background)
+            try:
+                threading.Thread(
+                    target=send_donation_receipt,
+                    args=(current_app._get_current_object(), donation),
+                    daemon=True
+                ).start()
+            except Exception as e:
+                current_app.logger.warning(f"Failed to queue receipt: {e}")
+
+        # 7. Redirect to appropriate confirmation
+        from flask_login import current_user
+        if current_user.is_authenticated:
+            return redirect(url_for('donate.confirmation', donation_id=donation.id))
+        else:
+            return render_template('donate/guest_confirmation.html', donation=donation)
+
+    except Exception as e:
+        current_app.logger.error(f"DPO redirect verification failed: {str(e)}", exc_info=True)
+        flash("There was a problem verifying your donation. Please contact support.", "danger")
+        return redirect(url_for('main.home'))
+
+
 @donate_bp.route('/donate', methods=['GET'])
 def donate():
     program_id = request.args.get('program_id', type=int)
@@ -249,7 +311,6 @@ def confirmation(donation_id):
         current_app.logger.error(f"Confirmation error: {str(e)}")
         flash("Error loading donation details", "danger")
         return redirect(url_for("main.home"))
-
 
 
 

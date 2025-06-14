@@ -36760,3 +36760,48 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='secure.3gdirectpa
 2025-06-14 13:37:42,182 [INFO] - 127.0.0.1 - - [14/Jun/2025 13:37:42] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
 2025-06-14 13:37:42,506 [INFO] - 127.0.0.1 - - [14/Jun/2025 13:37:42] "GET /categories HTTP/1.1" 200 -
 2025-06-14 13:37:42,719 [INFO] - 127.0.0.1 - - [14/Jun/2025 13:37:42] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-06-14 13:38:42,915 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-14 13:38:42,916 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-14 13:38:42,917 [INFO] -  * Restarting with stat
+2025-06-14 13:38:43,856 [WARNING] -  * Debugger is active!
+2025-06-14 13:38:43,857 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 14:01:13,742 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-14 14:01:13,767 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-14 14:01:13,769 [INFO] -  * Restarting with stat
+2025-06-14 14:01:15,156 [WARNING] -  * Debugger is active!
+2025-06-14 14:01:15,485 [INFO] -  * Debugger PIN: 764-674-973
+2025-06-14 14:01:19,073 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:01:19] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-06-14 14:01:19,361 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:01:19] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-06-14 14:01:19,475 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:01:19] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-14 14:01:19,498 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:01:19] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-14 14:01:19,508 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:01:19] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-14 14:01:19,510 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:01:19] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-14 14:01:27,246 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:01:27] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-06-14 14:01:35,263 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:01:35] "GET /categories HTTP/1.1" 200 -
+2025-06-14 14:01:35,264 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:01:35] "GET /categories HTTP/1.1" 200 -
+2025-06-14 14:04:45,580 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:04:45] "GET /auth/login HTTP/1.1" 200 -
+2025-06-14 14:04:45,817 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:04:45] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-14 14:04:45,820 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:04:45] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-14 14:05:01,048 [INFO] - 127.0.0.1 - - [14/Jun/2025 14:05:01] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-06-14 15:45:07,335 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/dpo/routes.py', reloading
+2025-06-14 15:45:12,422 [INFO] -  * Restarting with stat
+2025-06-14 15:45:21,363 [WARNING] -  * Debugger is active!
+2025-06-14 15:45:21,364 [INFO] -  * Debugger PIN: 764-674-973
+2025-06-14 15:46:34,350 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 15:46:34,582 [INFO] -  * Restarting with stat
+2025-06-14 15:46:36,131 [WARNING] -  * Debugger is active!
+2025-06-14 15:46:36,132 [INFO] -  * Debugger PIN: 764-674-973
+2025-06-14 15:46:50,297 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 15:46:50,525 [INFO] -  * Restarting with stat
+2025-06-14 15:46:51,683 [WARNING] -  * Debugger is active!
+2025-06-14 15:46:51,684 [INFO] -  * Debugger PIN: 764-674-973
+2025-06-14 15:47:00,798 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 15:47:01,026 [INFO] -  * Restarting with stat
+2025-06-14 15:47:02,347 [WARNING] -  * Debugger is active!
+2025-06-14 15:47:02,348 [INFO] -  * Debugger PIN: 764-674-973
+2025-06-14 15:59:41,490 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-14 15:59:41,491 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-14 15:59:41,492 [INFO] -  * Restarting with stat

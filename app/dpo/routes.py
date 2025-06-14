@@ -16,22 +16,25 @@ def build_dpo_payload(donation, email, amount):
     """Build XML payload with proper callback and redirect URLs"""
     service_date = datetime.utcnow().strftime('%Y/%m/%d %H:%M')
 
-    # Where the user is redirected after successful payment
+    # ✅ NEW: User is redirected here after payment to verify & confirm donation
     user_redirect_url = url_for(
-        'donate.confirmation', 
-        donation_id=donation.id,
+        'donate.dpo_redirect',  # <-- new redirect route that verifies & updates DB
+        TransactionToken=donation.gateway_reference,
         _external=True
     )
 
-    # Where the user goes if they cancel payment
+    # ❌ Cancelled or user backs out
     user_back_url = url_for(
         'donate.payment_cancel',
         program_id=donation.program_id,
         _external=True
     )
 
-    # Where DPO calls your server to notify about payment completion
-    callback_url = url_for('donate.payment_callback', _external=True)
+    # ✅ Server-to-server notification from DPO
+    callback_url = url_for(
+        'donate.payment_callback',
+        _external=True
+    )
 
     return f"""<?xml version="1.0" encoding="utf-8"?>
 <API3G>
@@ -55,7 +58,6 @@ def build_dpo_payload(donation, email, amount):
     </Service>
   </Services>
 </API3G>"""
-
 
 
 @dpo_bp.route('/initialize', methods=['POST'])
