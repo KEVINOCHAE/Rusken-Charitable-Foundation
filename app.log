@@ -36660,3 +36660,63 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='secure.3gdirectpa
 2025-06-14 09:31:01,961 [INFO] -  * Restarting with stat
 2025-06-14 09:31:06,980 [WARNING] -  * Debugger is active!
 2025-06-14 09:31:06,981 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 09:32:34,266 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-14 09:32:34,266 [INFO] - [33mPress CTRL+C to quit[0m
+2025-06-14 09:32:34,267 [INFO] -  * Restarting with stat
+2025-06-14 09:32:35,206 [WARNING] -  * Debugger is active!
+2025-06-14 09:32:35,207 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 09:40:33,413 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 09:40:33,674 [INFO] -  * Restarting with stat
+2025-06-14 09:40:35,322 [WARNING] -  * Debugger is active!
+2025-06-14 09:40:35,323 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 09:58:44,705 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 09:58:48,978 [INFO] -  * Restarting with stat
+2025-06-14 09:58:59,775 [WARNING] -  * Debugger is active!
+2025-06-14 09:58:59,797 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 10:01:12,165 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 10:01:12,406 [INFO] -  * Restarting with stat
+2025-06-14 10:01:13,616 [WARNING] -  * Debugger is active!
+2025-06-14 10:01:13,617 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 10:01:57,623 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 10:01:57,886 [INFO] -  * Restarting with stat
+2025-06-14 10:01:59,375 [WARNING] -  * Debugger is active!
+2025-06-14 10:01:59,376 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 10:03:24,638 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 10:03:24,888 [INFO] -  * Restarting with stat
+2025-06-14 10:03:25,970 [WARNING] -  * Debugger is active!
+2025-06-14 10:03:25,970 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 10:04:52,307 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 10:04:52,547 [INFO] -  * Restarting with stat
+2025-06-14 10:04:53,741 [WARNING] -  * Debugger is active!
+2025-06-14 10:04:53,742 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 10:05:05,047 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:05] "GET /programs HTTP/1.1" 200 -
+2025-06-14 10:05:05,731 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:05] "GET /static/css/home.css HTTP/1.1" 200 -
+2025-06-14 10:05:05,765 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:05] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-06-14 10:05:05,811 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:05] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-06-14 10:05:06,116 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:06] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-14 10:05:06,160 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:06] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-14 10:05:06,476 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:06] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-14 10:05:06,512 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:06] "[33mGET /static/programs/placeholder.jpg HTTP/1.1[0m" 404 -
+2025-06-14 10:05:07,131 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:07] "GET /categories HTTP/1.1" 200 -
+2025-06-14 10:05:07,266 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:07] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-06-14 10:05:09,924 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:09] "GET /donate/donate?program_id=1 HTTP/1.1" 200 -
+2025-06-14 10:05:10,223 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:10] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+2025-06-14 10:05:10,228 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:10] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-06-14 10:05:10,235 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:10] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-06-14 10:05:10,244 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:10] "[36mGET /static/js/donation.js HTTP/1.1[0m" 304 -
+2025-06-14 10:05:10,787 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:10] "[36mGET /static/images/Rusken-Charity-Foundation.png HTTP/1.1[0m" 304 -
+2025-06-14 10:05:11,110 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:11] "GET /categories HTTP/1.1" 200 -
+2025-06-14 10:05:11,177 [INFO] - 127.0.0.1 - - [14/Jun/2025 10:05:11] "GET /static/favicon/apple-touch-icon.png HTTP/1.1" 200 -
+2025-06-14 10:05:41,759 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 10:05:42,203 [INFO] -  * Restarting with stat
+2025-06-14 10:05:45,440 [WARNING] -  * Debugger is active!
+2025-06-14 10:05:45,441 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 10:07:08,505 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 10:07:08,746 [INFO] -  * Restarting with stat
+2025-06-14 10:07:09,896 [WARNING] -  * Debugger is active!
+2025-06-14 10:07:09,896 [INFO] -  * Debugger PIN: 765-811-279
+2025-06-14 10:11:36,653 [INFO] -  * Detected change in '/home/bha/Desktop/Flask/ruskencfhosted/app/donate/routes.py', reloading
+2025-06-14 10:11:36,901 [INFO] -  * Restarting with stat
+2025-06-14 10:11:38,075 [WARNING] -  * Debugger is active!
+2025-06-14 10:11:38,075 [INFO] -  * Debugger PIN: 765-811-279

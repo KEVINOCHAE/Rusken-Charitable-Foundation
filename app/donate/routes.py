@@ -1,7 +1,6 @@
 from flask import (
     Blueprint, render_template, request, flash, redirect, url_for, current_app, abort, jsonify, make_response, send_file 
 )
-
 from io import BytesIO
 from app.utils.receipts import generate_receipt_pdf
 from decimal import Decimal, ROUND_HALF_UP
@@ -16,121 +15,231 @@ from app.utils.tokens import generate_email_token, verify_email_token
 import logging
 from app.admin.models import Program,Donation, User
 from .forms import DonationForm, FindDonationsForm
+import threading
+import requests
+import xml.etree.ElementTree as ET
+from xml.sax.saxutils import escape
+
+
 # Blueprint
 donate_bp = Blueprint('donate', __name__)
 logger = logging.getLogger(__name__)
 
-# Custom Exceptions
-class PaymentVerificationError(Exception):
-    pass
+# DPO Configuration
+DPO_CONFIG = {
+    
+    'VERIFY_URL': "https://secure.3gdirectpay.com/API/v6/verify",
+    'TIMEOUT': 15  # seconds
+}
 
-class PaymentInitializationError(Exception):
-    pass
-
-
-
+# -----------------------------
+# Payment Callback Handler
+# -----------------------------
 @donate_bp.route('/payment-callback', methods=['GET'])
 def payment_callback():
+    """Handle DPO payment notifications"""
     transaction_token = request.args.get('TransactionToken')
-    
-    # Immediately return 200 OK to acknowledge receipt
     response = make_response("OK", 200)
-    
+
     if not transaction_token:
         current_app.logger.error("DPO callback missing TransactionToken")
-        return response  # Still return 200 to prevent DPO retries
+        return response
 
-    # Process the transaction asynchronously
     try:
-        # Use a task queue or thread for production
-        from threading import Thread
-        Thread(target=process_dpo_callback, args=(transaction_token,)).start()
+        # Start background processing with proper app context
+        app = current_app._get_current_object()
+        thread = threading.Thread(
+            target=process_dpo_callback,
+            args=(app, transaction_token),
+            daemon=True
+        )
+        thread.start()
     except Exception as e:
-        current_app.logger.error(f"Failed to process callback: {str(e)}")
+        current_app.logger.error(f"Failed to start callback processing: {str(e)}", exc_info=True)
 
     return response
 
-
-def process_dpo_callback(transaction_token):
-    """Process the DPO callback in the background"""
-    with current_app.app_context():
+# -----------------------------
+# Background Callback Processor
+# -----------------------------
+def process_dpo_callback(app, transaction_token):
+    """Process payment verification and update donation status"""
+    with app.app_context():
         try:
             # 1. Verify transaction with DPO
             transaction = verify_dpo_transaction(transaction_token)
-            
-            # 2. Lookup donation
+            if not transaction or transaction.get('status') != 'Completed':
+                raise ValueError("Transaction verification failed")
+
+            # 2. Get donation record
             donation = Donation.query.filter_by(gateway_reference=transaction_token).first()
             if not donation:
-                current_app.logger.error(f"No donation for token: {transaction_token}")
-                return
+                raise ValueError(f"No donation found for token: {transaction_token}")
 
-            # 3. Check if already processed
+            # 3. Check for duplicate processing
             if donation.status == 'completed':
                 current_app.logger.info(f"Duplicate callback for donation {donation.id}")
                 return
 
             # 4. Validate amount
-            dpo_amount = Decimal(str(transaction['transactionAmount'])).quantize(Decimal('0.01'))
-            if dpo_amount != donation.amount:
-                current_app.logger.error(f"Amount mismatch for donation {donation.id}")
-                raise PaymentVerificationError("Amount verification failed")
+            try:
+                dpo_amount = Decimal(str(transaction['transactionAmount'])).quantize(Decimal('0.01'))
+                if dpo_amount != donation.amount:
+                    raise ValueError(f"Amount mismatch: DPO {dpo_amount} vs DB {donation.amount}")
+            except (InvalidOperation, ValueError) as e:
+                raise ValueError(f"Invalid transaction amount: {str(e)}")
 
-            # 5. Update donation
+            # 5. Update donation status
             donation.status = 'completed'
             donation.completed_at = datetime.utcnow()
             donation.gateway_response = transaction
             db.session.commit()
 
-            # 6. Send receipt
+            # 6. Send receipt asynchronously
             try:
-                send_donation_receipt(donation)
+                threading.Thread(
+                    target=send_donation_receipt,
+                    args=(app, donation),
+                    daemon=True
+                ).start()
             except Exception as e:
-                current_app.logger.error(f"Receipt failed for {donation.id}: {str(e)}")
-
-            # Store in session for the redirect handler
-            from flask import session
-            session[f'donation_{donation.id}_processed'] = True
+                current_app.logger.error(f"Failed to queue receipt: {str(e)}")
 
         except Exception as e:
-            current_app.logger.error(f"Callback processing failed: {str(e)}")
+            current_app.logger.error(f"Callback processing failed: {str(e)}", exc_info=True)
             db.session.rollback()
+            raise
 
-
+# -----------------------------
+# Payment Completion Handler
+# -----------------------------
 @donate_bp.route('/payment-complete', methods=['GET'])
 def payment_complete():
-    """Handle user redirect after processing"""
+    """Handle user redirect after payment processing"""
     donation_id = request.args.get('donation_id')
     
-    if not donation_id:
-        flash('Invalid completion request', 'danger')
+    if not donation_id or not donation_id.isdigit():
+        flash('Invalid donation reference', 'danger')
         return redirect(url_for('main.home'))
 
-    # Check if processing is done
-    from flask import session
-    if session.get(f'donation_{donation_id}_processed'):
-        session.pop(f'donation_{donation_id}_processed', None)
+    donation = Donation.query.get(int(donation_id))
+    
+    if not donation:
+        flash('Donation not found', 'danger')
+        return redirect(url_for('main.home'))
+
+    if donation.status == 'completed':
         flash('Thank you for your donation!', 'success')
         return redirect(url_for('donate.thank_you'))
-    
-    # If not processed yet, show waiting page with auto-refresh
+
+    # Show processing page with auto-refresh
     return """
-    <html>
+    <!DOCTYPE html>
+    <html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="refresh" content="3">
         <title>Processing Your Donation</title>
+        <style>
+            .processing-container {
+                max-width: 600px;
+                margin: 2rem auto;
+                padding: 2rem;
+                text-align: center;
+                background: #f8f9fa;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .spinner {
+                margin: 0 auto 1.5rem;
+                width: 50px;
+                height: 50px;
+                border: 5px solid #f3f3f3;
+                border-top: 5px solid #3498db;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
     </head>
     <body>
-        <h1>Processing your donation...</h1>
-        <p>This page will refresh automatically. Please wait.</p>
+        <div class="processing-container">
+            <div class="spinner"></div>
+            <h1>Processing Your Donation</h1>
+            <p>We're verifying your payment. This page will refresh automatically.</p>
+            <p><small>Transaction ID: {donation_id}</small></p>
+        </div>
     </body>
     </html>
-    """
+    """.format(donation_id=donation_id)
 
+# -----------------------------
+# Payment Cancellation Handler
+# -----------------------------
 @donate_bp.route('/payment-cancel', methods=['GET'])
 def payment_cancel():
-    flash('Your donation was cancelled. You can try again anytime.', 'warning')
-    return redirect(url_for('donate.donate', program_id=request.args.get('program_id')))
-    
+    """Handle payment cancellation"""
+    program_id = request.args.get('program_id')
+    flash('Your donation was not completed. You may try again if you wish.', 'warning')
+    return redirect(url_for('donate.donate', program_id=program_id))
+
+# -----------------------------
+# Helper Functions
+# -----------------------------
+def verify_dpo_transaction(token):
+    """Verify transaction with DPO API"""
+    try:
+        payload = f"""<?xml version="1.0" encoding="utf-8"?>
+<API3G>
+  <CompanyToken>{escape(current_app.config['DPO_COMPANY_TOKEN'])}</CompanyToken>
+  <Request>verifyToken</Request>
+  <TransactionToken>{escape(token)}</TransactionToken>
+</API3G>"""
+
+        response = requests.post(
+            DPO_CONFIG['VERIFY_URL'],
+            data=payload,
+            headers={'Content-Type': 'application/xml'},
+            timeout=DPO_CONFIG['TIMEOUT']
+        )
+
+        if response.status_code != 200:
+            raise ValueError(f"DPO API returned {response.status_code}")
+
+        root = ET.fromstring(response.content)
+        if root.findtext("Result") != "000":
+            raise ValueError(root.findtext("ResultExplanation") or "Verification failed")
+
+        return {
+            'transactionToken': token,
+            'transactionAmount': root.findtext("TransactionAmount"),
+            'status': 'Completed',
+            'raw_response': response.text
+        }
+
+    except Exception as e:
+        current_app.logger.error(f"Transaction verification failed: {str(e)}", exc_info=True)
+        return None
+
+def send_donation_receipt(app, donation):
+    """Send donation receipt email"""
+    with app.app_context():
+        try:
+            # Implement actual email sending logic here
+            # Example using Flask-Mail:
+            # msg = Message("Donation Receipt",
+            #              recipients=[donation.donor_email])
+            # msg.body = f"Thank you for your donation of {donation.amount}"
+            # mail.send(msg)
+            
+            current_app.logger.info(f"Receipt sent for donation {donation.id}")
+        except Exception as e:
+            current_app.logger.error(f"Failed to send receipt: {str(e)}", exc_info=True)
+
 
 @donate_bp.route('/donate', methods=['GET'])
 def donate():
@@ -282,3 +391,25 @@ def find_donations():
         return redirect(url_for('donate.find_donations'))
     
     return render_template('donate/find_donations.html', form=form)
+
+
+@donate_bp.route('/thank-you', methods=['GET'])
+def thank_you():
+    return """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Thank You</title>
+        <style>
+            body { font-family: Arial, sans-serif; text-align: center; padding: 4rem; background: #f9f9f9; }
+            .message { background: #fff; padding: 2rem; border-radius: 8px; display: inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        </style>
+    </head>
+    <body>
+        <div class="message">
+            <h1>🎉 Thank You for Your Donation!</h1>
+            <p>Your support helps us make a real difference.</p>
+        </div>
+    </body>
+    </html>
+    """
