@@ -102,10 +102,73 @@
     </div>
   </div>
 
+<div id="toast-container" class="fixed top-5 right-5 z-50 space-y-4"></div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const messages = {{ get_flashed_messages(with_categories=true)|tojson }};
+    messages.forEach(([category, message]) => showToast(message, category));
+  });
+
+  function showToast(message, type = 'info') {
+    const container = document.getElementById('toast-container');
+
+    const types = {
+      success: {
+        icon: `<svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+               </svg>`,
+        classes: 'border-green-300 text-green-800',
+      },
+      error: {
+        icon: `<svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+               </svg>`,
+        classes: 'border-red-300 text-red-800',
+      },
+      info: {
+        icon: `<svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01"/>
+               </svg>`,
+        classes: 'border-blue-300 text-blue-800',
+      },
+    };
+
+    const { icon, classes } = types[type] || types.info;
+
+    const toast = document.createElement('div');
+    toast.className = `max-w-xs w-full bg-white px-4 py-3 rounded-lg shadow-md flex items-start gap-3 border ${classes} animate-slide-in`;
+    toast.innerHTML = `
+      <div class="mt-0.5">${icon}</div>
+      <div class="text-sm flex-1">${message}</div>
+      <button onclick="this.parentElement.remove()" class="hover:opacity-70">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 5000);
+  }
+</script>
+
+<style>
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.animate-slide-in {
+  animation: slideInRight 0.4s ease-out;
+}
+</style>
+
 
   <main id="main-content" class="container-fluid flex-grow-1 px-0 ">
 
     {% block content %}{% endblock %}
+
   </main>
   
   <!-- Scroll To Top -->

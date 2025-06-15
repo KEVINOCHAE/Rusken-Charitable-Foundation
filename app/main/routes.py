@@ -106,6 +106,17 @@ def change_password_fragment():
     return render_template('partials/_change_password_fragment.html', form=form)
 
 
+@main_bp.route('/support-fragment')
+def support_fragment():
+    support_data = {
+        "phone": "+254 757 734 064",
+        "email": "ruskencf2024@gmail.com",
+        "hours": "9AM - 5PM EAT, Mon-Fri",
+        "response_time": "Typically within 24 hours",
+        "contact_page": url_for('main.contact')  
+    }
+    return render_template('partials/support_fragment.html', **support_data)
+
 @main_bp.route('/edit-profile-fragment')
 @login_required
 def edit_profile_fragment():
