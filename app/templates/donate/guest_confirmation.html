@@ -1,195 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thank You for Your Donation</title>
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
-  <!-- Confetti.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-  <style>
-    :root {
-      --primary-color: #28a745;
-      --primary-hover: #218838;
-      --bg-color: #f7f9fc;
-      --text-color: #333;
-      --card-bg: #ffffff;
-      --transition-speed: 0.3s;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background: var(--bg-color);
-      color: var(--text-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
-      flex-direction: column;
-      overflow-x: hidden;
-    }
-    .container {
-      background: var(--card-bg);
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      max-width: 620px;
-      width: 100%;
-      text-align: center;
-      animation: fadeIn 0.8s ease-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animation-container {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 20px;
-      position: relative;
-    }
-    .checkmark {
-      stroke: var(--primary-color);
-      stroke-width: 8;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-dasharray: 100;
-      stroke-dashoffset: 100;
-      animation: draw 1s ease-out forwards;
-    }
-    @keyframes draw {
-      to { stroke-dashoffset: 0; }
-    }
-    h1 {
-      font-size: 1.8em;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-    p {
-      font-size: 1em;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-    .home-button, .btn-primary, .btn-outline {
-      display: inline-block;
-      padding: 12px 24px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background-color var(--transition-speed), color var(--transition-speed);
-      margin: 5px;
-      cursor: pointer;
-    }
-    .home-button {
-      background-color: var(--primary-color);
-      color: #fff;
-      border: 2px solid var(--primary-color);
-    }
-    .home-button:hover {
-      background-color: var(--primary-hover);
-      border-color: var(--primary-hover);
-    }
-    .btn-primary {
-      background-color: var(--primary-color);
-      color: #fff;
-      border: 2px solid var(--primary-color);
-    }
-    .btn-primary:hover {
-      background-color: var(--primary-hover);
-      border-color: var(--primary-hover);
-    }
-    .btn-outline {
-      background-color: transparent;
-      color: var(--primary-color);
-      border: 2px solid var(--primary-color);
-    }
-    .btn-outline:hover {
-      background-color: var(--primary-color);
-      color: #fff;
-    }
-    .alert {
-      background: #e9f7ef;
-      border-left: 4px solid var(--primary-color);
-      padding: 20px;
-      margin-top: 30px;
-      text-align: left;
-      border-radius: 8px;
-    }
-    .alert h5 {
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-    .alert ul {
-      margin-left: 20px;
-      margin-bottom: 10px;
-    }
-    .dark-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      font-size: 1.2em;
-    }
-  </style>
-</head>
-<body>
-  <button class="dark-toggle" id="darkModeToggle">🌙</button>
-  <div class="container">
-    <div class="animation-container">
-      <svg viewBox="0 0 52 52">
-        <path class="checkmark" d="M14 27l7 7 17-17"/>
-      </svg>
-    </div>
-    <h1>Thank You!</h1>
-    <p>Your generous donation of <strong>{{ donation.amount }} {{ donation.currency }}</strong> has been received. Your support is greatly appreciated.</p>
-
-    {% if not current_user.is_authenticated %}
-    <div class="alert">
-      <h5>Want to track all your donations?</h5>
-      <p>Create an account with <strong>{{ donation.donor_email }}</strong> to:</p>
-      <ul>
-        <li>View your complete donation history</li>
-        <li>Get personalized updates</li>
-        <li>Manage your giving preferences</li>
-      </ul>
-      <a href="{{ url_for('auth.register', email=donation.donor_email) }}" class="btn-primary">Create Account</a>
-      <a href="{{ url_for('donate.find_donations') }}" class="btn-outline">Find My Donations</a>
-    </div>
-    {% endif %}
-    <a href="{{ url_for('main.home') }}" class="home-button">Go Back Home</a>
-  </div>
-
-  <script>
-    // Confetti celebration
-    window.addEventListener('load', () => {
-      confetti({ particleCount: 150, spread: 60 });
-    });
-
-    // Dark mode toggle
-    const toggle = document.getElementById('darkModeToggle');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      if (document.body.classList.contains('dark-mode')) {
-        document.documentElement.style.setProperty('--bg-color', '#1e1e2f');
-        document.documentElement.style.setProperty('--text-color', '#e0e0e0');
-        document.documentElement.style.setProperty('--card-bg', '#2a2a3a');
-        toggle.textContent = '☀️';
-      } else {
-        document.documentElement.style.setProperty('--bg-color', '#f7f9fc');
-        document.documentElement.style.setProperty('--text-color', '#333');
-        document.documentElement.style.setProperty('--card-bg', '#ffffff');
-        toggle.textContent = '🌙';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donation Confirmed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .dark .dark-toggle {
+        content: '☀️';
       }
-    });
-  </script>
-</body>
+      .dark .bg-card {
+        @apply bg-gray-800 text-white;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-all duration-300 font-sans flex items-center justify-center min-h-screen px-4 relative">
+    
+
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 max-w-xl w-full text-center space-y-6 transition-all duration-300 bg-card">
+      <!-- Checkmark Animation -->
+      <div class="w-24 h-24 mx-auto rounded-full bg-green-500 flex items-center justify-center">
+        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" stroke-width="4" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl font-semibold">Thank You!</h1>
+      <p class="text-gray-600 dark:text-gray-300">
+        Your donation of <strong>{{ donation.amount }} {{ donation.currency }}</strong> has been successfully received.
+        Your support makes a big difference!
+      </p>
+
+      {% if not current_user.is_authenticated %}
+      <!-- Guest Message -->
+      <div class="bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 p-5 rounded-md text-left">
+        <h2 class="text-lg font-semibold mb-2">Want to track your donations?</h2>
+        <p class="text-sm mb-2">
+          Create an account with <strong>{{ donation.donor_email }}</strong> to:
+        </p>
+        <ul class="list-disc pl-5 text-sm space-y-1 mb-3">
+          <li>View all your donations</li>
+          <li>Receive updates</li>
+          <li>Manage preferences</li>
+        </ul>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="{{ url_for('auth.register', email=donation.donor_email) }}"
+             class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium text-center">
+            Create Account
+          </a>
+          <a href="{{ url_for('donate.find_donations') }}"
+             class="border border-green-600 text-green-700 hover:bg-green-600 hover:text-white px-4 py-2 rounded-md text-sm font-medium text-center">
+            Find My Donations
+          </a>
+        </div>
+      </div>
+      {% endif %}
+
+      <a href="{{ url_for('main.home') }}"
+         class="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium mt-4">
+        Return Home
+      </a>
+    </div>
+
+    <script>
+      // Confetti Celebration
+      window.addEventListener('load', () => {
+        confetti({
+          particleCount: 510,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      });
+
+     
+    </script>
+  </body>
 </html>

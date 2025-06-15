@@ -2,9 +2,9 @@ from flask import render_template, redirect, url_for, flash, request,Blueprint
 from flask_login import login_user, logout_user, login_required, current_user
 from app import db
 from app.admin.models import User, Role
-from .forms import LoginForm, AdminUserForm,RegisterForm, ForgotPasswordForm, ResetPasswordForm
+from .forms import LoginForm, AdminUserForm,RegisterForm, ForgotPasswordForm, ResetPasswordForm, ChangePasswordForm, UpdateProfileForm
 from app.email.send_mail import send_email
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from datetime import datetime
 
@@ -55,10 +55,13 @@ def register():
                 flash('Invalid referral code.', 'danger')
                 return render_template('auth/register.html', form=form)
 
+        # Convert email to lowercase
+        email = form.email.data.strip().lower()
+
         # Create user
         user = User.create_with_referral(
             username=form.username.data,
-            email=form.email.data,
+            email=email,
             password_hash=generate_password_hash(form.password.data),
             role_id=default_role.id,
             invited_by_id=invited_by.id if invited_by else None
@@ -86,27 +89,27 @@ def register():
     return render_template('auth/register.html', form=form)
 
 
-
-# Login route
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
-    
+
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        email = form.email.data.strip().lower()
+        user = User.query.filter_by(email=email).first()
+
         if user and user.check_password(form.password.data):
-            # ← pass form.remember.data here
             login_user(user, remember=form.remember.data)
             flash('Logged in successfully!', 'success')
-            
+
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('main.home'))
+            return redirect(next_page or url_for('main.home'))
         else:
             flash('Invalid email or password', 'danger')
-    
+
     return render_template('auth/login.html', form=form)
+
 
 # Logout route
 @auth_bp.route('/logout')
@@ -147,6 +150,59 @@ def view_users():
 @roles_required('Admin')
 def admin_dashboard():
     return render_template('admin/dashboard.html')
+
+    
+@auth_bp.route('/update-profile', methods=['POST'])
+@login_required
+def update_profile():
+    form = UpdateProfileForm()
+
+    if form.validate_on_submit():
+        # Clean and split the full name input
+        raw_name = form.full_name.data.strip()
+        name_parts = raw_name.split()
+
+        # Ensure no more than 3 name parts (i.e., 2 spaces max)
+        if len(name_parts) > 3:
+            flash("Please enter up to 3 names only.", "danger")
+            referral_link = current_user.get_referral_link()
+            return render_template('partials/edit_profile_fragment.html', form=form, user=current_user, referral_link=referral_link)
+
+        # Capitalize each name properly
+        formatted_name = ' '.join(word.capitalize() for word in name_parts)
+
+        # Update username with cleaned full name
+        current_user.username = formatted_name
+        db.session.commit()
+
+        flash("Profile updated successfully!", "success")
+        return redirect(url_for('main.dashboard'))
+
+    # If form is invalid, reload the fragment with flash message
+    flash("Failed to update profile. Please check your input.", "danger")
+    referral_link = current_user.get_referral_link()
+    return render_template('partials/edit_profile_fragment.html', form=form, user=current_user, referral_link=referral_link)
+
+@auth_bp.route('/change-password', methods=['POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+
+    if form.validate_on_submit():
+        # Validate current password
+        if not check_password_hash(current_user.password_hash, form.current_password.data):
+            flash("Your current password is incorrect.", "danger")
+            return redirect(url_for('main.dashboard'))  
+
+        # Update password
+        current_user.password_hash = generate_password_hash(form.new_password.data)
+        db.session.commit()
+        flash("Password updated successfully!", "success")
+        return redirect(url_for('main.dashboard'))  # Or update fragment if using JS
+
+    # If form not valid, re-render fragment (JS could handle this too)
+    return render_template('partials/_change_password_fragment.html', form=form)
+
 
 
 @auth_bp.route('/forgot-password', methods=['GET', 'POST'])

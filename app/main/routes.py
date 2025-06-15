@@ -1,13 +1,13 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, session, request
+from flask import Blueprint, render_template, redirect, url_for, flash, request, session, request, current_app
 from flask import jsonify
 from app.admin.models import  ContactMessage,Program,Category, User, Donation
+from app.auth.forms import ChangePasswordForm, UpdateProfileForm
 from sqlalchemy import func
 from app.main.forms import  ContactForm
 from werkzeug.exceptions import abort
 from sqlalchemy.exc import SQLAlchemyError
 from functools import wraps
 from app import db, mail, csrf
-from flask import current_app
 from sqlalchemy.orm import joinedload
 from flask_login import login_required, login_user, logout_user, current_user
 from datetime import datetime
@@ -81,6 +81,36 @@ def donate_details():
 @main_bp.route('/terms-of-service', methods=['GET', 'POST'])
 def terms_of_service():
     return render_template('main/terms.html', current_year=datetime.now().year)
+
+
+
+@main_bp.route('/donation-history-fragment')
+@login_required
+def donation_history_fragment():
+    donations = Donation.query.filter_by(user_id=current_user.id).order_by(Donation.created_at.desc()).all()
+    return render_template('partials/_donation_history_table.html', donations=donations)
+
+@main_bp.route('/profile-fragment')
+@login_required
+def profile_fragment():
+    user = current_user
+    referral_link = user.get_referral_link()
+    return render_template('partials/_profile_fragment.html', user=user, referral_link=referral_link)
+
+
+@main_bp.route('/change-password-fragment')
+def change_password_fragment():
+    form = ChangePasswordForm()
+    return render_template('partials/_change_password_fragment.html', form=form)
+
+
+@main_bp.route('/edit-profile-fragment')
+@login_required
+def edit_profile_fragment():
+    form = UpdateProfileForm(obj=current_user) 
+    referral_link = current_user.get_referral_link()
+    return render_template('partials/edit_profile_fragment.html', form=form, user=current_user, referral_link=referral_link)
+
 
 @main_bp.route('/contact', methods=['GET', 'POST'])
 def contact():

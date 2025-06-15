@@ -202,10 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Login Form -->
 <div class="login-card" data-aos="fade-up">
-  <form method="POST" action="{{ url_for('auth.login') }}" novalidate>
+  <form method="POST" action="{{ url_for('auth.login', next=request.args.get('next')) }}" novalidate>
     {{ form.hidden_tag() }}
-
-   
+    
+    {% if request.args.get('next') %}
+      <input type="hidden" name="next" value="{{ request.args.get('next') }}">
+    {% endif %}
 
     <!-- Email -->
     <div class="form-group" data-aos="fade-up" data-aos-delay="100">
@@ -217,11 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
 
     <!-- Password -->
-    <div class="form-group" data-aos="fade-up" data-aos-delay="200">
-      {{ form.password(class="form-input", placeholder="Password", autocomplete="current-password", **{'aria-describedby': 'passwordHelp'}) }}
+    <div class="form-group position-relative" data-aos="fade-up" data-aos-delay="200">
+      {{ form.password(class="form-input", placeholder="Password", autocomplete="current-password", **{'aria-describedby': 'passwordHelp', 'id': 'password'}) }}
       <i class="fas fa-lock input-icon" aria-hidden="true"></i>
-      <button type="button" class="password-toggle" aria-label="Toggle password visibility">
-        <i class="fas fa-eye"></i>
+      <button type="button" class="password-toggle" aria-label="Toggle password visibility" onclick="togglePassword()">
+        <i class="fas fa-eye" id="toggleIcon"></i>
       </button>
       {% for error in form.password.errors %}
         <small class="text-error" id="passwordHelp">{{ error }}</small>
@@ -248,4 +250,19 @@ document.addEventListener('DOMContentLoaded', () => {
     </p>
   </form>
 </div>
+
+
+</div>
+
+<!-- Password Toggle Script -->
+<script>
+function togglePassword() {
+  const passwordField = document.getElementById('password');
+  const toggleIcon = document.getElementById('toggleIcon');
+  const isHidden = passwordField.type === 'password';
+  passwordField.type = isHidden ? 'text' : 'password';
+  toggleIcon.classList.toggle('fa-eye');
+  toggleIcon.classList.toggle('fa-eye-slash');
+}
+</script>
 {% endblock %}

@@ -1,0 +1,80 @@
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
+  <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">Donation History</h3>
+    <p class="mt-1 max-w-2xl text-sm text-gray-500">All your donation transactions</p>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table id="donationHistoryTable" class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Program</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Receipt</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {% for donation in donations %}
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ donation.created_at.strftime('%b %d, %Y %I:%M %p') }}</td>
+          <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">KSh{{ "{:,.2f}".format(donation.amount) }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+              {% if donation.status == 'completed' %}bg-green-100 text-green-800
+              {% else %}bg-yellow-100 text-yellow-800{% endif %}">
+              {{ donation.status|title }}
+            </span>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+            {% if donation.program %}
+              <a href="{{ url_for('main.program_detail', slug=donation.program.slug) }}" class="text-blue-600 hover:text-blue-900">{{ donation.program.title }}</a>
+            {% else %}
+              <span class="text-gray-400">General Donation</span>
+            {% endif %}
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+            <a href="{{ url_for('donate.download_receipt', donation_id=donation.id) }}" class="text-blue-600 hover:text-blue-900 flex items-center">
+              <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+              Download
+            </a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="5" class="text-center px-6 py-4 text-sm text-gray-500">No donation history available.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const tableEl = document.querySelector('#donationHistoryTable');
+
+    if (tableEl) {
+      new DataTable(tableEl, {
+        perPage: 5,
+        responsive: true,
+        layout: {
+          top: '{search}',
+          bottom: '{info}{pager}'
+        },
+        language: {
+          search: 'Search:',
+          perPage: 'Show {select} entries',
+          noRows: 'No donations found',
+          info: 'Showing {start} to {end} of {rows} donations',
+        }
+      });
+    } else {
+      console.warn('Table #donationHistoryTable not found!');
+    }
+  });
+</script>
+
