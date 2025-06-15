@@ -54,11 +54,13 @@ def dashboard():
     referral_link = user.get_referral_link()
     referral_count = User.query.filter_by(invited_by_id=user.id).count()
 
-    # Fetch and sort donations
-    donations = Donation.query.filter_by(user_id=user.id).order_by(Donation.created_at.desc()).all()
+    # Fetch only completed donations
+    donations = Donation.query.filter_by(user_id=user.id, status='completed')\
+        .order_by(Donation.created_at.desc()).all()
 
-    # Calculate total donated
-    total_donated = db.session.query(func.sum(Donation.amount)).filter_by(user_id=user.id).scalar() or 0.00
+    # Calculate total donated (only completed)
+    total_donated = db.session.query(func.sum(Donation.amount))\
+        .filter_by(user_id=user.id, status='completed').scalar() or 0.00
 
     return render_template(
         'main/dashboard.html',
