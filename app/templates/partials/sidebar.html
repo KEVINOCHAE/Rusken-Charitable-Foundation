@@ -164,100 +164,100 @@
   </aside>
 </div>
 
-  <!-- Desktop Sidebar -->
-<aside class="hidden md:flex md:w-64 lg:w-72 flex-col bg-gradient-to-b from-gray-900 to-gray-800 text-white h-screen shadow-lg">
+<!--desktop-->
+
+  <aside class="hidden md:flex md:w-64 lg:w-72 flex-col bg-white border-r border-gray-200 text-gray-800 h-screen sticky top-0 mt-5 pt-5">
   <!-- Logo/Brand Section -->
-  <div class="px-6 py-8 mt-5 pt-5">
-    <div class="flex items-center space-x-3 mt-4">
-      <div class="p-2 bg-gradient-to-r from-emerald-500 to-teal-400 rounded-lg shadow-md">
+  <div class="px-6 py-6 border-b border-gray-200">
+    <div class="flex items-center space-x-3">
+      <div class="p-2 bg-gradient-to-r from-emerald-600 to-teal-500 rounded-lg shadow-md">
         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
         </svg>
       </div>
-      <span class="text-2xl font-bold tracking-tight">Rusken<span class="text-emerald-400">CF</span></span>
+      <span class="text-2xl font-bold text-gray-900">Rusken<span class="text-emerald-600">CF</span></span>
     </div>
   </div>
   
   <!-- Navigation Menu -->
-  <nav class="flex-1 px-4 pb-4 space-y-2 overflow-y-auto">
-    <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg bg-gray-700/50 text-white shadow-sm transition-all duration-200 hover:bg-gray-700 hover:shadow-md">
-      <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <nav class="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
+    <!-- Active Link -->
+    <a href="/dashboard" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg bg-emerald-50 text-emerald-700 group transition-all duration-200">
+      <svg class="w-5 h-5 mr-3 text-emerald-600 group-hover:text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
       </svg>
-      My Donations
-    
+      Dashboard
+      
     </a>
     
-   <a href="#" onclick="loadFragment('/profile-fragment'); mobileSidebarOpen = false;" 
-   class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-300/90 transition-all duration-200 hover:bg-gray-700/50 hover:text-white hover:shadow-sm">
-  <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A8.968 8.968 0 0112 15c1.93 0 3.707.613 5.121 1.646M15 10a3 3 0 11-6 0 3 3 0 016 0z"/>
-  </svg>
-  My Profile
-</a>
-  
- <a href="#" onclick="loadFragment('/donation-history-fragment'); mobileSidebarOpen = false;" 
-   class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-300/90 transition-all duration-200 hover:bg-gray-700/50 hover:text-white hover:shadow-sm">
-  <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-  </svg>
-  History
-</a>
-
-   <div x-data="{ open: false }" class="px-4 py-3">
-  <!-- Parent Trigger -->
-  <button @click="open = !open" class="w-full flex items-center justify-between text-sm font-medium rounded-lg text-gray-300/90 transition-all duration-200 hover:bg-gray-700/50 hover:text-white hover:shadow-sm">
-    <span class="flex items-center">
-      <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+    <!-- Profile Link -->
+    <a href="#" onclick="loadFragment('/profile-fragment')" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100 group transition-all duration-200">
+      <svg class="w-5 h-5 mr-3 text-gray-500 group-hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A8.968 8.968 0 0112 15c1.93 0 3.707.613 5.121 1.646M15 10a3 3 0 11-6 0 3 3 0 016 0z"/>
       </svg>
-      Settings
-    </span>
-    <svg class="w-4 h-4 ml-2 transition-transform" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-    </svg>
-  </button>
-
-  <!-- Dropdown Links -->
-  <div x-show="open" x-transition class="mt-2 pl-8 space-y-1">
-    <a href="#" onclick="loadFragment('/edit-profile-fragment')" class="block text-sm text-gray-300/90 hover:text-white transition hover:underline">
-    Edit Profile
-  </a>
-
-  <!-- Change Password Link -->
-  <a href="#" onclick="loadFragment('/change-password-fragment')" class="block text-sm text-gray-300/90 hover:text-white transition hover:underline">
-    Change Password
-  </a>
-  </div>
-</div>
-
-   <!-- Divider -->
-    <div class="border-t border-gray-700/50 my-2"></div>
+      My Profile
+    </a>
     
-    <!-- Additional Menu Items -->
-    <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-300/90 transition-all duration-200 hover:bg-gray-700/50 hover:text-white hover:shadow-sm">
-      <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <!-- History Link -->
+    <a href="#" onclick="loadFragment('/donation-history-fragment')" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100 group transition-all duration-200">
+      <svg class="w-5 h-5 mr-3 text-gray-500 group-hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      Donation History
+    </a>
+    
+    <!-- Settings Dropdown -->
+    <div x-data="{ open: false }" class="space-y-1">
+      <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100 group transition-all duration-200">
+        <span class="flex items-center">
+          <svg class="w-5 h-5 mr-3 text-gray-500 group-hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          Settings
+        </span>
+        <svg class="w-4 h-4 ml-2 transition-transform text-gray-400" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      
+      <!-- Dropdown Links -->
+      <div x-show="open" x-collapse class="pl-11 space-y-1">
+        <a href="#" onclick="loadFragment('/edit-profile-fragment')" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200">
+          Edit Profile
+        </a>
+        <a href="#" onclick="loadFragment('/change-password-fragment')" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200">
+          Change Password
+        </a>
+      </div>
+    </div>
+    
+    <!-- Divider -->
+    <div class="border-t border-gray-200 my-2"></div>
+    
+    <!-- Support Link -->
+    <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100 group transition-all duration-200">
+      <svg class="w-5 h-5 mr-3 text-gray-500 group-hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
       </svg>
       Support
     </a>
   </nav>
-
-   <!-- User Profile Section -->
-  <div class="p-4 border-t border-gray-700/50 bg-gray-800/30">
+  
+  <!-- User Profile Section -->
+  <div class="p-4 border-t border-gray-200 mt-auto">
     <div class="flex items-center space-x-3">
       <div class="relative">
-        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 flex items-center justify-center text-white font-medium shadow-md">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-emerald-600 to-teal-500 flex items-center justify-center text-white font-medium shadow-md">
           {{ current_user.username[0]|upper }}
         </div>
-        <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-gray-800 bg-emerald-400"></span>
+        <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white bg-green-400"></span>
       </div>
       <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-white truncate">{{ current_user.username }}</p>
-        <p class="text-xs text-gray-400/80 truncate">{{ current_user.email }}</p>
+        <p class="text-sm font-medium text-gray-900 truncate">{{ current_user.username }}</p>
+        <p class="text-xs text-gray-500 truncate">{{ current_user.email }}</p>
       </div>
-      <button class="p-1 rounded-md text-gray-400 hover:text-white hover:bg-gray-700/50">
+      <button class="p-1 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors duration-200">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
         </svg>
