@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}{{ program.title }} – Program Details{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+{% endblock %}
+
+{% block content %}
+<section class="relative h-[60vh] flex items-center justify-center text-white text-center">
+  {% set img = program.images.first() %}
+  <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url('{{ img|program_image_url }}');"></div>
+  <div class="absolute inset-0 bg-black/60 z-10"></div>
+  <div class="relative z-20 px-4">
+    <span class="bg-indigo-600 px-3 py-1 rounded-full text-sm tracking-wide uppercase">{{ program.category.name }}</span>
+    <h1 class="text-4xl font-bold mt-4">{{ program.title }}</h1>
+    <p class="mt-2 text-gray-300">
+      Started on {{ program.created_at.strftime('%B %d, %Y') }} | by {{ program.author.username }}
+    </p>
+    <a href="{{ url_for('donate.donate', program_id=program.id) }}" class="inline-block mt-4 bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2 rounded-full font-semibold transition">
+      <i class="fas fa-hand-holding-heart mr-2"></i> Support Now
+    </a>
+  </div>
+</section>
+
+<!-- Main Content -->
+<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+    <!-- Left Column: Description and Story -->
+    <div class="lg:col-span-2 space-y-10">
+
+      <!-- Description -->
+      <div data-aos="fade-right">
+        <h2 class="text-2xl font-semibold mb-3">Description</h2>
+        <p class="text-gray-700 leading-relaxed">{{ program.description }}</p>
+      </div>
+
+      <!-- Full Story -->
+      <div data-aos="fade-up" data-aos-delay="100">
+        <h2 class="text-2xl font-semibold mb-3">Full Story</h2>
+        <div class="prose max-w-none">
+          {{ program.story | safe }}
+        </div>
+      </div>
+
+      <!-- Mobile Funding Overview -->
+      <div class="lg:hidden" data-aos="fade-up">
+        {% include 'partials/_funding_overview.html' %}
+      </div>
+    </div>
+
+    <!-- Right Column: Funding Box -->
+    <div class="hidden lg:block" data-aos="fade-left">
+      {% include 'partials/_funding_overview.html' %}
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="text-center mt-16" data-aos="zoom-in">
+    <a href="{{ url_for('main.all_programs') }}" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold transition">
+      <i class="fas fa-arrow-left mr-2"></i> Explore Other Programs
+    </a>
+  </div>
+</div>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init({ once: true });
+</script>
+{% endblock %}

@@ -1,0 +1,223 @@
+
+/* Body should get a class="programs-page" in base.html */
+body.programs-page {
+    background: linear-gradient(45deg, #0a0a2e, #1a1a4a, #2a2a6e);
+    color: #fff;
+    font-family: 'Exo 2', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+  body.programs-page::before {
+    content: '';
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background:
+      radial-gradient(circle at 10% 20%, rgba(46,204,113,0.1) 0%, transparent 30%),
+      radial-gradient(circle at 90% 80%, rgba(52,152,219,0.1) 0%, transparent 30%);
+    z-index: -1;
+  }
+  
+  /* Card base */
+  .program-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.6s, box-shadow 0.6s;
+    position: relative;
+    box-shadow:
+      0 8px 32px rgba(0,0,0,0.1),
+      0 0 20px rgba(46,204,113,0.05) inset;
+    animation: fadeInUp 0.6s ease forwards;
+  }
+  .program-card:nth-child(odd)  { animation-delay: 0.1s; }
+  .program-card:nth-child(even) { animation-delay: 0.2s; }
+  .program-card:hover {
+    transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+    box-shadow:
+      0 15px 45px rgba(46,204,113,0.2),
+      0 0 40px rgba(52,152,219,0.1) inset;
+  }
+  
+  /* Shimmer on hover */
+  .program-card::before {
+    content: '';
+    position: absolute; top: 0; left: -100%;
+    width: 200%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: 0.6s;
+  }
+  .program-card:hover::before {
+    left: 100%;
+  }
+  
+  /* Image */
+  .card-img-wrapper {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+  }
+  .card-img-top {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s;
+  }
+  .program-card:hover .card-img-top {
+    transform: scale(1.1) rotate(1deg);
+  }
+  .card-img-wrapper::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 40%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  }
+  
+  /* Badge */
+  .category-badge {
+    position: absolute; top: 20px; right: 20px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(5px);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: 0.4s;
+  }
+  .category-badge:hover {
+    background: rgba(255,255,255,0.25);
+  }
+  
+  /* Body text */
+  .card-body {
+    padding: 1.5rem;
+    flex: 1;
+  }
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .card-title::after {
+    content: '';
+    position: absolute; bottom: -8px; left: 0;
+    width: 50px; height: 3px;
+    background: linear-gradient(90deg, #2ecc71, #3498db);
+  }
+  .card-text {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+  .view-more {
+    font-size: 0.875rem;
+    color: #0d6efd;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .view-more:hover {
+    transform: translateX(3px);
+  }
+  
+  /* Progress bars */
+  .budget-progress {
+    position: relative;
+    height: 12px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.4);
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+  .progress-bar-donated,
+  .progress-bar-remaining {
+    position: absolute; top: 0; bottom: 0;
+    transition: width 0.8s, left 0.8s;
+  }
+  .progress-bar-donated {
+    left: 0; width: var(--donated-percent);
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+  }
+  .progress-bar-remaining {
+    left: var(--donated-percent);
+    width: var(--remaining-percent);
+    background: linear-gradient(90deg, #17a2b8, #117a8b);
+  }
+  
+  /* Stats grid */
+  .budget-stats {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1rem; margin-bottom: 1.5rem;
+  }
+  .stat-item {
+    background: rgba(255,255,255,0.05);
+    padding: 1rem; border-radius: 10px;
+    text-align: center; transition: 0.4s;
+  }
+  .stat-item:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-3px);
+  }
+  .stat-item span:first-child {
+    display: block; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem;
+  }
+  .stat-item span:last-child {
+    display: block; font-size: 1.1rem; color: #fff; font-weight: 600;
+  }
+  
+  /* Footer */
+  .card-footer {
+    background: rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 1rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.85rem; color: rgba(255,255,255,0.8);
+  }
+  
+  /* Buttons */
+  .btn-sm {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+  .donate-btn {
+    position: absolute; bottom: 20px; right: 20px;
+    padding: 12px 30px; border-radius: 15px; background: linear-gradient(45deg,#2ecc71,#3498db);
+    color: #fff; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    overflow: hidden; transition: 0.6s; box-shadow: 0 8px 25px rgba(46,204,113,0.3);
+  }
+  .donate-btn::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 200%; height: 100%;
+    background: linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+    transition: 0.6s;
+  }
+  .donate-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(46,204,113,0.5);
+  }
+  .donate-btn:hover::before {
+    left: 100%;
+  }
+  
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    body.programs-page { padding-bottom: 2rem; }
+    .budget-stats { grid-template-columns: 1fr; }
+    .card-img-wrapper { height: 200px; }
+    .donate-btn { bottom: 15px; right: 15px; padding: 10px 25px; }
+  }
+  

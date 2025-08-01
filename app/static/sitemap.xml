@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<!-- Main Pages -->
+<url>
+  <loc>https://www.ruskencf2024.org/</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.ruskencf2024.org/about</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ruskencf2024.org/contact</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+<!-- Programs Overview -->
+<url>
+  <loc>https://www.ruskencf2024.org/programs</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+<!-- Individual Program Pages -->
+<url>
+  <loc>https://www.ruskencf2024.org/programs/donation-of-learning-materials</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ruskencf2024.org/programs/knowledge-and-skills-tvet-support</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ruskencf2024.org/programs/school-uniform-relief-for-disadvantaged-students</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ruskencf2024.org/programs/water-environment-2</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ruskencf2024.org/programs/development-of-facilities</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ruskencf2024.org/programs/finance-resources-smes-support</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ruskencf2024.org/programs/women-empowerment-and-protection</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.71</priority>
+</url>
+<url>
+  <loc>https://www.ruskencf2024.org/programs/protection-and-development-of-children-and-youth</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.71</priority>
+</url>
+<url>
+  <loc>https://www.ruskencf2024.org/programs/promotion-of-entrepreneurial-culture</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.71</priority>
+</url>
+<url>
+  <loc>https://www.ruskencf2024.org/programs/scholarships-for-needy-students-and-school-infrastructure-development</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.71</priority>
+</url>
+
+<!-- Donation Page -->
+<url>
+  <loc>https://www.ruskencf2024.org/donate/donate?program_id=1</loc>
+  <lastmod>2025-05-08T21:56:20+00:00</lastmod>
+  <priority>0.91</priority>
+</url>
+
+</urlset>

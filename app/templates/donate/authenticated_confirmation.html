@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+{% block title %}Donation Confirmed{% endblock %}
+
+{% block head %}
+{{ super() }}
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+  .checkmark-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  }
+  
+  .impact-card {
+    border-left: 4px solid #10b981;
+  }
+  
+  .donation-card {
+    border-left: 4px solid #3b82f6;
+  }
+  
+  .confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  .card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .donation-item {
+    transition: all 0.2s ease;
+    border-left: 3px solid #e2e8f0;
+  }
+  
+  .donation-item:hover {
+    border-left-color: #3b82f6;
+    background-color: #f8fafc;
+  }
+  
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+    70% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Confetti canvas -->
+<canvas class="confetti-canvas" id="confetti-canvas"></canvas>
+
+<div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 mt-5">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="checkmark-circle mb-6 pulse">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
+          <path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Thank You, {{ current_user.first_name }}!</h1>
+      <p class="text-xl text-gray-600">Your donation is now complete.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+      <!-- Donation Details Card -->
+      <div class="bg-white donation-card">
+        <div class="bg-gray-50 px-6 py-4 border-b">
+          <h2 class="text-xl font-bold text-gray-900 flex items-center">
+            <i class="fas fa-receipt text-blue-500 mr-3"></i>
+            Donation Details
+          </h2>
+        </div>
+        <div class="p-6">
+          <div class="space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+              <div class="text-gray-600">
+                <i class="fas fa-dollar-sign mr-2"></i>
+                Amount
+              </div>
+              <div class="font-medium text-gray-900">{{ donation.amount|currency }} {{ donation.currency }}</div>
+            </div>
+            
+            <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+              <div class="text-gray-600">
+                <i class="far fa-calendar-alt mr-2"></i>
+                Date
+              </div>
+              <div class="font-medium text-gray-900">{{ donation.created_at|datetime_format }}</div>
+            </div>
+            
+            <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+              <div class="text-gray-600">
+                <i class="far fa-credit-card mr-2"></i>
+                Payment Method
+              </div>
+              <div class="font-medium text-gray-900">•••• {{ donation.payment_method_last4 }}</div>
+            </div>
+            
+            {% if donation.program and program_url %}
+            <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+              <div class="text-gray-600">
+                <i class="fas fa-hands-helping mr-2"></i>
+                Program
+              </div>
+              <div class="font-medium text-gray-900">
+                <a href="{{ program_url }}" class="text-blue-600 hover:underline">
+                  {{ donation.program.title }}
+                </a>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+          
+          <div class="mt-6 flex justify-end">
+            <a href="{{ receipt_url }}" class="inline-flex items-center px-4 py-2 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50 transition-colors">
+              <i class="fas fa-download mr-2"></i>
+              Download Receipt
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Impact Card -->
+      <div class="bg-white impact-card">
+        <div class="bg-gray-50 px-6 py-4 border-b">
+          <h2 class="text-xl font-bold text-gray-900 flex items-center">
+            <i class="fas fa-chart-line text-green-500 mr-3"></i>
+            Your Impact
+          </h2>
+        </div>
+        <div class="p-6">
+          <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-blue-600 mb-1">{{ impact_stats.total_donated|currency }}</div>
+              <div class="text-gray-600">Total Given</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-green-600 mb-1">{{ impact_stats.donation_count }}</div>
+              <div class="text-gray-600">Total Donations</div>
+            </div>
+          </div>
+
+          {% if user_donations %}
+          <hr class="my-4">
+          <h3 class="text-lg font-medium text-gray-900 mb-3">Recent Donations</h3>
+          <div class="space-y-3">
+            {% for d in user_donations %}
+            <div class="donation-item pl-4 py-2">
+              <div class="flex justify-between">
+                <div>
+                  <div class="font-medium">{{ d.amount|currency }}</div>
+                  {% if d.program %}
+                  <div class="text-sm text-gray-600">to {{ d.program.title }}</div>
+                  {% endif %}
+                </div>
+                <div class="text-sm text-gray-500">{{ d.created_at|datetime_format('short') }}</div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="text-center">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">What would you like to do next?</h2>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="{{ url_for('main.home') }}" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-md">
+          <i class="fas fa-home mr-2"></i>
+          Return Home
+        </a>
+        {% if donation.program and program_url %}
+        <a href="{{ program_url }}" class="px-6 py-3 bg-white text-blue-600 border border-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-colors">
+          <i class="fas fa-project-diagram mr-2"></i>
+          View Program
+        </a>
+        {% endif %}
+        <a href="#" class="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md">
+          <i class="fas fa-share-alt mr-2"></i>
+          Share Your Impact
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Confetti effect
+  confetti({
+    particleCount: 150,
+    spread: 70,
+    origin: { y: 0.6 },
+    ticks: 200
+  });
+
+  // Add animation to cards
+  setTimeout(() => {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('animate__animated', 'animate__fadeInUp');
+      }, 150 * index);
+    });
+  }, 500);
+});
+</script>
+{% endblock %}

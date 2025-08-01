@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+{% block title %}Donate to {{ program.title }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8 mt-5">
+  <div class="max-w-3xl mx-auto">
+    <!-- Header Section -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center justify-center bg-white p-3 rounded-full shadow-md mb-6">
+        <div class="bg-blue-100 p-4 rounded-full">
+          <i class="fas fa-hands-helping text-blue-600 text-2xl"></i>
+        </div>
+      </div>
+      <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+        Support <span class="text-blue-600">{{ program.title }}</span>
+      </h1>
+      
+    </div>
+
+    <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+      <!-- Donation Form -->
+      <div class="p-8">
+        <form id="donationForm" method="POST" class="space-y-6">
+          {{ form.hidden_tag() }}
+          <input type="hidden" id="program_id" value="{{ program.id }}">
+
+          <div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Your Donation Details</h2>
+            
+            <!-- Name Field -->
+            <div class="mb-5">
+              <label for="donor_name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+              <div class="relative rounded-md shadow-sm">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <i class="fas fa-user text-gray-400"></i>
+                </div>
+                <input type="text" id="donor_name" name="donor_name" required 
+                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="John Doe"
+                      value="{{ current_user.username if current_user.is_authenticated else '' }}">
+              </div>
+            </div>
+
+            <!-- Email Field -->
+            <div class="mb-5">
+              <label for="donor_email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+              <div class="relative rounded-md shadow-sm">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <i class="fas fa-envelope text-gray-400"></i>
+                </div>
+                <input type="email" id="donor_email" name="donor_email" required 
+                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="john@example.com"
+                      value="{{ current_user.email if current_user.is_authenticated else '' }}">
+              </div>
+            </div>
+
+            <!-- Amount Field -->
+            <div class="mb-6">
+              <label for="amount" class="block text-sm font-medium text-gray-700 mb-2">Donation Amount (KES)</label>
+              <div class="relative rounded-md shadow-sm">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span class="text-gray-500">KES</span>
+                </div>
+                <input type="number" id="amount" name="amount" step="1" min="100" required 
+                      class="block w-full pl-14 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                      value="{{ form.amount.data if form.amount.data else 1000 }}"
+                      placeholder="1000">
+              </div>
+              <p class="mt-2 text-xs text-gray-500">Minimum donation: KES 100</p>
+              
+              <!-- Quick Amount Buttons -->
+              <div class="mt-4 grid grid-cols-4 gap-2">
+                <button type="button" data-amount="500" class="amount-btn py-2 px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                  KES 500
+                </button>
+                <button type="button" data-amount="1000" class="amount-btn py-2 px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                  KES 1,000
+                </button>
+                <button type="button" data-amount="2500" class="amount-btn py-2 px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                  KES 2,500
+                </button>
+                <button type="button" data-amount="5000" class="amount-btn py-2 px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                  KES 5,000
+                </button>
+              </div>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Payment Method</label>
+              <div class="bg-gray-100 p-4 rounded-lg border border-gray-200">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-10 w-10 rounded-full bg-white flex items-center justify-center shadow-sm">
+                    <i class="fas fa-credit-card text-blue-500"></i>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="text-sm font-medium text-gray-700">Secure Payment via DPO</h3>
+                    <p class="text-xs text-gray-500">Visa, Mastercard, M-Pesa, and other local options</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-8">
+              <button id="payButton" type="button"
+                      class="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <i class="fas fa-lock mr-3"></i> Complete Donation
+              </button>
+              <p class="mt-3 text-center text-xs text-gray-500">
+                <i class="fas fa-shield-alt mr-1"></i> Your payment is securely processed by DPO
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+<!-- Impact Statement -->
+    <div class="mt-10 bg-white rounded-xl shadow-md overflow-hidden">
+      <div class="p-8">
+        <div class="text-center">
+          <h3 class="text-lg font-medium text-gray-900">Your Impact</h3>
+          <p class="mt-2 text-gray-600">
+            A donation of <span class="font-semibold">KES 1,000</span> can provide {{ program.impact_statement }}.
+          </p>
+          <div class="mt-6 grid grid-cols-3 gap-4">
+            <div class="text-center p-4 bg-blue-50 rounded-lg">
+              <div class="mx-auto h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mb-2">
+                <i class="fas fa-users"></i>
+              </div>
+              <p class="text-xs text-gray-600">Supports 2 families</p>
+            </div>
+            <div class="text-center p-4 bg-purple-50 rounded-lg">
+              <div class="mx-auto h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mb-2">
+                <i class="fas fa-book"></i>
+              </div>
+              <p class="text-xs text-gray-600">Provides 5 books</p>
+            </div>
+            <div class="text-center p-4 bg-green-50 rounded-lg">
+              <div class="mx-auto h-12 w-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-2">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <p class="text-xs text-gray-600">Feeds 3 children</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+ 
+
+<!-- Payment Processing Modal -->
+<div id="paymentProcessing" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 text-center">
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mx-auto mb-6"></div>
+    <h3 class="text-xl font-bold text-gray-800 mb-2">Processing Your Donation</h3>
+    <p class="text-gray-600 mb-6">Please wait while we connect you to our secure payment gateway</p>
+    <div class="flex justify-center space-x-2">
+      <div class="w-3 h-3 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0s"></div>
+      <div class="w-3 h-3 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+      <div class="w-3 h-3 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Set quick amount buttons
+  document.querySelectorAll('.amount-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.getElementById('amount').value = this.dataset.amount;
+    });
+  });
+
+  // Handle payment submission
+  document.getElementById('payButton').addEventListener('click', async function() {
+    const form = document.getElementById('donationForm');
+    const donorName = document.getElementById('donor_name').value.trim();
+    const donorEmail = document.getElementById('donor_email').value.trim();
+    const amount = document.getElementById('amount').value.trim();
+    const programId = document.getElementById('program_id').value;
+
+    // Validation
+    if (!donorName || !donorEmail || !amount) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    if (parseFloat(amount) < 1) {
+      alert('Minimum donation amount is KES 100');
+      return;
+    }
+
+    // Show processing modal
+    const processingModal = document.getElementById('paymentProcessing');
+    processingModal.classList.remove('hidden');
+    this.disabled = true;
+
+    try {
+      // Initialize DPO payment
+      const response = await fetch('/dpo/initialize', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': document.querySelector('[name="csrf_token"]').value
+        },
+        body: JSON.stringify({
+          donor_name: donorName,
+          email: donorEmail,
+          amount: amount,
+          program_id: programId
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Payment initialization failed');
+      }
+
+      if (data.status && data.authorization_url) {
+        // Redirect to DPO payment page
+        window.location.href = data.authorization_url;
+      } else {
+        throw new Error('Invalid response from payment gateway');
+      }
+    } catch (error) {
+      console.error('Payment Error:', error);
+      processingModal.classList.add('hidden');
+      document.getElementById('payButton').disabled = false;
+      alert('Payment processing failed: ' + error.message);
+    }
+  });
+
+  // Auto-fill for logged in users
+  {% if current_user.is_authenticated %}
+    document.getElementById('donor_name').value = "{{ current_user.username }}";
+    document.getElementById('donor_email').value = "{{ current_user.email }}";
+  {% endif %}
+});
+</script>
+
+{% endblock %}

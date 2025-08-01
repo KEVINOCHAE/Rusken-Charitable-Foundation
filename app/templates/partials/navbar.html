@@ -1,0 +1,211 @@
+<!-- Alpine.js -->
+<script src="https://unpkg.com/alpinejs" defer></script>
+
+<!-- Navbar -->
+<nav class="bg-gradient-to-r from-indigo-900 to-purple-900 text-white shadow-lg fixed top-0 left-0 w-full z-50 transition-all duration-300"
+     x-data="{ mobileOpen: false, scrolled: false }"
+     @scroll.window="scrolled = window.scrollY > 10"
+     :class="{'shadow-xl': scrolled, 'py-2': scrolled, 'py-3': !scrolled}">
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      
+      <!-- Logo (Animated on hover) -->
+      <a href="{{ url_for('main.home') }}" class="flex items-center space-x-3 group">
+        <img src="{{ url_for('static', filename='images/Rusken-Charity-Foundation.png') }}"
+             alt="RuskenCF" 
+             class="h-10 w-10 rounded-full transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
+        <span class="text-xl font-bold tracking-tight transition-all duration-300 group-hover:text-blue-300">
+          Rusken<span class="text-blue-300">CF</span>
+        </span>
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <div class="flex items-center space-x-8">
+          <!-- Home Link -->
+          <a href="{{ url_for('main.home') }}" 
+             class="relative px-1 py-2 font-medium text-white/90 hover:text-white transition-all duration-300
+                    after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-300 
+                    after:transition-all after:duration-300 hover:after:w-full">
+            Home
+          </a>
+<!-- Programs Dropdown (Sleek & Modern) -->
+<div x-data="{ open: false }" class="relative">
+  <button @mouseenter="open = true" @mouseleave="open = false"
+    class="relative px-1 py-2 font-medium text-white/90 hover:text-white transition-all duration-300
+           flex items-center after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 
+           after:bg-blue-300 after:transition-all after:duration-300 hover:after:w-full">
+    Programs
+    <svg :class="{ 'rotate-180': open }" class="ml-1 w-4 h-4 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+    </svg>
+  </button>
+
+  <div x-show="open" @mouseenter="open = true" @mouseleave="open = false"
+       x-transition:enter="transition ease-out duration-200"
+       x-transition:enter-start="opacity-0 translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-150"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 translate-y-1"
+       class="absolute left-0 mt-2 w-56 bg-blue-700 rounded-lg shadow-xl ring-1 ring-black/5 py-2 z-50">
+       
+    <ul id="category-menu" class="space-y-1 text-white text-sm font-medium px-2 py-1 list-none">
+      {% for category in categories %}
+        <li>
+          <a href="{{ url_for('main.programs_by_category', category_id=category.id) }}"
+             class="block px-4 py-2 rounded hover:bg-blue-600 transition">
+            {{ category.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+
+          
+          <a href="{{ url_for('main.donate_details') }}" 
+             class="relative px-1 py-2 font-medium text-white/90 hover:text-white transition-all duration-300
+                    after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-300 
+                    after:transition-all after:duration-300 hover:after:w-full">
+            Donate
+          </a>
+          <a href="{{ url_for('main.about') }}" 
+             class="relative px-1 py-2 font-medium text-white/90 hover:text-white transition-all duration-300
+                    after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-300 
+                    after:transition-all after:duration-300 hover:after:w-full">
+            About
+          </a>
+          <a href="{{ url_for('main.contact') }}" 
+             class="relative px-1 py-2 font-medium text-white/90 hover:text-white transition-all duration-300
+                    after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-300 
+                    after:transition-all after:duration-300 hover:after:w-full">
+            Contact
+          </a>
+        </div>
+
+        <!-- Phone Number (Subtle Hover Effect) -->
+        <div class="ml-6 pl-6 border-l border-white/20">
+          <a href="tel:+254757734064" class="flex items-center space-x-2 text-sm font-medium text-white/80 hover:text-white transition-colors duration-300">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13
+                       a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498
+                       a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <span>+254 757 734 064</span>
+          </a>
+        </div>
+
+        <!-- Auth Buttons (Modern Gradient & Hover Effects) -->
+        <div class="flex items-center space-x-3 ml-6">
+          {% if current_user.is_authenticated %}
+            {% if current_user.has_role('Admin') %}
+              <a href="{{ url_for('admin.dashboard') }}" 
+                 class="px-4 py-1.5 text-sm font-medium bg-white/10 hover:bg-white/20 rounded-md 
+                        backdrop-blur-sm transition-all duration-300 shadow-sm">
+                Admin
+              </a>
+            {% endif %}
+            <a href="{{ url_for('main.dashboard') }}" 
+               class="px-4 py-1.5 text-sm font-medium bg-white/5 hover:bg-white/10 rounded-md 
+                      transition-all duration-300 border border-white/20">
+              Account
+            </a>
+            <a href="{{ url_for('auth.logout') }}" 
+               class="px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-red-600 to-pink-600 
+                      hover:from-red-700 hover:to-pink-700 rounded-md shadow-sm transition-all duration-300">
+              Logout
+            </a>
+          {% else %}
+            <a href="{{ url_for('donate.find_donations') }}" 
+               class="px-4 py-1.5 text-sm font-medium bg-white/5 hover:bg-white/10 rounded-md 
+                      transition-all duration-300 border border-white/20">
+              My Donations
+            </a>
+            <a href="{{ url_for('auth.login') }}" 
+               class="px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-blue-500 to-indigo-600 
+                      hover:from-blue-600 hover:to-indigo-700 rounded-md shadow-sm transition-all duration-300">
+              Login
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button (Animated) -->
+      <button @click="mobileOpen = !mobileOpen" 
+              class="lg:hidden p-2 rounded-md text-white hover:bg-white/10 transition-all duration-300 
+                     focus:outline-none focus:ring-2 focus:ring-white/30">
+        <svg x-show="!mobileOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg x-show="mobileOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu (Fixed FOUC with x-cloak & responsive polish) -->
+<div x-show="mobileOpen" x-cloak
+     x-transition:enter="transition ease-out duration-300"
+     x-transition:enter-start="opacity-0 -translate-y-4"
+     x-transition:enter-end="opacity-100 translate-y-0"
+     x-transition:leave="transition ease-in duration-200"
+     x-transition:leave-start="opacity-100 translate-y-0"
+     x-transition:leave-end="opacity-0 -translate-y-4"
+     class="lg:hidden fixed top-[64px] left-0 right-0 w-full bg-gradient-to-b from-indigo-900 to-purple-900 shadow-xl z-40">
+  <div class="px-4 py-4 space-y-3">
+    <a href="{{ url_for('main.home') }}" 
+       class="block px-4 py-2 rounded-lg text-white hover:bg-white/10 transition">
+      Home
+    </a>
+
+    <a href="{{ url_for('main.all_programs') }}" 
+       class="block px-4 py-2 rounded-lg text-white hover:bg-white/10 transition">
+      Programs
+    </a>
+
+    <a href="{{ url_for('main.donate_details') }}" 
+       class="block px-4 py-2 rounded-lg text-white hover:bg-white/10 transition">
+      Donate
+    </a>
+
+    <a href="{{ url_for('main.about') }}" 
+       class="block px-4 py-2 rounded-lg text-white hover:bg-white/10 transition">
+      About
+    </a>
+
+    <a href="{{ url_for('main.contact') }}" 
+       class="block px-4 py-2 rounded-lg text-white hover:bg-white/10 transition">
+      Contact
+    </a>
+
+    <!-- Mobile Auth Buttons -->
+    <div class="pt-4 space-y-3 border-t border-white/10">
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('main.dashboard') }}" 
+           class="block w-full px-4 py-2 text-center rounded-lg bg-white/5 hover:bg-white/10 transition">
+          Account
+        </a>
+        <a href="{{ url_for('auth.logout') }}" 
+           class="block w-full px-4 py-2 text-center rounded-lg bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 transition">
+          Logout
+        </a>
+      {% else %}
+        <a href="{{ url_for('auth.login') }}" 
+           class="block w-full px-4 py-2 text-center rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 transition">
+          Login
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+</nav>
+
+<style>
+  [x-cloak] { display: none !important; }
+</style>

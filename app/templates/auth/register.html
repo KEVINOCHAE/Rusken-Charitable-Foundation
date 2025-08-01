@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% block title %}Register | RefurbNest{% endblock %}
+
+{% block content %}
+<!-- Google Fonts, AOS, FontAwesome -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a2e0e6cf6d.js" crossorigin="anonymous"></script>
+
+<style>
+:root {
+  --primary: #2a3f54;
+  --secondary: #ff6b6b;
+  --bg-light: #f0f2f5;
+  --glass: rgba(255,255,255,0.6);
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.register-hero {
+  height: 50vh;
+   background: url('{{ url_for("static",filename="images/er.jpg") }}') center/cover;
+  position: relative;
+   display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+.register-hero::before {
+  content: ''; position: absolute; inset: 0; background: rgba(42,63,84,0.6);
+}
+.register-hero h1 {
+  color: #fff; font-size: 3rem; z-index: 1; animation: fadeIn 1s ease-out;
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(-20px);} to { opacity:1; transform:none;} }
+
+.form-container {
+  max-width: 500px; margin: -80px auto 40px; padding: 20px;
+  backdrop-filter: blur(20px) saturate(180%); background: var(--glass);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  position: relative; overflow: hidden;
+}
+.floating-label { position: relative; margin-bottom: 1.5rem; }
+.floating-label input {
+  width:100%; padding:1rem; border:2px solid transparent; border-radius:8px;
+  background: rgba(255,255,255,0.8); transition:0.3s;
+}
+.floating-label input:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(42,63,84,0.15);}
+.floating-label label {
+  position:absolute; top:50%; left:1rem; transform:translateY(-50%);
+  background: var(--glass); padding:0 0.5rem; color:#666; transition:0.2s;
+}
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+  top:-0.7rem; font-size:0.85rem; color:var(--primary);
+}
+.input-icon, .password-toggle {
+  position:absolute; top:50%; transform:translateY(-50%);
+  color:#666; opacity:0.7;
+}
+.input-icon { right:1rem; }
+.password-toggle { right:2.5rem; background:none; border:none; cursor:pointer;}
+.password-strength {
+  height:4px; background:rgba(0,0,0,0.1); border-radius:2px; overflow:hidden;
+  margin-top:-1rem; margin-bottom:1rem;
+}
+.strength-bar { height:100%; width:0; background:var(--secondary); transition:0.3s; }
+.strength-text { font-size:0.75rem; color:#333; opacity:0.8; margin-bottom:1.5rem;}
+.btn-primary {
+  width:100%; padding:1rem; border:none; border-radius:30px;
+  background:#2a3f54;
+  color:#fff; font-weight:600; cursor:pointer; transition:0.3s;
+}
+.btn-primary:hover { transform:translateY(-2px); }
+
+.terms-check {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.terms-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+
+
+</style>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  AOS.init({ once:true, duration:600 });
+  // Password toggle
+  document.querySelectorAll('.password-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ip = btn.closest('.floating-label').querySelector('input');
+      const type = ip.type==='password'?'text':'password';
+      ip.type = type; btn.querySelector('i').classList.toggle('fa-eye-slash');
+    });
+  });
+  // Strength meter
+  const pw = document.getElementById('password');
+  const bar = document.querySelector('.strength-bar');
+  const txt = document.querySelector('.strength-text');
+  pw.addEventListener('input', () => {
+    const val = pw.value, s = calculateStrength(val);
+    bar.style.width = s.p+'%'; bar.style.background = s.c; txt.textContent = s.t;
+  });
+  function calculateStrength(pw) {
+    let score=0;
+    if(pw.length>=8) score++; if(/[A-Z]/.test(pw)) score++;
+    if(/[0-9]/.test(pw)) score++; if(/[^A-Za-z0-9]/.test(pw)) score++;
+    const lvl = [{t:'Very Weak',c:'#ef4444',p:25},
+                 {t:'Weak',c:'#f59e0b',p:50},
+                 {t:'Moderate',c:'#3b82f6',p:75},
+                 {t:'Strong',c:'#10B981',p:100}];
+    return lvl[Math.min(score,3)];
+  }
+});
+</script>
+
+<!-- Hero -->
+<section class="register-hero"><h1 data-aos="fade-up">Join Rusken Family</h1></section>
+
+<!-- Form -->
+<div class="form-container" data-aos="fade-up">
+  <form method="POST" action="{{ url_for('auth.register') }}">
+    {{ form.hidden_tag() }}
+
+    <div class="floating-label">
+      {{ form.username(class="form-control", placeholder=" ") }}
+      <label for="{{ form.username.id }}">Full Name</label>
+      <i class="fas fa-user input-icon"></i>
+      {% for e in form.username.errors %}<small class="form-error">{{ e }}</small>{% endfor %}
+    </div>
+
+    <div class="floating-label">
+      {{ form.email(class="form-control", placeholder=" ") }}
+      <label for="{{ form.email.id }}">Email</label>
+      <i class="fas fa-envelope input-icon"></i>
+      {% for e in form.email.errors %}<small class="form-error">{{ e }}</small>{% endfor %}
+    </div>
+
+    <div class="floating-label">
+      {{ form.password(class="form-control", placeholder=" ", id="password") }}
+      <label for="password">Password</label>
+      <i class="fas fa-lock input-icon"></i>
+      <button type="button" class="password-toggle"><i class="fas fa-eye"></i></button>
+      {% for e in form.password.errors %}<small class="form-error">{{ e }}</small>{% endfor %}
+    </div>
+    <div class="password-strength">
+      <div class="strength-bar"></div>
+    </div>
+    <span class="strength-text"></span>
+
+    <div class="floating-label">
+      {{ form.confirm_password(class="form-control", placeholder=" ") }}
+      <label for="{{ form.confirm_password.id }}">Confirm Password</label>
+      <i class="fas fa-lock input-icon"></i>
+    </div>
+
+    <div class="floating-label">
+  {{ form.referral_code(class="form-control", placeholder=" ") }}
+  <label for="{{ form.referral_code.id }}">Referral Code (Optional)</label>
+  <i class="fas fa-link input-icon"></i>
+  {% for e in form.referral_code.errors %}<small class="form-error">{{ e }}</small>{% endfor %}
+</div>
+
+
+    <div class="terms-check">
+      <input type="checkbox" id="terms" required>
+      <label for="terms">I agree to the <a href="{{url_for('main.terms_of_service')}}">Terms of Service</a></label>
+    </div>
+
+    <button type="submit" class="btn-primary">{{ form.submit.label.text }}</button>
+
+    <!-- Signup Link -->
+    <p class="text-center mt-3" data-aos="fade-up" data-aos-delay="500">
+      Already have an account? <a href="{{ url_for('auth.login') }}" class="text-primary">Sign in</a>
+    </p>
+  </form>
+</div>
+{% endblock %}

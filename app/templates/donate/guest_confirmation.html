@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donation Confirmed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .dark .dark-toggle {
+        content: '☀️';
+      }
+      .dark .bg-card {
+        @apply bg-gray-800 text-white;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-all duration-300 font-sans flex items-center justify-center min-h-screen px-4 relative">
+    
+
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 max-w-xl w-full text-center space-y-6 transition-all duration-300 bg-card">
+      <!-- Checkmark Animation -->
+      <div class="w-24 h-24 mx-auto rounded-full bg-green-500 flex items-center justify-center">
+        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" stroke-width="4" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl font-semibold">Thank You!</h1>
+      <p class="text-gray-600 dark:text-gray-300">
+        Your donation of <strong>{{ donation.amount }} {{ donation.currency }}</strong> has been successfully received.
+        Your support makes a big difference!
+      </p>
+
+      {% if not current_user.is_authenticated %}
+      <!-- Guest Message -->
+      <div class="bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 p-5 rounded-md text-left">
+        <h2 class="text-lg font-semibold mb-2">Want to track your donations?</h2>
+        <p class="text-sm mb-2">
+          Create an account with <strong>{{ donation.donor_email }}</strong> to:
+        </p>
+        <ul class="list-disc pl-5 text-sm space-y-1 mb-3">
+          <li>View all your donations</li>
+          <li>Receive updates</li>
+          <li>Manage preferences</li>
+        </ul>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="{{ url_for('auth.register', email=donation.donor_email) }}"
+             class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium text-center">
+            Create Account
+          </a>
+          <a href="{{ url_for('donate.find_donations') }}"
+             class="border border-green-600 text-green-700 hover:bg-green-600 hover:text-white px-4 py-2 rounded-md text-sm font-medium text-center">
+            Find My Donations
+          </a>
+        </div>
+      </div>
+      {% endif %}
+
+      <a href="{{ url_for('main.home') }}"
+         class="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium mt-4">
+        Return Home
+      </a>
+    </div>
+
+    <script>
+      // Confetti Celebration
+      window.addEventListener('load', () => {
+        confetti({
+          particleCount: 510,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      });
+
+     
+    </script>
+  </body>
+</html>

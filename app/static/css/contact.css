@@ -1,0 +1,129 @@
+
+  
+
+  .contact-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0;
+    letter-spacing: 1px;
+    font-weight: 700;
+    color: #abc0d6;
+  }
+
+  .contact-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    padding: 60px 10%;
+    
+  }
+
+  .glass-form {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .floating-label {
+    position: relative;
+    margin-bottom: 25px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 12px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  .form-label {
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    font-size: 0.85rem;
+    color: #666;
+    transition: all 0.2s;
+    pointer-events: none;
+    background: #fff;
+    padding: 0 4px;
+  }
+
+  .form-control:focus + .form-label,
+  .form-control:not(:placeholder-shown) + .form-label {
+    top: -10px;
+    font-size: 0.75rem;
+    color: #007bff;
+  }
+
+  .btn-submit {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 8px;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+
+  .btn-submit:hover {
+    background: #0056b3;
+  }
+
+  .error {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: block;
+  }
+
+  .contact-info {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  }
+
+  .contact-info .info-item {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .info-item i {
+    font-size: 1.4rem;
+    color: #007bff;
+  }
+
+  .chatbot-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  @media (max-width: 768px) {
+    .contact-container {
+      padding: 40px 20px;
+    }
+  }

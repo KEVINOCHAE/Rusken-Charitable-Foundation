@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<style>
+  .donation-search-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  .donation-search-header {
+    background-color: #2e7d32;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .donation-search-body {
+    padding: 2rem;
+  }
+  .form-control:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 0.25rem rgba(46, 125, 50, 0.25);
+  }
+  .btn-primary {
+    background-color: #2e7d32;
+    border-color: #2e7d32;
+    padding: 0.5rem;
+    font-weight: 500;
+  }
+  .btn-primary:hover {
+    background-color: #1e5e24;
+    border-color: #1e5e24;
+  }
+  .form-text {
+    color: #6c757d;
+    font-size: 0.85rem;
+  }
+  .register-link {
+    color: #2e7d32;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .register-link:hover {
+    text-decoration: underline;
+  }
+  .logo-container {
+    margin-bottom: 1.5rem;
+  }
+  .logo-container img {
+    height: 60px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5 " style="height: 500px; margin-top: 160px;">
+  <div class="row justify-content-center p-2">
+    <div class="col-lg-6">
+      <div class="card donation-search-card">
+        <div class="donation-search-header">
+         
+          <h2 class="mb-0">Find Your Donations</h2>
+        </div>
+        
+        <div class="donation-search-body">
+          <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            
+            <div class="mb-4">
+              {{ form.email.label(class="form-label fw-semibold") }}
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-envelope"></i>
+                </span>
+                {{ form.email(class="form-control form-control-lg" + (" is-invalid" if form.email.errors else ""), 
+                             placeholder="your@email.com") }}
+              </div>
+              
+              {% if form.email.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.email.errors %}
+                    <i class="bi bi-exclamation-circle-fill me-1"></i>{{ error }}
+                  {% endfor %}
+                </div>
+              {% else %}
+                <div class="form-text mt-1">
+                  Enter the email address you used when making your donation
+                </div>
+              {% endif %}
+            </div>
+            
+            {{ form.submit(class="btn btn-primary btn-lg w-100 py-2") }}
+          </form>
+          
+          <div class="mt-4 pt-3 border-top text-center">
+            <p class="mb-2">Don't have an account yet?</p>
+            <a href="{{ url_for('auth.register') }}" class="register-link">
+              <i class="bi bi-person-plus me-1"></i>Create your Rusken account
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add focus styling to form inputs
+    const inputs = document.querySelectorAll('.form-control');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('input-focused');
+        });
+        input.addEventListener('blur', function() {
+            this.parentElement.classList.remove('input-focused');
+        });
+    });
+});
+</script>
+{% endblock %}

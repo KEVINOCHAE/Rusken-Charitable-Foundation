@@ -1,0 +1,149 @@
+{% extends 'admin_base.html' %}
+
+{% block title %}Category Management - Admin Dashboard{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
+<style>
+    .dataTables_wrapper .table thead th {
+        border-bottom: 2px solid var(--bs-border-color);
+    }
+
+    .dataTables_wrapper .table-hover tbody tr:hover {
+        background-color: rgba(var(--bs-primary-rgb), 0.05) !important;
+    }
+
+    .dataTables_filter input {
+        border-radius: 0.375rem;
+        padding: 0.375rem 0.75rem;
+        border: 1px solid var(--bs-border-color);
+    }
+
+    [data-bs-theme="dark"] .dataTables_wrapper .table {
+        --bs-table-color: var(--bs-body-color);
+        --bs-table-bg: var(--bs-body-bg);
+        --bs-table-border-color: var(--bs-border-color);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">
+            <i class="fas fa-folder me-2"></i>Category Management
+        </h1>
+        <a href="{{ url_for('program.add_category') }}" class="btn btn-primary">
+            <i class="fas fa-plus-circle me-2"></i>Add New Category
+        </a>
+    </div>
+
+    <!-- Categories Table -->
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover w-100" id="categoriesTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Programs</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                        <tr>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <h6 class="mb-0">{{ category.name }}</h6>
+                                    <small class="text-muted">{{ category.description|truncate(60) }}</small>
+                                </div>
+                            </td>
+                            <td>{{ category.programs.count() }}</td>
+                            <td class="text-center">
+                                <div class="d-flex gap-2 justify-content-center">
+                                    <a href="{{ url_for('program.add_category', category_id=category.id) }}" 
+                                       class="btn btn-sm btn-outline-primary"
+                                       data-bs-toggle="tooltip" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-outline-danger delete-btn" 
+                                            data-id="{{ category.id }}"
+                                            data-bs-toggle="tooltip" title="Delete">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="3" class="text-center py-5">
+                                <div class="empty-state">
+                                    <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+                                    <h5 class="text-muted">No categories found</h5>
+                                    <p class="text-muted">Start by adding a new category</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal (keep existing) -->
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize DataTable
+    const table = $('#categoriesTable').DataTable({
+        dom: '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"i><"col-md-6"p>>',
+        language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search categories...",
+            lengthMenu: "Show _MENU_ entries",
+            info: "Showing _START_ to _END_ of _TOTAL_ entries",
+            emptyTable: "No categories available",
+            zeroRecords: "No matching categories found"
+        },
+        columnDefs: [
+            { orderable: false, targets: [2] },
+            { className: "align-middle", targets: "_all" }
+        ],
+        order: [[0, 'asc']]
+    });
+
+    // Re-initialize tooltips after table redraw
+    table.on('draw', function() {
+        const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        [...tooltips].forEach(tooltip => new bootstrap.Tooltip(tooltip));
+    });
+
+    // Delete Category Handler (keep existing)
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const categoryId = this.dataset.id;
+            const form = document.getElementById('deleteForm');
+            form.action = `/admin/categories/delete/${categoryId}`;
+            new bootstrap.Modal(document.getElementById('deleteModal')).show();
+        });
+    });
+
+    // Theme compatibility
+    document.addEventListener('themeChanged', () => {
+        table.columns.adjust().responsive.recalc();
+    });
+});
+</script>
+{% endblock %}

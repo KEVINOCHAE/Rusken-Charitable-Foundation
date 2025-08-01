@@ -1,0 +1,152 @@
+{% extends 'admin_base.html' %}
+
+{% block title %}Program Management - Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">
+            <i class="fas fa-hand-holding-heart me-2"></i>Program Management
+        </h1>
+        <a href="{{ url_for('program.add_program') }}" class="btn btn-primary">
+            <i class="fas fa-plus-circle me-2"></i> Add New Program
+        </a>
+    </div>
+
+    <!-- Program List Table -->
+    <div class="card shadow mb-4">
+        <div class="card-body table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Author</th>
+                        <th class="text-end">Budget (KES)</th>
+                        <th class="text-end">Donated</th>
+                        <th class="text-end">Remaining</th>
+                        <th>Created</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for program in programs.items %}
+                    <tr>
+                        <td>
+                            <strong>{{ program.title }}</strong><br>
+                            <small class="text-muted">{{ program.slug }}</small>
+                        </td>
+                        <td>{{ program.category.name if program.category else "Uncategorized" }}</td>
+                        <td>{{ program.author.name if program.author else "N/A" }}</td>
+                        <td class="text-end">KES {{ "{:,.2f}".format(program.annual_budget) }}</td>
+                        <td class="text-end">KES {{ "{:,.2f}".format(program.total_donated) }}</td>
+                        <td class="text-end text-success fw-bold">KES {{ "{:,.2f}".format(program.budget_remaining) }}</td>
+                        <td>{{ program.created_at.strftime('%Y-%m-%d') }}</td>
+                        <td class="text-center">
+                            <a href="{{ url_for('program.edit_program', program_id=program.id) }}" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <button class="btn btn-sm btn-outline-danger delete-btn" data-id="{{ program.id }}" data-title="{{ program.title }}" data-bs-toggle="tooltip" title="Delete">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+
+                        <td>
+                            
+                            <a href="{{ url_for('admin.upload_program_image', program_id=program.id) }}"
+                               class="btn btn-sm btn-secondary">
+                              Manage Images
+                            </a>
+                          </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="8" class="text-center py-5">
+                            <div class="empty-state">
+                                <i class="fas fa-hand-holding-heart fa-3x text-muted mb-3"></i>
+                                <h5 class="text-muted">No programs found</h5>
+                                <p class="text-muted">Start by adding a new program</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            {% if programs.pages > 1 %}
+            <nav class="d-flex justify-content-end">
+                <ul class="pagination">
+                    {% if programs.has_prev %}
+                    <li class="page-item"><a class="page-link" href="?page={{ programs.prev_num }}">Previous</a></li>
+                    {% endif %}
+                    {% for page_num in programs.iter_pages() %}
+                    {% if page_num %}
+                    <li class="page-item {% if page_num == programs.page %}active{% endif %}">
+                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if programs.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ programs.next_num }}">Next</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" id="deleteForm">
+                {{ form.hidden_tag() }}
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Program Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="deleteMessage">Are you sure you want to delete this program?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete Program</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    const deleteForm = document.getElementById('deleteForm');
+    const deleteMessage = document.getElementById('deleteMessage');
+
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const programId = this.dataset.id;
+            const programTitle = this.dataset.title;
+            deleteForm.action = `/admin/programs/delete/KES{programId}`;
+            deleteMessage.textContent = `Are you sure you want to delete the program "${programTitle}"?`;
+            deleteModal.show();
+        });
+    });
+});
+</script>
+{% endblock %}
+
+<style>
+.empty-state {
+    opacity: 0.6;
+    padding: 2rem;
+    text-align: center;
+}
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+</style> convert tables to datatables well designed styled sortable fitable and searchable

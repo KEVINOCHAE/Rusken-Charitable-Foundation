@@ -1,0 +1,128 @@
+{% extends 'admin_base.html' %}
+
+{% block title %}{% if form.name.data %}Edit{% else %}Create{% endif %} Category{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-10">
+            <!-- Header with Breadcrumb Navigation -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">
+                    <i class="fas fa-folder me-2"></i>{% if form.name.data %}Edit{% else %}Create{% endif %} Category
+                </h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin.dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('program.list_categories') }}">Categories</a></li>
+                        <li class="breadcrumb-item active">{% if form.name.data %}Edit{% else %}New{% endif %}</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <!-- Form Card -->
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-file-alt me-2"></i>Category Details
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="needs-validation" novalidate>
+                        {{ form.hidden_tag() }}
+
+                        <!-- Name Field -->
+                        <div class="mb-4">
+                            <label for="name" class="form-label fw-bold">
+                                <i class="fas fa-tag me-1"></i>Category Name
+                            </label>
+                            {{ form.name(class="form-control form-control-lg", placeholder="Enter category name") }}
+                            <div class="invalid-feedback">
+                                Please provide a valid category name (3-100 characters)
+                            </div>
+                            {% for error in form.name.errors %}
+                            <div class="alert alert-danger mt-2 p-2 small">
+                                {{ error }}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                       
+
+                       
+
+                        <!-- Form Actions -->
+                        <div class="d-flex justify-content-between border-top pt-4">
+                            <a href="{{ url_for('program.list_categories') }}" 
+                               class="btn btn-secondary btn-lg px-4">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg px-5">
+                                <i class="fas fa-save me-2"></i>Save Category
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Form Validation and Enhancements -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Bootstrap Validation
+    const forms = document.querySelectorAll('.needs-validation');
+    
+    Array.prototype.slice.call(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+
+    // Dynamic Character Counter for Description
+    const descriptionField = document.querySelector('#description');
+    if (descriptionField) {
+        const counter = document.createElement('small');
+        counter.className = 'form-text text-muted text-end d-block';
+        descriptionField.parentNode.appendChild(counter);
+
+        const updateCounter = () => {
+            const remaining = 200 - descriptionField.value.length;
+            counter.textContent = `KES{descriptionField.value.length}/200 characters`;
+            counter.style.color = remaining < 0 ? '#dc3545' : '#6c757d';
+        };
+
+        descriptionField.addEventListener('input', updateCounter);
+        updateCounter();
+    }
+});
+</script>
+{% endblock %}
+
+<style>
+.card {
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.card-header {
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
+}
+
+.alert-danger {
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+}
+</style>

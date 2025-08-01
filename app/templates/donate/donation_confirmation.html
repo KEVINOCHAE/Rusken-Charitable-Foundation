@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% block title %}Donation Confirmation - {{ program.title }}{% endblock %}
+
+{% block head %}
+{{ super() }}
+<style>
+  .confetti-effect {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  .receipt-card {
+    border-left: 4px solid #28a745;
+    transition: transform 0.3s ease;
+  }
+  .progress-bar-animated {
+    transition: width 1s ease-in-out;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Confetti Animation Container -->
+  <div class="confetti-effect" aria-hidden="true"></div>
+
+  <div class="text-center mb-5">
+    <h1 class="display-4 text-success mb-3">
+      <i class="fas fa-heart-circle-check me-2"></i> Thank You, {{ donation.donor_name }}!
+    </h1>
+    <p class="lead">Your generous contribution is making a real difference.</p>
+  </div>
+
+  <div class="row g-4">
+    <!-- Transaction Details -->
+    <div class="col-lg-6">
+      <div class="card receipt-card shadow-lg h-100">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0"><i class="fas fa-receipt me-2"></i> Donation Receipt</h5>
+        </div>
+        <div class="card-body">
+          <dl class="row">
+            <dt class="col-sm-5">Transaction ID:</dt>
+            <dd class="col-sm-7 font-monospace">{{ donation.transaction_id }}</dd>
+
+            <dt class="col-sm-5">Program:</dt>
+            <dd class="col-sm-7">{{ program.title }}</dd>
+
+            <dt class="col-sm-5">Donation Amount:</dt>
+            <dd class="col-sm-7">${{ "{:,.2f}".format(donation.amount) }}</dd>
+
+            <dt class="col-sm-5">Date & Time:</dt>
+            <dd class="col-sm-7">{{ donation.created_at.strftime('%b %d, %Y %I:%M %p') }}</dd>
+
+            <dt class="col-sm-5">Payment Method:</dt>
+            <dd class="col-sm-7">Credit Card ****{{ donation.last4 }}</dd>
+          </dl>
+          
+          <div class="alert alert-info mt-3">
+            <i class="fas fa-envelope me-2"></i>
+            A receipt has been sent to <strong>{{ donation.donor_email }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Funding Progress -->
+    <div class="col-lg-6">
+      <div class="card shadow-lg h-100">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i> Impact Update</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <span class="h4">${{ "{:,.0f}".format(funding.total_donated) }}</span>
+              <small class="text-muted d-block">Raised</small>
+            </div>
+            <div class="text-end">
+              <span class="h4">${{ "{:,.0f}".format(funding.goal) }}</span>
+              <small class="text-muted d-block">Goal</small>
+            </div>
+          </div>
+
+          <div class="progress" style="height: 25px;">
+            <div class="progress-bar progress-bar-animated bg-success" 
+                 role="progressbar" 
+                 style="width: {{ funding.progress }}%"
+                 aria-valuenow="{{ funding.progress }}" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100">
+              {{ funding.progress|round(1) }}%
+            </div>
+          </div>
+
+          <div class="alert alert-success mt-3">
+            <i class="fas fa-bullseye me-2"></i>
+            {% if funding.remaining > 0 %}
+              Only ${{ "{:,.0f}".format(funding.remaining) }} left to reach our goal!
+            {% else %}
+              🎉 Goal exceeded! Additional funds will enhance program impact.
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Next Steps -->
+  <div class="row mt-5 g-3">
+    <div class="col-md-4">
+      <a href="{{ url_for('main.program_detail', program_id=program.id) }}" 
+         class="btn btn-outline-success w-100 h-100 py-3">
+        <i class="fas fa-binoculars me-2"></i>
+        View Program Details
+      </a>
+    </div>
+    <div class="col-md-4">
+      <button onclick="window.print()" class="btn btn-outline-primary w-100 h-100 py-3">
+        <i class="fas fa-print me-2"></i>
+        Print Receipt
+      </button>
+    </div>
+    <div class="col-md-4">
+      <a href="{{ url_for('user.donations') }}" 
+         class="btn btn-outline-info w-100 h-100 py-3">
+        <i class="fas fa-history me-2"></i>
+        View Donation History
+      </a>
+    </div>
+  </div>
+
+  <!-- Security Assurance -->
+  <div class="text-center mt-5 pt-3 border-top">
+    <small class="text-muted">
+      <i class="fas fa-lock me-2"></i>
+      Secured transaction processed by CyberSource. 
+      This page will automatically redirect in <span id="countdown">10</span> seconds.
+    </small>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Auto-redirect after 10 seconds
+  let seconds = 10;
+  const countdownElement = document.getElementById('countdown');
+  
+  const timer = setInterval(() => {
+    seconds--;
+    countdownElement.textContent = seconds;
+    if (seconds <= 0) {
+      clearInterval(timer);
+      window.location.href = "{{ url_for('main.program_detail', program_id=program.id) }}";
+    }
+  }, 1000);
+
+  // Simple confetti effect
+  const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+  const confettiContainer = document.querySelector('.confetti-effect');
+  
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.cssText = `
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      border-radius: 2px;
+      left: ${Math.random() * 100}%;
+      top: -10px;
+      animation: fall ${Math.random() * 3 + 2}s linear infinite;
+    `;
+    
+    confettiContainer.appendChild(confetti);
+  }
+
+  // Add keyframe animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+});
+</script>
+{% endblock %}

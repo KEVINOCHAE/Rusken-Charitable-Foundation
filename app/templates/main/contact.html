@@ -1,0 +1,314 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us | RefurbNest{% endblock %}
+
+{% block content %}
+<!-- Fonts & Icons & AOS -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a2e0e6cf6d.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init({ once: true, duration: 800 });</script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+<style>
+  .contact-hero {
+    height: 60vh;
+    background: linear-gradient(rgba(42, 63, 84, 0.2), rgba(42, 63, 84, 0.2)),
+    url('{{ url_for("static",filename="images/eq1.jpg") }}') center/cover no-repeat;
+    color: #fff;
+    padding: 150px 20px;
+    text-align: center;
+
+  }
+</style>
+<!-- Hero -->
+<section class="contact-hero">
+  <h1 data-aos="fade-up">Get in Touch</h1>
+</section>
+
+</section>
+
+<!-- Main Container -->
+<div class="contact-container">
+  <!-- Form Column -->
+  <form method="POST" action="{{ url_for('main.contact') }}" class="glass-form" data-aos="fade-right">
+    {{ form.hidden_tag() }}
+
+    <div class="floating-label">
+      {{ form.name(class="form-control", placeholder=" ") }}
+      <label class="form-label" for="{{ form.name.id }}">Full Name</label>
+      {% for error in form.name.errors %}
+      <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="floating-label">
+      {{ form.email(class="form-control", placeholder=" ") }}
+      <label class="form-label" for="{{ form.email.id }}">Email Address</label>
+      {% for error in form.email.errors %}
+      <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="floating-label">
+      {{ form.subject(class="form-control", placeholder=" ") }}
+      <label class="form-label" for="{{ form.subject.id }}">Subject</label>
+      {% for error in form.subject.errors %}
+      <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="floating-label">
+      {{ form.message(class="form-control", placeholder=" ", style="height: 150px; resize: none;") }}
+      <label class="form-label" for="{{ form.message.id }}">Your Message</label>
+      {% for error in form.message.errors %}
+      <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn-submit">
+        <span class="submit-text">Send Message</span>
+        <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+      </button>
+    </div>
+  </form>
+
+  <!-- Contact Info Column -->
+  <div class="contact-info" data-aos="fade-left">
+    <div class="info-item">
+      <ul class="list-unstyled footer-contact">
+
+        <div class="info-item"><i class="fas fa-phone-alt me-2"></i><a href="tel:+254 202 111 101">+254 202 111 101</a>
+        </div>
+        <div class="info-item"><i class="fas fa-phone-alt me-2"></i><a href="tel:+254 202 111 107">+254 202 111
+            107</a></div>
+        <div class="info-item"><i class="fas fa-phone-alt me-2"></i><a href="tel:+254 757 734 064">+254 757 734
+            064</a></div>
+        <div class="info-item"><i class="fas fa-envelope me-2"></i><a
+            href="mailto:info@ruskencf.org">info@ruskencf.org</a></div>
+        <div class="info-item"><i class="fas fa-envelope me-2"></i><a
+            href="mailto:ruskencf2024@gmail.com">ruskencf2024@gmail.com</a></div>
+
+    </div>
+    <div class="info-item">
+      <i class="fas fa-map-marker-alt"></i>
+      <address>Muindi Mbingu Street Sixeighty Hotel Building Office No. 630</address>
+    </div>
+
+    <div class="info-item">
+      <i class="fas fa-globe-africa"></i>
+      <a href="https://www.refurbnest.com" target="_blank">www.ruskencf2024.org</a>
+    </div>
+  </div>
+</div>
+</ul>
+<!-- Chatbot Widget -->
+<div class="chatbot-btn" onclick="initChatbot()">
+  <i class="fas fa-comment-dots"></i>
+</div>
+
+
+<!-- Map Section -->
+<section class="map-section mb-3">
+  <h3 class="text-center">Visit US</h3>
+  <div class="map-container" data-aos="fade-up">
+    <iframe
+      src="https://www.google.com/maps?q=Muindi%20Mbingu%20Street%20SixEighty%20Hotel%20Building%20Office%20No.%20630%2C%20Nairobi%2C%20Kenya&output=embed"
+      frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    <div class="map-overlay">
+      <h2>Our Location</h2>
+      <address>
+        Muindi Mbingu Street<br>
+        SixEighty Hotel Building<br>
+        Office No. 630<br>
+        Nairobi, Kenya
+      </address>
+    </div>
+  </div>
+  <style>
+    /* Map Section Styling */
+    .map-section {
+      width: 100%;
+      margin: 3rem 0;
+    }
+
+    .map-container {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: saturate(0.9) contrast(1.05);
+    }
+
+    .map-overlay {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(6px);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      max-width: 280px;
+    }
+
+    .map-overlay h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.25rem;
+      color: var(--primary);
+    }
+
+    .map-overlay address {
+      margin: 0;
+      font-style: normal;
+      line-height: 1.4;
+      color: #444;
+    }
+
+    /* Responsive tweak */
+    @media (max-width: 576px) {
+      .map-overlay {
+        bottom: 1rem;
+        left: 1rem;
+        padding: 0.75rem 1rem;
+        max-width: 220px;
+      }
+
+      .map-overlay h2 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</section>
+
+<section class="newsletter-section" aria-label="Newsletter Subscription">
+  <div class="newsletter-container">
+    <div class="newsletter-content">
+      <h2 class="newsletter-title">Stay Connected With Our Mission</h2>
+      <p class="newsletter-description">Join our community of changemakers and receive:<br>
+        • Monthly impact reports • Event invitations • Inspiring stories • Urgent needs alerts</p>
+
+      <a href="{{ url_for('auth.register') }}" class="newsletter-cta">
+        <span class="cta-text">Subscribe for Updates</span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+
+      <p class="newsletter-note">By subscribing, you agree to our <a href="{{ url_for('main.privacy_policy') }}">Privacy
+          Policy</a></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .newsletter-section {
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, rgba(42, 63, 84, 0.04) 0%, rgba(78, 205, 196, 0.04) 100%);
+  }
+
+  .newsletter-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .newsletter-content {
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(42, 63, 84, 0.08);
+    backdrop-filter: blur(8px);
+  }
+
+  .newsletter-title {
+    color: #2a3f54;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .newsletter-description {
+    color: #4a5568;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .newsletter-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: #4ECDC4;
+    color: white !important;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+  }
+
+  .newsletter-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(78, 205, 196, 0.4);
+    background: #3ebcb3;
+  }
+
+  .newsletter-cta i {
+    transition: transform 0.3s ease;
+  }
+
+  .newsletter-cta:hover i {
+    transform: translateX(3px);
+  }
+
+  .newsletter-note {
+    color: #718096;
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+  }
+
+  .newsletter-note a {
+    color: #2a3f54;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .newsletter-content {
+      padding: 1.5rem;
+    }
+
+    .newsletter-title {
+      font-size: 1.5rem;
+    }
+
+    .newsletter-cta {
+      padding: 0.75rem 1.5rem;
+    }
+  }
+</style>
+
+
+<script>
+  // Loading spinner toggle on submit
+  document.querySelector('form').addEventListener('submit', (e) => {
+    const btn = document.querySelector('.btn-submit');
+    btn.disabled = true;
+    btn.querySelector('.submit-text').classList.add('d-none');
+    btn.querySelector('.spinner-border').classList.remove('d-none');
+  });
+
+  function initChatbot() {
+    // Placeholder for chatbot init
+    console.log('Initialize your chatbot integration here');
+  }
+</script>
+{% endblock %}
