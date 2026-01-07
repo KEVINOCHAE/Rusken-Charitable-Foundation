@@ -8,14 +8,16 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, '.env'))
 
 class Config:
-    SECRET_KEY                  = os.getenv('SECRET_KEY', 's3kr3t_k3y')
-<<<<<<< HEAD
-    SQLALCHEMY_DATABASE_URI     = os.getenv("DATABASE_URL", "sqlite:///rusken.db")
-=======
-    SQLALCHEMY_DATABASE_URI     = os.getenv('DATABASE_URL') #'postgresql://postgres:gAhMpttqCrXkJLoTGECVVKzWvTaPwRWi@postgres.railway.internal:5432/railway'
->>>>>>> 0282710c0ccc46712a28dd8e817384947e532bf8
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+        # Secret key for session management and CSRF protection
+    SECRET_KEY                  = os.getenv('SECRET_KEY', 'super_secret_key')
+
+    # Database configuration
+    SQLALCHEMY_DATABASE_URI     = os.getenv("DATABASE_URL") #("sqlite:///rusken.db" for local )
+    SQLALCHEMY_DATABASE_URI     = os.getenv('DATABASE_URL') #'postgresql://postgres:gAhMpttqCrXkJLoTGECVVKzWvTaPwRWi@postgres.railway.internal:5432/railway'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False  # Disable unnecessary overhead
+
+# Additional configurations (for future enhancements)
     SESSION_COOKIE_SECURE       = True
     SESSION_COOKIE_HTTPONLY     = True
     PERMANENT_SESSION_LIFETIME  = timedelta(seconds=3600)
