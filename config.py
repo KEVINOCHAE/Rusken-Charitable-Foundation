@@ -9,7 +9,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config:
     SECRET_KEY                  = os.getenv('SECRET_KEY', 's3kr3t_k3y')
-    SQLALCHEMY_DATABASE_URI     = os.getenv("DATABASE_URL","sqlite:///rusken.db")
+    SQLALCHEMY_DATABASE_URI     = os.getenv("DATABASE_URL", "sqlite:///rusken.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     SESSION_COOKIE_SECURE       = True
