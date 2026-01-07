@@ -9,7 +9,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config:
     SECRET_KEY                  = os.getenv('SECRET_KEY', 's3kr3t_k3y')
-    SQLALCHEMY_DATABASE_URI     = "sqlite:///rusken.db"
+    SQLALCHEMY_DATABASE_URI     = os.getenv("DATABASE_URL"), "sqlite:///rusken.db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     SESSION_COOKIE_SECURE       = True
@@ -28,7 +28,7 @@ class Config:
     
     UPLOAD_FOLDER               = os.path.join(basedir, 'static', 'programs')
     ALLOWED_EXTENSIONS          = {'png', 'jpg', 'jpeg', 'gif'}
-    MAX_CONTENT_LENGTH          = 4 * 1024 * 1024  # 4 MB
+    MAX_CONTENT_LENGTH          = 4 * 1024 * 1024  # 4MB
 
    # Required DPO configurations
     DPO_API_URL = "https://secure.3gdirectpay.com/API/v6/"
