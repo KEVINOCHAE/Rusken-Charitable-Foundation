@@ -9,7 +9,11 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config:
     SECRET_KEY                  = os.getenv('SECRET_KEY', 's3kr3t_k3y')
+<<<<<<< HEAD
     SQLALCHEMY_DATABASE_URI     = os.getenv("DATABASE_URL", "sqlite:///rusken.db")
+=======
+    SQLALCHEMY_DATABASE_URI     = os.getenv('DATABASE_URL') #'postgresql://postgres:gAhMpttqCrXkJLoTGECVVKzWvTaPwRWi@postgres.railway.internal:5432/railway'
+>>>>>>> 0282710c0ccc46712a28dd8e817384947e532bf8
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     SESSION_COOKIE_SECURE       = True
