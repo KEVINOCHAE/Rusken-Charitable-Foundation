@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash,current_a
 from app import db, csrf
 from app.admin.forms import EmptyForm, ProgramImageForm 
 from app.auth.routes import roles_required
-from app.admin.models import User,ProgramImage, Program
+from app.admin.models import User,ProgramImage, Program, Category
 from flask_login import login_required
 import os
 import uuid
@@ -31,6 +31,7 @@ def list_users():
     return render_template('admin/list_users.html', users=users, form=form)
 
 @admin_bp.route('/admin/programs/<int:program_id>/images', methods=['GET', 'POST'])
+@roles_required('Admin')
 @login_required
 def upload_program_image(program_id):
     program = Program.query.get_or_404(program_id)
@@ -82,3 +83,9 @@ def upload_program_image(program_id):
         return redirect(url_for('program.list_programs')) 
 
     return render_template('admin/upload_image.html', form=form, program=program)
+
+@admin_bp.route('/categories')
+@login_required
+def list_categories():
+    categories = Category.query.all()
+    return render_template('admin/list_categories.html', categories=categories)
